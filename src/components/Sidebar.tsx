@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { useState, useEffect } from "react";
 import { 
   BarChart3, 
   Target, 
@@ -23,6 +24,23 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
   const pathname = usePathname();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Визначаємо поточну тему
+  useEffect(() => {
+    const checkTheme = () => {
+      const isDark = document.body.classList.contains('dark-mode');
+      setIsDarkMode(isDark);
+    };
+
+    checkTheme();
+    
+    // Слухаємо зміни теми
+    const observer = new MutationObserver(checkTheme);
+    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+    
+    return () => observer.disconnect();
+  }, []);
 
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: BarChart3 },
@@ -57,7 +75,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
             <div className="flex items-center space-x-3">
               <Link href="/dashboard">
                 <Image
-                  src="/logoDark.svg"
+                  src={isDarkMode ? "/logoWhite.svg" : "/logoDark.svg"}
                   alt="Cieden Logo"
                   width={100}
                   height={32}

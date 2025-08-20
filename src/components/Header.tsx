@@ -3,6 +3,8 @@
 import { Bell, Menu, Search, Moon, Sun } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
+import Image from "next/image";
+import Link from "next/link";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -14,14 +16,11 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   // Завантажуємо збережену тему при старті
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    // Визначаємо початкову тему
+    // За замовчуванням світла тема
     let initialTheme = 'light';
     if (savedTheme) {
       initialTheme = savedTheme;
-    } else if (prefersDark) {
-      initialTheme = 'dark';
     }
     
     // Встановлюємо тему
@@ -56,6 +55,18 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
 
+          {/* Logo */}
+          <div className="flex items-center">
+            <Link href="/dashboard">
+              <Image
+                src={isDarkMode ? "/logoWhite.svg" : "/logoDark.svg"}
+                alt="Cieden Logo"
+                width={100}
+                height={32}
+                className="h-8 w-auto"
+              />
+            </Link>
+          </div>
 
           {/* Search (Desktop) */}
           <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
@@ -95,7 +106,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             {/* Mobile Menu Button */}
             <button
               onClick={onMenuClick}
-              className="md:hidden p-2 text-gray-900 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+              className="md:hidden p-2 text-gray-900 dark:text-white hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -103,10 +114,10 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             {/* User Info and Button */}
             <div className="hidden md:flex items-center space-x-3">
               <div className="hidden md:block text-right">
-                <p className="text-sm font-medium text-gray-900">
+                <p className="text-sm font-medium text-gray-900 dark:text-white">
                   All Team
                 </p>
-                <p className="text-xs text-gray-600">
+                <p className="text-xs text-gray-600 dark:text-gray-400">
                   team@company.com
                 </p>
               </div>
