@@ -1,0 +1,379 @@
+"use client";
+
+import { useState } from "react";
+import { 
+  Users, 
+  Calendar, 
+  Settings, 
+  Plus, 
+  Eye, 
+  Edit, 
+  Trash2, 
+  CheckCircle, 
+  AlertCircle, 
+  Clock,
+  Database,
+  Server,
+  HardDrive,
+  BarChart3,
+  UserPlus,
+  Shield
+} from "lucide-react";
+import AdminSeedButton from "@/components/AdminSeedButton";
+import Avatar from "@/components/ui/Avatar";
+import Layout from "@/components/Layout";
+
+const AdminPage = () => {
+  const [activeTab, setActiveTab] = useState("overview");
+  const [showAddUserModal, setShowAddUserModal] = useState(false);
+
+  const stats = [
+    {
+      title: "Total Users",
+      value: "1,234",
+      change: "+12%",
+      changeType: "positive" as const,
+      icon: Users,
+    },
+    {
+      title: "Active Cycles",
+      value: "8",
+      change: "+2",
+      changeType: "positive" as const,
+      icon: Calendar,
+    },
+    {
+      title: "System Health",
+      value: "98%",
+      change: "+1%",
+      changeType: "positive" as const,
+      icon: CheckCircle,
+    },
+    {
+      title: "Storage Used",
+      value: "2.4GB",
+      change: "+0.2GB",
+      changeType: "negative" as const,
+      icon: HardDrive,
+    },
+  ];
+
+  const recentUsers = [
+    {
+      id: 1,
+      firstName: "John",
+      lastName: "Doe",
+      email: "john@example.com",
+      role: "employee",
+      department: "Engineering",
+      status: "active",
+      avatar: "",
+    },
+    {
+      id: 2,
+      firstName: "Jane",
+      lastName: "Smith",
+      email: "jane@example.com",
+      role: "manager",
+      department: "Design",
+      status: "active",
+      avatar: "",
+    },
+    {
+      id: 3,
+      firstName: "Bob",
+      lastName: "Johnson",
+      email: "bob@example.com",
+      role: "admin",
+      department: "Management",
+      status: "inactive",
+      avatar: "",
+    },
+  ];
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "active": return "bg-[#8AC34A] text-white";
+      case "inactive": return "bg-[#F44436] text-white";
+      case "pending": return "bg-[#FF9102] text-white";
+      default: return "bg-[#646464] text-white";
+    }
+  };
+
+  const getRoleColor = (role: string) => {
+    switch (role) {
+      case "admin": return "bg-[#651FFF] text-white";
+      case "manager": return "bg-[#FF9102] text-white";
+      case "employee": return "bg-[#646464] text-white";
+      default: return "bg-[#646464] text-white";
+    }
+  };
+
+  const handleViewAllUsers = () => {
+    window.location.href = "/team";
+  };
+
+  const tabs = [
+    { id: "overview", name: "Overview", icon: BarChart3 },
+    { id: "users", name: "Users", icon: Users },
+    { id: "cycles", name: "Cycles", icon: Calendar },
+    { id: "settings", name: "Settings", icon: Settings },
+  ];
+
+  return (
+    <Layout>
+      <div className="min-h-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-[#212121] dark:text-white">Admin Panel</h1>
+          <p className="text-[#646464] dark:text-[#909090] mt-1">
+            Manage users, performance cycles, and system settings
+          </p>
+        </div>
+
+        {/* Tabs */}
+        <div className="mb-8">
+          <nav className="flex space-x-8">
+            {tabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                  activeTab === tab.id
+                    ? "text-[#651FFF] dark:text-[#651FFF] border-b-2 border-[#651FFF] dark:border-[#651FFF]"
+                    : "text-[#646464] dark:text-[#909090] border-transparent hover:text-[#212121] dark:hover:text-white hover:border-[#e9e9e9] dark:hover:border-[#373737]"
+                }`}
+              >
+                <tab.icon className="h-4 w-4" />
+                <span>{tab.name}</span>
+              </button>
+            ))}
+          </nav>
+        </div>
+
+        {/* Overview Tab */}
+        {activeTab === "overview" && (
+          <div className="space-y-8">
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {stats.map((stat, index) => (
+                <div key={index} className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="text-sm font-medium text-[#646464] dark:text-[#909090]">{stat.title}</p>
+                      <p className="text-2xl font-bold text-[#212121] dark:text-white">{stat.value}</p>
+                      <div className="flex items-center mt-2">
+                        <span
+                          className={`text-sm font-medium ${
+                            stat.changeType === "negative" ? "text-[#F44436]" : "text-[#8AC34A]"
+                          }`}
+                        >
+                          {stat.change}
+                        </span>
+                        <span className="text-sm text-[#646464] dark:text-[#909090] ml-1">from last month</span>
+                      </div>
+                    </div>
+                    <div className="p-3 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
+                      <stat.icon className="h-6 w-6 text-[#651FFF] dark:text-white" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Quick Actions */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
+                    <Users className="h-6 w-6 text-[#651FFF] dark:text-white" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-[#212121] dark:text-white">User Management</div>
+                    <div className="text-sm text-[#646464] dark:text-[#909090]">Add, edit, delete users</div>
+                  </div>
+                </div>
+                <button className="w-full bg-white dark:bg-[#000319] border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors px-4 py-2 rounded-lg">
+                  Manage Users
+                </button>
+              </div>
+
+              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
+                    <Calendar className="h-6 w-6 text-[#651FFF] dark:text-white" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-[#212121] dark:text-white">Performance Cycles</div>
+                    <div className="text-sm text-[#646464] dark:text-[#909090]">Setup and planning</div>
+                  </div>
+                </div>
+                <button className="w-full bg-white dark:bg-[#000319] border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors px-4 py-2 rounded-lg">
+                  Manage Cycles
+                </button>
+              </div>
+
+              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
+                    <Settings className="h-6 w-6 text-[#651FFF] dark:text-white" />
+                  </div>
+                  <div>
+                    <div className="font-medium text-[#212121] dark:text-white">System Settings</div>
+                    <div className="text-sm text-[#646464] dark:text-[#909090]">Configuration and parameters</div>
+                  </div>
+                </div>
+                <button className="w-full bg-white dark:bg-[#000319] border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors px-4 py-2 rounded-lg">
+                  Configure
+                </button>
+              </div>
+            </div>
+
+            {/* Recent Users */}
+            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold text-[#212121] dark:text-white">Recently added or updated</h3>
+                <button 
+                  onClick={handleViewAllUsers}
+                  className="text-[#651FFF] dark:text-[#651FFF] hover:text-[#5b1ce6] dark:hover:text-[#5b1ce6] font-medium"
+                >
+                  View All
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                {recentUsers.map((user) => (
+                  <div key={user.id} className="flex items-center justify-between p-4 border border-[#e9e9e9] dark:border-[#373737] rounded-lg">
+                    <div className="flex items-center space-x-4">
+                      <Avatar src={user.avatar} alt={`${user.firstName} ${user.lastName}`} />
+                      <div>
+                        <div className="font-medium text-[#212121] dark:text-white">{user.email}</div>
+                        <div className="flex items-center space-x-2 mt-1">
+                          <span className={`px-2 py-1 text-xs rounded-full ${getRoleColor(user.role)}`}>
+                            {user.role}
+                          </span>
+                          <span className="text-sm text-[#646464] dark:text-[#909090]">{user.department}</span>
+                          <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(user.status)}`}>
+                            {user.status}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <button className="p-2 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors">
+                      <Eye className="h-4 w-4 text-[#646464] dark:text-[#909090]" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* System Status and Quick Functions */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-[#212121] dark:text-white mb-4">All services are running normally</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#646464] dark:text-[#909090]">Database</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-[#8AC34A] rounded-full"></div>
+                      <span className="text-sm text-[#8AC34A]">Online</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#646464] dark:text-[#909090]">API</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-[#8AC34A] rounded-full"></div>
+                      <span className="text-sm text-[#8AC34A]">Online</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-[#646464] dark:text-[#909090]">File Storage</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-[#8AC34A] rounded-full"></div>
+                      <span className="text-sm text-[#8AC34A]">Online</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+                <h3 className="text-lg font-semibold text-[#212121] dark:text-white mb-4">Frequently used functions</h3>
+                <div className="space-y-3">
+                  <button className="w-full flex items-center space-x-3 p-3 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors">
+                    <UserPlus className="h-5 w-5 text-[#651FFF]" />
+                    <span className="text-[#212121] dark:text-white">Add New User</span>
+                  </button>
+                  <button className="w-full flex items-center space-x-3 p-3 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors">
+                    <Calendar className="h-5 w-5 text-[#651FFF]" />
+                    <span className="text-[#212121] dark:text-white">Create Cycle</span>
+                  </button>
+                  <button className="w-full flex items-center space-x-3 p-3 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors">
+                    <Shield className="h-5 w-5 text-[#651FFF]" />
+                    <span className="text-[#212121] dark:text-white">Security Settings</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Seed Data Button */}
+            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+              <AdminSeedButton />
+            </div>
+          </div>
+        )}
+
+        {/* Users Tab */}
+        {activeTab === "users" && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">User Management</h2>
+              <button
+                onClick={() => setShowAddUserModal(true)}
+                className="flex items-center space-x-2 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors"
+              >
+                <Plus className="h-4 w-4" />
+                <span>Add User</span>
+              </button>
+            </div>
+            
+            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+              <p className="text-[#646464] dark:text-[#909090]">User management interface will be implemented here.</p>
+            </div>
+          </div>
+        )}
+
+        {/* Cycles Tab */}
+        {activeTab === "cycles" && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Performance Cycles</h2>
+              <button className="flex items-center space-x-2 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors">
+                <Plus className="h-4 w-4" />
+                <span>Create Cycle</span>
+              </button>
+            </div>
+            
+            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+              <p className="text-[#646464] dark:text-[#909090]">Performance cycles management interface will be implemented here.</p>
+            </div>
+          </div>
+        )}
+
+        {/* Settings Tab */}
+        {activeTab === "settings" && (
+          <div className="space-y-6">
+            <h2 className="text-xl font-semibold text-[#212121] dark:text-white">System Settings</h2>
+            
+            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+              <p className="text-[#646464] dark:text-[#909090]">System settings interface will be implemented here.</p>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+    </Layout>
+  );
+};
+
+export default AdminPage;

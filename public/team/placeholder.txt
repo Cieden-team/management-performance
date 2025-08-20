@@ -1,0 +1,41 @@
+# Папка для фото команди Cieden
+
+Тут мають бути розміщені фото співробітників команди Cieden з [https://cieden.com/about](https://cieden.com/about)
+
+Файли мають бути названі за шаблоном:
+- yuriy-mykhasyak.jpg
+- iryna-serednia.jpg
+- kateryna-zavertailo.jpg
+- roman-kaminechny.jpg
+- anastasiya-mudryk.jpg
+- olesia-havryshko.jpg
+- tetiana-bondarchuk.jpg
+- yulia-mahera.jpg
+- andrew-sapkowski.jpg
+- denis-dudar.jpg
+- valentyn-skliarov.jpg
+- daria-novosiadla.jpg
+- tetiana-zakus.jpg
+- maksym-gozhelsky.jpg
+- oksana-veskera.jpg
+- demian-peretiatko.jpg
+- marta-kacharaba.jpg
+- iryna-mykytenko.jpg
+- volodymyr-merlenko.jpg
+- iryna-tanavska.jpg
+- yuliia-braslavska.jpg
+- vladyslav-pianov.jpg
+- maksym-vertsanov.jpg
+- khrystyna-nych.jpg
+- illia-suprun.jpg
+- dmytro-chyzh.jpg
+- bohdana-levochko.jpg
+- taras-kunanets.jpg
+- daya-danyliv.jpg
+- tamara-zhostka.jpg
+- tetiana-korol.jpg
+- natalia-antonyshyn.jpg
+- katya-gorodova.jpg
+- iryna-mykhasyak.jpg
+
+Поки що використовуються placeholder зображення з Unsplash.
