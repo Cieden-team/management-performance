@@ -12,7 +12,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <div className="flex">
         {/* Sidebar */}
         <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Header onMenuClick={() => setSidebarOpen(true)} />
           
           {/* Page Content */}
-          <main className="flex-1 p-6">
+          <main className="flex-1 p-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
             {children}
           </main>
         </div>

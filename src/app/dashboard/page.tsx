@@ -140,17 +140,17 @@ const DashboardPage = () => {
     <Layout>
       <div className="space-y-6">
         {/* Welcome Header */}
-        <div className="bg-gradient-to-r from-white via-white to-purple-50/30 rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+        <div className="bg-gradient-to-r from-white via-white to-purple-50/30 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/20 rounded-2xl border border-gray-100 dark:border-gray-700 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
           <div className="flex items-center space-x-6">
             <div className="relative">
               <Avatar src={currentUser.avatar} alt={`${currentUser.firstName} ${currentUser.lastName}`} size="lg" />
               <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-3 border-white"></div>
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 mb-1 font-gilroy">
+              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1 font-gilroy">
                 Welcome back, {currentUser.firstName} {currentUser.lastName}!
               </h1>
-              <p className="text-gray-500 font-medium">
+              <p className="text-gray-500 dark:text-gray-400 font-medium">
                 Last login: {formatDate(new Date().toISOString())} at {formatTime(new Date().toISOString())}
               </p>
             </div>
@@ -159,11 +159,11 @@ const DashboardPage = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-2">Active Goals</p>
-                <p className="text-3xl font-bold text-gray-900 font-gilroy">
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Active Goals</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white font-gilroy">
                   {goals.filter(g => g.status === "active").length}
                 </p>
               </div>
@@ -175,11 +175,11 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-2">Feedback Received</p>
-                <p className="text-3xl font-bold text-gray-900 font-gilroy">
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Feedback Received</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white font-gilroy">
                   {feedbacks.length}
                 </p>
               </div>
@@ -191,11 +191,11 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 mb-2">Average Rating</p>
-                <p className="text-3xl font-bold text-gray-900 font-gilroy">
+                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Average Rating</p>
+                <p className="text-3xl font-bold text-gray-900 dark:text-white font-gilroy">
                   {feedbacks.length > 0 
                     ? (feedbacks.reduce((acc, f) => acc + f.rating, 0) / feedbacks.length).toFixed(1)
                     : "0.0"

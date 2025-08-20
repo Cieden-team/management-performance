@@ -50,10 +50,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
       )}
 
       {/* Desktop sidebar */}
-      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:static inset-y-0 left-0 z-50 w-64 bg-white/90 backdrop-blur-md border-r border-gray-100 transform transition-transform duration-300 ease-in-out`}>
+      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:static inset-y-0 left-0 z-50 w-64 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-r border-gray-100 dark:border-gray-700 transform transition-transform duration-300 ease-in-out`}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-100">
+          <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-700">
             <div className="flex items-center space-x-3">
               <Link href="/dashboard">
                 <Image
@@ -88,7 +88,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
                   className={`flex items-center space-x-4 px-4 py-3 rounded-xl font-gilroy font-medium transition-all duration-300 ${
                     isActive
                       ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg transform scale-105"
-                      : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 hover:transform hover:scale-105"
+                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:transform hover:scale-105"
                   }`}
                 >
                   <IconComponent className="h-5 w-5" />
@@ -99,12 +99,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
           </nav>
 
           {/* Footer */}
-          <div className="p-6 border-t border-gray-100">
-            <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-4">
+          <div className="p-6 border-t border-gray-100 dark:border-gray-700">
+            <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-4">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-[#F44436] rounded-full"></div>
-                <span className="text-sm font-medium text-gray-700">N 7 Issues</span>
-                <button className="ml-auto text-gray-500 hover:text-gray-700">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">N 7 Issues</span>
+                <button className="ml-auto text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
                   <X className="h-4 w-4" />
                 </button>
               </div>

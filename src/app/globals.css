@@ -3,88 +3,61 @@
 
 @import "tailwindcss";
 
-/* CSS Variables for theming */
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #212121;
-  --text-secondary: #646464;
-  --border-color: #e9e9e9;
-  --accent-color: #651FFF;
-  --accent-light: #f0e9ff;
-}
-
-/* Dark mode variables */
-body.dark-mode {
-  --bg-primary: #000319;
-  --bg-secondary: #000319;
-  --text-primary: #ffffff;
-  --text-secondary: #909090;
-  --border-color: #373737;
-  --accent-color: #651FFF;
-  --accent-light: #651FFF;
-}
-
+/* Base styles */
 body {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Gilroy', 'Inter', system-ui, sans-serif;
+  background-color: #ffffff;
+  color: #1f2937;
 }
 
-/* Utility classes */
-.bg-white {
-  background-color: var(--bg-primary) !important;
+/* Dark mode styles */
+body.dark-mode {
+  background-color: #0f172a;
+  color: #f8fafc;
 }
 
-.bg-gray-50 {
-  background-color: var(--bg-secondary) !important;
+/* Dark mode overrides */
+body.dark-mode .bg-white {
+  background-color: #1e293b !important;
 }
 
+body.dark-mode .text-gray-900 {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .text-gray-600 {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .text-gray-500 {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .border-gray-100 {
+  border-color: #334155 !important;
+}
+
+body.dark-mode .border-gray-200 {
+  border-color: #475569 !important;
+}
+
+body.dark-mode .bg-gray-50 {
+  background-color: #1e293b !important;
+}
+
+body.dark-mode .bg-gray-100 {
+  background-color: #334155 !important;
+}
+
+/* Ensure text is always visible */
 .text-gray-900 {
-  color: var(--text-primary) !important;
+  color: #1f2937 !important;
 }
 
 .text-gray-600 {
-  color: var(--text-secondary) !important;
+  color: #4b5563 !important;
 }
 
-.border-gray-200 {
-  border-color: var(--border-color) !important;
-}
-
-.bg-purple-50 {
-  background-color: var(--accent-light) !important;
-}
-
-.bg-purple-600 {
-  background-color: var(--accent-color) !important;
-}
-
-.text-purple-600 {
-  color: var(--accent-color) !important;
-}
-
-/* Override old colors */
-.bg-\[#f8f9fa\] {
-  background-color: var(--bg-secondary) !important;
-}
-
-.bg-\[#f0e9ff\] {
-  background-color: var(--accent-light) !important;
-}
-
-.bg-\[#651FFF\] {
-  background-color: var(--accent-color) !important;
-}
-
-.text-\[#212121\] {
-  color: var(--text-primary) !important;
-}
-
-.text-\[#646464\] {
-  color: var(--text-secondary) !important;
-}
-
-.border-\[#e9e9e9\] {
-  border-color: var(--border-color) !important;
+.text-gray-500 {
+  color: #6b7280 !important;
 }
