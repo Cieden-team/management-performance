@@ -127,7 +127,10 @@ export default defineSchema({
     status: v.union(v.literal("pending"), v.literal("completed")),
     createdAt: v.number(),
     updatedAt: v.number(),
-  }),
+  })
+    .index("by_from_user", ["fromUserId"])
+    .index("by_to_user", ["toUserId"])
+    .index("by_status", ["status"]),
   
   feedbackForms: defineTable({
     fromUserId: v.id("users"),

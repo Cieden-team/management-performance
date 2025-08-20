@@ -215,7 +215,12 @@ const FeedbackPage = () => {
                 </button>
               </div>
               
-                             <FeedbackForm onSubmit={() => setShowFeedbackForm(false)} onCancel={() => setShowFeedbackForm(false)} />
+                             <FeedbackForm 
+                               isOpen={showFeedbackForm} 
+                               onClose={() => setShowFeedbackForm(false)} 
+                               onSubmit={() => setShowFeedbackForm(false)} 
+                               onCancel={() => setShowFeedbackForm(false)} 
+                             />
             </div>
           </div>
         )}

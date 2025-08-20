@@ -43,7 +43,7 @@ export const getUnreadNotifications = query({
     return await ctx.db
       .query("notifications")
       .withIndex("by_user", (q) => q.eq("userId", args.userId))
-      .withIndex("by_read_status", (q) => q.eq("isRead", false))
+      .filter((q) => q.eq(q.field("isRead"), false))
       .order("desc")
       .collect();
   },
@@ -71,7 +71,7 @@ export const markAllAsRead = mutation({
     const unreadNotifications = await ctx.db
       .query("notifications")
       .withIndex("by_user", (q) => q.eq("userId", args.userId))
-      .withIndex("by_read_status", (q) => q.eq("isRead", false))
+      .filter((q) => q.eq(q.field("isRead"), false))
       .collect();
 
     for (const notification of unreadNotifications) {

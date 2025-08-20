@@ -8,7 +8,7 @@ interface Skill {
   category: string;
   progress: number;
   target: number;
-  icon: React.ComponentType<any>;
+  icon?: React.ComponentType<any>;
   color: string;
 }
 

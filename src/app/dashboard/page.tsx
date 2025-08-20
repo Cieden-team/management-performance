@@ -80,7 +80,7 @@ const DashboardPage = () => {
       target: 90, 
       category: "Frontend",
       progress: 85,
-      icon: "TrendingUp",
+
       color: "#651FFF"
     },
     { 
@@ -90,7 +90,7 @@ const DashboardPage = () => {
       target: 85, 
       category: "Programming",
       progress: 70,
-      icon: "Code",
+
       color: "#8AC34A"
     },
     { 
@@ -100,7 +100,7 @@ const DashboardPage = () => {
       target: 75, 
       category: "Design",
       progress: 60,
-      icon: "Palette",
+
       color: "#FF9102"
     },
     { 
@@ -110,7 +110,7 @@ const DashboardPage = () => {
       target: 85, 
       category: "Leadership",
       progress: 80,
-      icon: "Users",
+
       color: "#F44436"
     }
   ];
