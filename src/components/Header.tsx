@@ -3,8 +3,6 @@
 import { Bell, Menu, Search, Moon, Sun } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -51,22 +49,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   };
 
   return (
-    <header className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md shadow-sm border-b border-gray-100 dark:border-gray-700 w-full sticky top-0 z-50">
+    <header className="bg-white/95 dark:bg-gray-800/95 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700 w-full sticky top-0 z-50">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/dashboard">
-              <Image
-                src={isDarkMode ? "/logoWhite.svg" : "/logoDark.svg"}
-                alt="Cieden Logo"
-                width={100}
-                height={32}
-                className="h-8 w-auto"
-              />
-            </Link>
-          </div>
+        <div className="flex justify-between items-center h-20">
 
           {/* Search (Desktop) */}
           <div className="hidden md:flex items-center flex-1 max-w-md mx-8">

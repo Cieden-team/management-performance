@@ -16,9 +16,9 @@ body.dark-mode {
   color: #f8fafc;
 }
 
-/* Ensure light theme is properly applied */
+/* Ensure light theme is properly applied with better colors */
 .bg-gray-50 {
-  background-color: #f9fafb !important;
+  background-color: #f8fafc !important;
 }
 
 .bg-white {
@@ -26,23 +26,37 @@ body.dark-mode {
 }
 
 .text-gray-900 {
-  color: #111827 !important;
+  color: #0f172a !important;
 }
 
 .text-gray-600 {
-  color: #4b5563 !important;
+  color: #475569 !important;
 }
 
 .text-gray-500 {
-  color: #6b7280 !important;
+  color: #64748b !important;
 }
 
 .border-gray-100 {
-  border-color: #f3f4f6 !important;
+  border-color: #e2e8f0 !important;
 }
 
 .border-gray-200 {
-  border-color: #e5e7eb !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* Better light theme colors for cards */
+.bg-gradient-to-r.from-white.via-white.to-purple-50\/30 {
+  background: linear-gradient(to right, #ffffff, #ffffff, rgba(245, 243, 255, 0.3)) !important;
+}
+
+/* Improved text contrast for light theme */
+.text-gray-700 {
+  color: #334155 !important;
+}
+
+.text-gray-400 {
+  color: #94a3b8 !important;
 }
 
 /* Dark mode overrides */

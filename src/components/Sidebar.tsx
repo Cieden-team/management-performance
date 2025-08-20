@@ -68,10 +68,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
       )}
 
       {/* Desktop sidebar */}
-      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:static inset-y-0 left-0 z-50 w-64 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-r border-gray-100 dark:border-gray-700 transform transition-transform duration-300 ease-in-out`}>
+      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:static inset-y-0 left-0 z-50 w-64 bg-white/95 dark:bg-gray-800/95 backdrop-blur-md border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out`}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-700">
+          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
             <div className="flex items-center space-x-3">
               <Link href="/dashboard">
                 <Image
@@ -117,8 +117,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
           </nav>
 
           {/* Footer */}
-          <div className="p-6 border-t border-gray-100 dark:border-gray-700">
-            <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-4">
+          <div className="p-6 border-t border-gray-200 dark:border-gray-700">
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-4">
               <div className="flex items-center space-x-3">
                 <div className="w-2 h-2 bg-[#F44436] rounded-full"></div>
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">N 7 Issues</span>
