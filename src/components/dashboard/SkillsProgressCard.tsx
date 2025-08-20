@@ -93,7 +93,7 @@ const SkillsProgressCard: React.FC<SkillsProgressCardProps> = ({ skills: propSki
   };
 
   return (
-    <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+    <div className="bg-white dark:bg-gray-800 rounded-xl border-0 dark:border dark:border-gray-700 p-6 shadow-sm">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center space-x-3">
           <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">

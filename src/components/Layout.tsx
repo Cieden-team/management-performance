@@ -14,11 +14,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
       <div className="flex">
-        {/* Sidebar */}
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        {/* Fixed Sidebar */}
+        <div className="hidden md:block">
+          <Sidebar isOpen={true} onClose={() => {}} />
+        </div>
+        
+        {/* Mobile Sidebar */}
+        <div className="md:hidden">
+          <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        </div>
         
         {/* Main Content */}
-        <div className="flex-1 flex flex-col">
+        <div className="flex-1 flex flex-col md:ml-64">
           {/* Header */}
           <Header onMenuClick={() => setSidebarOpen(true)} />
           

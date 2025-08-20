@@ -6,8 +6,8 @@
 /* Base styles - Light theme */
 body {
   font-family: 'Gilroy', 'Inter', system-ui, sans-serif;
-  background-color: #ffffff;
-  color: #1f2937;
+  background-color: #F8F9FA;
+  color: #212121;
 }
 
 /* Dark mode styles */
@@ -16,9 +16,9 @@ body.dark-mode {
   color: #f8fafc;
 }
 
-/* Ensure light theme is properly applied with better colors */
+/* Light theme - правильні кольори */
 .bg-gray-50 {
-  background-color: #f8fafc !important;
+  background-color: #F8F9FA !important;
 }
 
 .bg-white {
@@ -26,37 +26,29 @@ body.dark-mode {
 }
 
 .text-gray-900 {
-  color: #0f172a !important;
+  color: #212121 !important;
 }
 
 .text-gray-600 {
-  color: #475569 !important;
+  color: #646464 !important;
 }
 
 .text-gray-500 {
-  color: #64748b !important;
-}
-
-.border-gray-100 {
-  border-color: #e2e8f0 !important;
-}
-
-.border-gray-200 {
-  border-color: #cbd5e1 !important;
-}
-
-/* Better light theme colors for cards */
-.bg-gradient-to-r.from-white.via-white.to-purple-50\/30 {
-  background: linear-gradient(to right, #ffffff, #ffffff, rgba(245, 243, 255, 0.3)) !important;
-}
-
-/* Improved text contrast for light theme */
-.text-gray-700 {
-  color: #334155 !important;
+  color: #6b7280 !important;
 }
 
 .text-gray-400 {
   color: #94a3b8 !important;
+}
+
+.text-gray-700 {
+  color: #374151 !important;
+}
+
+/* Без обводок для карток в світлій темі */
+.border-gray-100,
+.border-gray-200 {
+  border-color: transparent !important;
 }
 
 /* Dark mode overrides */
@@ -76,6 +68,14 @@ body.dark-mode .text-gray-500 {
   color: #94a3b8 !important;
 }
 
+body.dark-mode .text-gray-400 {
+  color: #64748b !important;
+}
+
+body.dark-mode .text-gray-700 {
+  color: #e2e8f0 !important;
+}
+
 body.dark-mode .border-gray-100 {
   border-color: #334155 !important;
 }
@@ -92,15 +92,44 @@ body.dark-mode .bg-gray-100 {
   background-color: #334155 !important;
 }
 
-/* Ensure text is always visible */
-.text-gray-900 {
-  color: #1f2937 !important;
+/* Перевизначення старих хардкодних кольорів */
+.bg-\[#f8f9fa\] {
+  background-color: #F8F9FA !important;
 }
 
-.text-gray-600 {
-  color: #4b5563 !important;
+.bg-\[#ffffff\] {
+  background-color: #ffffff !important;
 }
 
-.text-gray-500 {
-  color: #6b7280 !important;
+.text-\[#212121\] {
+  color: #212121 !important;
+}
+
+.text-\[#646464\] {
+  color: #646464 !important;
+}
+
+.border-\[#e9e9e9\] {
+  border-color: transparent !important;
+}
+
+/* Dark mode для старих кольорів */
+body.dark-mode .bg-\[#f8f9fa\] {
+  background-color: #1e293b !important;
+}
+
+body.dark-mode .bg-\[#ffffff\] {
+  background-color: #1e293b !important;
+}
+
+body.dark-mode .text-\[#212121\] {
+  color: #f8fafc !important;
+}
+
+body.dark-mode .text-\[#646464\] {
+  color: #cbd5e1 !important;
+}
+
+body.dark-mode .border-\[#e9e9e9\] {
+  border-color: #475569 !important;
 }
