@@ -13,22 +13,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="flex">
-        {/* Sidebar */}
-        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      {/* Sidebar */}
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      
+      {/* Main Content */}
+      <div className="md:ml-64">
+        {/* Header */}
+        <Header onMenuClick={() => setSidebarOpen(true)} />
         
-        {/* Main Content */}
-        <div className="flex-1 flex flex-col min-w-0">
-          {/* Header */}
-          <Header onMenuClick={() => setSidebarOpen(true)} />
-          
-          {/* Page Content */}
-          <main className="flex-1 p-4 sm:p-6 lg:p-8">
-            <div className="w-full">
-              {children}
-            </div>
-          </main>
-        </div>
+        {/* Page Content */}
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">
+          <div className="w-full">
+            {children}
+          </div>
+        </main>
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
       )}
 
       {/* Desktop sidebar */}
-      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-100 transform transition-transform duration-300 ease-in-out`}>
+      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-100 transform transition-transform duration-300 ease-in-out`}>
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-100">
@@ -99,12 +99,12 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
           </nav>
 
           {/* Footer */}
-          <div className="p-4 border-t border-[#e9e9e9] dark:border-[#373737]">
-            <div className="bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg p-3">
+          <div className="p-4 border-t border-gray-100">
+            <div className="bg-purple-50 rounded-lg p-3">
               <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-[#F44436] rounded-full"></div>
-                <span className="text-sm font-medium text-[#212121] dark:text-white">N 7 Issues</span>
-                <button className="ml-auto text-[#646464] dark:text-[#909090] hover:text-[#212121] dark:hover:text-white">
+                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                <span className="text-sm font-medium text-gray-900">N 7 Issues</span>
+                <button className="ml-auto text-gray-500 hover:text-gray-900">
                   <X className="h-4 w-4" />
                 </button>
               </div>
