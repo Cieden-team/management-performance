@@ -106,9 +106,9 @@ const FeedbackFormsPage = () => {
                 <label key={initiative} className="flex items-center">
                   <input
                     type="checkbox"
-                    className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737] rounded"
+                    className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300 rounded"
                   />
-                  <span className="ml-3 text-sm text-[#212121] dark:text-white">{initiative}</span>
+                  <span className="ml-3 text-sm text-gray-900">{initiative}</span>
                 </label>
               ))}
             </div>
@@ -117,42 +117,42 @@ const FeedbackFormsPage = () => {
 
         {/* Cieden Values */}
         <div>
-          <h3 className="text-lg font-medium text-[#212121] dark:text-white mb-4">Alignment with Cieden's Values</h3>
+          <h3 className="text-xl font-medium text-gray-900 mb-6">Alignment with Cieden's Values</h3>
           
           {/* Creativity */}
-          <div className="mb-6">
-            <h4 className="text-md font-medium text-[#212121] dark:text-white mb-3">Q6. Creativity</h4>
+          <div className="mb-8">
+            <h4 className="text-lg font-medium text-gray-900 mb-4">Q6. Creativity</h4>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I generate original ideas and propose creative solutions.</p>
-                <div className="flex space-x-2">
+                <p className="text-gray-700 mb-3">I generate original ideas and propose creative solutions.</p>
+                <div className="flex space-x-3">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
                       <input
                         type="radio"
                         name="creativity_ideas"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-2 text-sm text-gray-900 font-medium">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I adapt my design approach to different contexts and challenges.</p>
-                <div className="flex space-x-2">
+                <p className="text-gray-700 mb-3">I adapt my design approach to different contexts and challenges.</p>
+                <div className="flex space-x-3">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
                       <input
                         type="radio"
                         name="creativity_adaptation"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-2 text-sm text-gray-900 font-medium">{rating}</span>
                     </label>
                   ))}
                 </div>
@@ -161,46 +161,46 @@ const FeedbackFormsPage = () => {
           </div>
 
           {/* Intelligence */}
-          <div className="mb-6">
-            <h4 className="text-md font-medium text-[#212121] dark:text-white mb-3">Q7. Intelligence</h4>
+          <div className="mb-8">
+            <h4 className="text-lg font-medium text-gray-900 mb-4">Q7. Intelligence</h4>
             
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I base my decisions on research, facts, and case studies rather than intuition alone.</p>
-                <div className="flex space-x-2">
+                <p className="text-gray-700 mb-3">I base my decisions on research, facts, and case studies rather than intuition alone.</p>
+                <div className="flex space-x-3">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
                       <input
                         type="radio"
                         name="intelligence_research"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-2 text-sm text-gray-900 font-medium">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I seek to deeply understand the problems I aim to solve.</p>
-                <div className="flex space-x-2">
+                <p className="text-gray-700 mb-3">I seek to deeply understand the problems I aim to solve.</p>
+                <div className="flex space-x-3">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
                       <input
                         type="radio"
                         name="intelligence_understanding"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-2 text-sm text-gray-900 font-medium">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I continuously develop my professional expertise and share knowledge with others.</p>
+                <p className="text-sm text-gray-900 mb-2">I continuously develop my professional expertise and share knowledge with others.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -208,9 +208,9 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="intelligence_expertise"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
@@ -220,11 +220,11 @@ const FeedbackFormsPage = () => {
 
           {/* Effectiveness & Efficiency */}
           <div className="mb-6">
-            <h4 className="text-md font-medium text-[#212121] dark:text-white mb-3">Q8. Effectiveness & Efficiency</h4>
+            <h4 className="text-md font-medium text-gray-900 mb-3">Q8. Effectiveness & Efficiency</h4>
             
             <div className="space-y-4">
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I deliver high-quality work within reasonable timeframes.</p>
+                <p className="text-sm text-gray-900 mb-2">I deliver high-quality work within reasonable timeframes.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -232,16 +232,16 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="effectiveness_quality"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I focus on the value and outcomes my work creates, not only on the number of completed tasks.</p>
+                <p className="text-sm text-gray-900 mb-2">I focus on the value and outcomes my work creates, not only on the number of completed tasks.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -249,16 +249,16 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="effectiveness_value"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I align my efforts with the business impact for the team and clients.</p>
+                <p className="text-sm text-gray-900 mb-2">I align my efforts with the business impact for the team and clients.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -266,9 +266,9 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="effectiveness_impact"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
@@ -278,11 +278,11 @@ const FeedbackFormsPage = () => {
 
           {/* Drive */}
           <div className="mb-6">
-            <h4 className="text-md font-medium text-[#212121] dark:text-white mb-3">Q9. Drive</h4>
+            <h4 className="text-md font-medium text-gray-900 mb-3">Q9. Drive</h4>
             
             <div className="space-y-4">
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I maintain work/life balance and take care of my mental and physical health.</p>
+                <p className="text-sm text-gray-900 mb-2">I maintain work/life balance and take care of my mental and physical health.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -290,16 +290,16 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="drive_balance"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I persistently pursue my goals despite obstacles.</p>
+                <p className="text-sm text-gray-900 mb-2">I persistently pursue my goals despite obstacles.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -307,16 +307,16 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="drive_persistence"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I actively seek challenging tasks and embrace difficult problems.</p>
+                <p className="text-sm text-gray-900 mb-2">I actively seek challenging tasks and embrace difficult problems.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -324,9 +324,9 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="drive_challenges"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
@@ -336,11 +336,11 @@ const FeedbackFormsPage = () => {
 
           {/* Encouragement */}
           <div className="mb-6">
-            <h4 className="text-md font-medium text-[#212121] dark:text-white mb-3">Q10. Encouragement</h4>
+            <h4 className="text-md font-medium text-gray-900 mb-3">Q10. Encouragement</h4>
             
             <div className="space-y-4">
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I communicate openly and honestly without gossip or hidden agendas.</p>
+                <p className="text-sm text-gray-900 mb-2">I communicate openly and honestly without gossip or hidden agendas.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -348,16 +348,16 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="encouragement_communication"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I give constructive feedback and actively seek it for my own improvement.</p>
+                <p className="text-sm text-gray-900 mb-2">I give constructive feedback and actively seek it for my own improvement.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -365,16 +365,16 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="encouragement_feedback"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I provide support and motivation to my colleagues.</p>
+                <p className="text-sm text-gray-900 mb-2">I provide support and motivation to my colleagues.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -382,9 +382,9 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="encouragement_support"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
@@ -394,11 +394,11 @@ const FeedbackFormsPage = () => {
 
           {/* Nurturing */}
           <div className="mb-6">
-            <h4 className="text-md font-medium text-[#212121] dark:text-white mb-3">Q11. Nurturing</h4>
+            <h4 className="text-md font-medium text-gray-900 mb-3">Q11. Nurturing</h4>
             
             <div className="space-y-4">
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I am interested in the success of my colleagues and help across teams and departments.</p>
+                <p className="text-sm text-gray-900 mb-2">I am interested in the success of my colleagues and help across teams and departments.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -406,16 +406,16 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="nurturing_success"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I actively participate in team events and initiatives.</p>
+                <p className="text-sm text-gray-900 mb-2">I actively participate in team events and initiatives.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -423,16 +423,16 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="nurturing_participation"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
               </div>
               
               <div>
-                <p className="text-sm text-[#212121] dark:text-white mb-2">I share my knowledge through mentoring, workshops, or team sessions.</p>
+                <p className="text-sm text-gray-900 mb-2">I share my knowledge through mentoring, workshops, or team sessions.</p>
                 <div className="flex space-x-2">
                   {[1, 2, 3, 4, 5, 6, 7].map((rating) => (
                     <label key={rating} className="flex items-center">
@@ -440,9 +440,9 @@ const FeedbackFormsPage = () => {
                         type="radio"
                         name="nurturing_sharing"
                         value={rating}
-                        className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                        className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                       />
-                      <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                      <span className="ml-1 text-sm text-gray-900">{rating}</span>
                     </label>
                   ))}
                 </div>
@@ -453,10 +453,10 @@ const FeedbackFormsPage = () => {
 
         {/* Work Comfort & Support */}
         <div>
-          <h3 className="text-lg font-medium text-[#212121] dark:text-white mb-4">Work Comfort & Support</h3>
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Work Comfort & Support</h3>
           
           <div className="mb-4">
-            <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+            <label className="block text-sm font-medium text-gray-900 mb-2">
               Q12. How comfortable do you feel in your current work environment?
             </label>
             <div className="flex items-center justify-between">
@@ -468,9 +468,9 @@ const FeedbackFormsPage = () => {
                       type="radio"
                       name="comfort"
                       value={rating}
-                      className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                      className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                     />
-                    <span className="ml-1 text-sm text-[#212121] dark:text-white">{rating}</span>
+                    <span className="ml-1 text-sm text-gray-900">{rating}</span>
                   </label>
                 ))}
               </div>
@@ -479,20 +479,20 @@ const FeedbackFormsPage = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+            <label className="block text-sm font-medium text-gray-900 mb-2">
               Q13. What additional support would help you perform better?
             </label>
             <textarea
               rows={3}
               placeholder="Describe any resources, training, or support you need..."
-              className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+              className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white text-gray-900"
             />
           </div>
         </div>
 
         {/* Submit Button */}
-        <div className="flex justify-end space-x-3 mt-8 pt-6 border-t border-[#e9e9e9] dark:border-[#373737]">
-          <button className="px-4 py-2 border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors">
+        <div className="flex justify-end space-x-3 mt-8 pt-6 border-t border-gray-200">
+          <button className="px-4 py-2 border border-gray-200 text-gray-900 rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors">
             Save Draft
           </button>
           <button className="px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1de6] transition-colors">
