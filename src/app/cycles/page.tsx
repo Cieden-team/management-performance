@@ -59,10 +59,10 @@ const CyclesPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "bg-[#8AC34A] text-white";
-      case "active": return "bg-[#651FFF] text-white";
-      case "planned": return "bg-[#646464] text-white";
-      default: return "bg-[#646464] text-white";
+      case "completed": return "bg-green-100 text-green-700";
+      case "active": return "bg-purple-100 text-purple-700";
+      case "planned": return "bg-gray-100 text-gray-700";
+      default: return "bg-gray-100 text-gray-700";
     }
   };
 
@@ -86,18 +86,18 @@ const CyclesPage = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#212121] dark:text-white">Performance Cycles</h1>
-            <p className="text-[#646464] dark:text-[#909090] mt-1">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Performance Cycles</h1>
+            <p className="text-gray-500 mt-2 text-lg">
               Management of periodic performance reviews
             </p>
           </div>
           <button
             onClick={() => setShowCreateModal(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors"
+            className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
           >
             <Plus className="h-4 w-4" />
             <span>Create Cycle</span>

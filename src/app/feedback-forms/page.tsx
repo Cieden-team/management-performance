@@ -17,22 +17,22 @@ const FeedbackFormsPage = () => {
   const managers = getManagers();
 
   const renderSelfEvaluationForm = () => (
-    <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Self-Evaluation Form</h2>
-        <p className="text-[#646464] dark:text-[#909090] mt-1">Reflect on your achievements, goals, and alignment with company values.</p>
+    <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold text-gray-900">Self-Evaluation Form</h2>
+        <p className="text-gray-500 mt-2 text-lg">Reflect on your achievements, goals, and alignment with company values.</p>
       </div>
 
       <div className="space-y-8">
         {/* Previous Achievements */}
         <div>
-          <h3 className="text-lg font-medium text-[#212121] dark:text-white mb-4">Previous Achievements</h3>
+          <h3 className="text-xl font-medium text-gray-900 mb-6">Previous Achievements</h3>
           
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-[#212121] dark:text-white mb-3">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-4">
               Q1. Which achievements from your previous PDP have you accomplished?
             </label>
-            <div className="space-y-2">
+            <div className="space-y-3">
               {[
                 "Achieved all planned goals",
                 "Achieved part of the goals", 
@@ -44,57 +44,57 @@ const FeedbackFormsPage = () => {
                     type="radio"
                     name="achievements"
                     value={option}
-                    className="h-4 w-4 text-[#651FFF] focus:ring-[#651FFF] border-[#e9e9e9] dark:border-[#373737]"
+                    className="h-4 w-4 text-purple-600 focus:ring-purple-600 border-gray-300"
                   />
-                  <span className="ml-3 text-sm text-[#212121] dark:text-white">{option}</span>
+                  <span className="ml-3 text-sm text-gray-900">{option}</span>
                 </label>
               ))}
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-3">
               Q1.1: Please provide examples of results and specific achievements
             </label>
             <textarea
               rows={4}
               placeholder="Describe your specific achievements and results..."
-              className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 transition-all duration-200"
             />
           </div>
         </div>
 
         {/* Plans & Development */}
         <div>
-          <h3 className="text-lg font-medium text-[#212121] dark:text-white mb-4">Plans & Development</h3>
+          <h3 className="text-xl font-medium text-gray-900 mb-6">Plans & Development</h3>
           
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-3">
               Q3. What role would you like to have in 6-12 months?
             </label>
             <textarea
               rows={3}
               placeholder="Describe your desired role and career aspirations..."
-              className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 transition-all duration-200"
             />
           </div>
 
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+          <div className="mb-6">
+            <label className="block text-sm font-medium text-gray-700 mb-3">
               Q3.1: Which skills or actions will help you achieve this?
             </label>
             <textarea
               rows={3}
               placeholder="List the skills and actions needed for your career growth..."
-              className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+              className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 transition-all duration-200"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#212121] dark:text-white mb-3">
+            <label className="block text-sm font-medium text-gray-700 mb-4">
               Q5. Are there any initiatives you'd like to drive within the team?
             </label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-4">
               {[
                 "Process Improvement",
                 "Knowledge Sharing", 
