@@ -388,7 +388,7 @@ const TeamPage = () => {
   const getRoleColor = (role: string) => {
     switch (role) {
       case "admin": return "bg-[#F44436] text-white";
-      case "manager": return "bg-[#651FFF] text-white";
+      case "manager": return "bg-purple-600 text-white";
       case "employee": return "bg-[#646464] text-white";
       default: return "bg-[#646464] text-white";
     }
@@ -416,7 +416,7 @@ const TeamPage = () => {
           </div>
           <button 
             onClick={() => setShowAddModal(true)}
-            className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
+            className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-2xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
           >
             <Plus className="h-5 w-5" />
             <span className="font-semibold">Add Employee</span>
@@ -430,11 +430,11 @@ const TeamPage = () => {
             <input
               type="text"
               placeholder="Search employees..."
-              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 transition-all duration-200"
+              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 transition-all duration-200"
             />
           </div>
           <div className="flex gap-3">
-            <select className="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700">
+            <select className="px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700">
               <option>All Departments</option>
               <option>Leadership</option>
               <option>Design</option>
@@ -443,7 +443,7 @@ const TeamPage = () => {
               <option>Marketing</option>
               <option>Finance</option>
             </select>
-            <select className="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700">
+            <select className="px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700">
               <option>All Statuses</option>
               <option>Active</option>
               <option>Inactive</option>
@@ -464,7 +464,7 @@ const TeamPage = () => {
                 />
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-[#212121] dark:text-white truncate">
+                    <h3 className="text-lg font-semibold text-gray-900 truncate">
                       {member.firstName} {member.lastName}
                     </h3>
                     <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(member.isActive ? "active" : "inactive")}`}>
@@ -476,7 +476,7 @@ const TeamPage = () => {
                     {member.position}
                   </p>
                   
-                  <p className="text-sm text-[#646464] dark:text-[#909090] mb-2">
+                  <p className="text-sm text-gray-500 mb-2">
                     {member.department}
                   </p>
 
@@ -485,12 +485,12 @@ const TeamPage = () => {
                   </span>
                   
                   <div className="space-y-2">
-                    <div className="flex items-center space-x-2 text-sm text-[#646464] dark:text-[#909090]">
+                    <div className="flex items-center space-x-2 text-sm text-gray-500">
                       <Mail className="h-4 w-4" />
                       <span className="truncate">{member.email}</span>
                     </div>
                     
-                    <div className="flex items-center space-x-2 text-sm text-[#646464] dark:text-[#909090]">
+                    <div className="flex items-center space-x-2 text-sm text-gray-500">
                       <MapPin className="h-4 w-4" />
                       <span>Kyiv</span>
                     </div>
@@ -499,11 +499,11 @@ const TeamPage = () => {
                   <div className="flex space-x-2 mt-4">
                     <button 
                       onClick={() => setSelectedMember(member)}
-                      className="flex-1 px-3 py-2 text-sm bg-[#f0e9ff] dark:bg-[#651FFF] text-[#651FFF] dark:text-white rounded-lg hover:bg-[#e9d5ff] dark:hover:bg-[#5b1ce6] transition-colors"
+                      className="flex-1 px-3 py-2 text-sm bg-[#f0e9ff] dark:bg-purple-600 text-[#651FFF] dark:text-white rounded-lg hover:bg-[#e9d5ff] dark:hover:bg-[#5b1ce6] transition-colors"
                     >
                       Profile
                     </button>
-                    <button className="flex-1 px-3 py-2 text-sm border border-[#e9e9e9] dark:border-[#373737] text-[#646464] dark:text-[#909090] rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors">
+                    <button className="flex-1 px-3 py-2 text-sm border border-gray-100 text-gray-500 rounded-lg hover:bg-gray-50 transition-colors">
                       Message
                     </button>
                   </div>
@@ -515,54 +515,54 @@ const TeamPage = () => {
 
         {/* Team Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
+              <div className="p-2 bg-[#f0e9ff] dark:bg-purple-600 rounded-lg">
                 <Users className="h-6 w-6 text-[#651FFF] dark:text-white" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Total Employees</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">{teamMembers.length}</p>
+                <p className="text-sm text-gray-500">Total Employees</p>
+                <p className="text-2xl font-bold text-gray-900">{teamMembers.length}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
                               <div className="p-2 bg-[#8AC34A] text-white rounded-lg">
                 <Users className="h-6 w-6 text-[#8AC34A] dark:text-white" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Active</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Active</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {teamMembers.filter(m => m.isActive).length}
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
+              <div className="p-2 bg-[#f0e9ff] dark:bg-purple-600 rounded-lg">
                 <Users className="h-6 w-6 text-[#651FFF] dark:text-white" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Departments</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Departments</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {new Set(teamMembers.map(m => m.department)).size}
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
                               <div className="p-2 bg-[#FF9102] text-white rounded-lg">
                 <Users className="h-6 w-6 text-[#FF9102] dark:text-white" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Managers</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Managers</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {teamMembers.filter(m => m.role === "manager" || m.role === "admin").length}
                 </p>
               </div>
@@ -572,69 +572,69 @@ const TeamPage = () => {
 
         {/* Add Member Side Panel */}
         {showAddModal && (
-          <div className="fixed right-0 top-0 h-full w-[28rem] bg-white dark:bg-[#000319] shadow-2xl transform transition-transform duration-300 ease-in-out z-50">
+          <div className="fixed right-0 top-0 h-full w-[28rem] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50">
               <div className="p-6 h-full overflow-y-auto">
                 <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Add Employee</h2>
+                  <h2 className="text-xl font-semibold text-gray-900">Add Employee</h2>
                   <button 
                     onClick={() => setShowAddModal(false)}
-                    className="p-2 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors"
+                    className="p-2 hover:bg-gray-50 rounded-lg transition-colors"
                   >
-                    <span className="text-2xl text-[#646464] dark:text-[#909090]">&times;</span>
+                    <span className="text-2xl text-gray-500">&times;</span>
                   </button>
                 </div>
                 
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-gray-900 mb-2">
                         First Name
                       </label>
                       <input
                         type="text"
                         placeholder="First name"
-                        className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                        className="w-full px-3 py-2 border border-gray-100 rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white text-gray-900"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                      <label className="block text-sm font-medium text-gray-900 mb-2">
                         Last Name
                       </label>
                       <input
                         type="text"
                         placeholder="Last name"
-                        className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                        className="w-full px-3 py-2 border border-gray-100 rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white text-gray-900"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
                       Email
                     </label>
                     <input
                       type="email"
                       placeholder="email@cieden.com"
-                      className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-100 rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white text-gray-900"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
                       Position
                     </label>
                     <input
                       type="text"
                       placeholder="Product Designer"
-                      className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                      className="w-full px-3 py-2 border border-gray-100 rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white text-gray-900"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
                       Department
                     </label>
-                    <select className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white">
+                    <select className="w-full px-3 py-2 border border-gray-100 rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white text-gray-900">
                       <option>Design</option>
                       <option>Sales</option>
                       <option>Product Management</option>
@@ -645,10 +645,10 @@ const TeamPage = () => {
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                    <label className="block text-sm font-medium text-gray-900 mb-2">
                       Role
                     </label>
-                    <select className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white">
+                    <select className="w-full px-3 py-2 border border-gray-100 rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white text-gray-900">
                       <option>employee</option>
                       <option>manager</option>
                       <option>admin</option>
@@ -659,11 +659,11 @@ const TeamPage = () => {
                 <div className="flex space-x-3 mt-6">
                   <button 
                     onClick={() => setShowAddModal(false)}
-                    className="flex-1 px-4 py-2 border border-[#e9e9e9] dark:border-[#373737] text-[#646464] dark:text-[#909090] rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors"
+                    className="flex-1 px-4 py-2 border border-gray-100 text-gray-500 rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     Cancel
                   </button>
-                  <button className="flex-1 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors">
+                  <button className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-[#5b1ce6] transition-colors">
                     Add
                   </button>
                 </div>
@@ -673,15 +673,15 @@ const TeamPage = () => {
 
         {/* Member Profile Modal */}
         {selectedMember && (
-          <div className="fixed right-0 top-0 h-full w-[28rem] bg-white dark:bg-[#000319] shadow-2xl transform transition-transform duration-300 ease-in-out z-50">
+          <div className="fixed right-0 top-0 h-full w-[28rem] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50">
             <div className="p-6 h-full overflow-y-auto">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Employee Profile</h2>
+                <h2 className="text-xl font-semibold text-gray-900">Employee Profile</h2>
                 <button 
                   onClick={() => setSelectedMember(null)}
-                  className="p-2 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors"
+                  className="p-2 hover:bg-gray-50 rounded-lg transition-colors"
                 >
-                  <span className="text-2xl text-[#646464] dark:text-[#909090]">&times;</span>
+                  <span className="text-2xl text-gray-500">&times;</span>
                 </button>
               </div>
               
@@ -692,34 +692,34 @@ const TeamPage = () => {
                   size="xl"
                 />
                 <div>
-                  <h3 className="text-xl font-semibold text-[#212121] dark:text-white">
+                  <h3 className="text-xl font-semibold text-gray-900">
                     {selectedMember.firstName} {selectedMember.lastName}
                   </h3>
                   <p className="text-[#651FFF] font-medium">{selectedMember.position}</p>
-                  <p className="text-[#646464] dark:text-[#909090]">{selectedMember.department}</p>
+                  <p className="text-gray-500">{selectedMember.department}</p>
                 </div>
               </div>
               
               <div className="space-y-4">
-                <div className="flex items-center space-x-2 text-[#646464] dark:text-[#909090]">
+                <div className="flex items-center space-x-2 text-gray-500">
                   <Mail className="h-4 w-4" />
                   <span>{selectedMember.email}</span>
                 </div>
                 
-                <div className="flex items-center space-x-2 text-[#646464] dark:text-[#909090]">
+                <div className="flex items-center space-x-2 text-gray-500">
                   <MapPin className="h-4 w-4" />
                   <span>Kyiv, Ukraine</span>
                 </div>
                 
                 <div className="flex items-center space-x-2">
-                  <span className="text-[#646464] dark:text-[#909090]">Role:</span>
+                  <span className="text-gray-500">Role:</span>
                   <span className={`px-2 py-1 text-xs rounded-full ${getRoleColor(selectedMember.role)}`}>
                     {getRoleText(selectedMember.role)}
                   </span>
                 </div>
                 
                 <div className="flex items-center space-x-2">
-                  <span className="text-[#646464] dark:text-[#909090]">Status:</span>
+                  <span className="text-gray-500">Status:</span>
                   <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(selectedMember.isActive ? "active" : "inactive")}`}>
                     {getStatusText(selectedMember.isActive ? "active" : "inactive")}
                   </span>
@@ -729,11 +729,11 @@ const TeamPage = () => {
               <div className="flex space-x-3 mt-6">
                 <button 
                   onClick={() => setSelectedMember(null)}
-                  className="flex-1 px-4 py-2 border border-[#e9e9e9] dark:border-[#373737] text-[#646464] dark:text-[#909090] rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors"
+                  className="flex-1 px-4 py-2 border border-gray-100 text-gray-500 rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Close
                 </button>
-                <button className="flex-1 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors">
+                <button className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-[#5b1ce6] transition-colors">
                   Edit
                 </button>
               </div>
