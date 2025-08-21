@@ -93,10 +93,10 @@ const AdminPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active": return "bg-[#8AC34A] text-white";
-      case "inactive": return "bg-[#F44436] text-white";
-      case "pending": return "bg-[#FF9102] text-white";
-      default: return "bg-[#646464] text-white";
+      case "active": return "bg-green-100 text-green-700";
+      case "inactive": return "bg-red-100 text-red-700";
+      case "pending": return "bg-orange-100 text-orange-700";
+      default: return "bg-gray-100 text-gray-700";
     }
   };
 
@@ -126,8 +126,8 @@ const AdminPage = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-[#212121] dark:text-white">Admin Panel</h1>
-          <p className="text-[#646464] dark:text-[#909090] mt-1">
+          <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Admin Panel</h1>
+          <p className="text-gray-500 mt-2 text-lg">
             Manage users, performance cycles, and system settings
           </p>
         </div>
@@ -139,10 +139,10 @@ const AdminPage = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center space-x-2 py-2 px-1 border-b-2 font-medium text-sm transition-colors ${
+                className={`flex items-center space-x-2 py-3 px-1 border-b-2 font-medium text-sm transition-all duration-200 ${
                   activeTab === tab.id
-                    ? "text-[#651FFF] dark:text-[#651FFF] border-b-2 border-[#651FFF] dark:border-[#651FFF]"
-                    : "text-[#646464] dark:text-[#909090] border-transparent hover:text-[#212121] dark:hover:text-white hover:border-[#e9e9e9] dark:hover:border-[#373737]"
+                    ? "text-purple-600 border-b-2 border-purple-600"
+                    : "text-gray-500 border-transparent hover:text-gray-900 hover:border-gray-300"
                 }`}
               >
                 <tab.icon className="h-4 w-4" />
@@ -158,24 +158,24 @@ const AdminPage = () => {
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {stats.map((stat, index) => (
-                <div key={index} className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+                <div key={index} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-[#646464] dark:text-[#909090]">{stat.title}</p>
-                      <p className="text-2xl font-bold text-[#212121] dark:text-white">{stat.value}</p>
+                      <p className="text-sm font-medium text-gray-500">{stat.title}</p>
+                      <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
                       <div className="flex items-center mt-2">
                         <span
                           className={`text-sm font-medium ${
-                            stat.changeType === "negative" ? "text-[#F44436]" : "text-[#8AC34A]"
+                            stat.changeType === "negative" ? "text-red-600" : "text-green-600"
                           }`}
                         >
                           {stat.change}
                         </span>
-                        <span className="text-sm text-[#646464] dark:text-[#909090] ml-1">from last month</span>
+                        <span className="text-sm text-gray-500 ml-1">from last month</span>
                       </div>
                     </div>
-                    <div className="p-3 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                      <stat.icon className="h-6 w-6 text-[#651FFF] dark:text-white" />
+                    <div className="p-3 bg-purple-50 rounded-xl">
+                      <stat.icon className="h-6 w-6 text-purple-600" />
                     </div>
                   </div>
                 </div>

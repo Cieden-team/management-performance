@@ -50,11 +50,11 @@ const ReviewsPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "bg-[#8AC34A] text-white";
-      case "pending": return "bg-[#FF9102] text-white";
-      case "scheduled": return "bg-[#651FFF] text-white";
-      case "overdue": return "bg-[#F44436] text-white";
-      default: return "bg-[#646464] text-white";
+      case "completed": return "bg-green-100 text-green-700";
+      case "pending": return "bg-orange-100 text-orange-700";
+      case "scheduled": return "bg-purple-100 text-purple-700";
+      case "overdue": return "bg-red-100 text-red-700";
+      default: return "bg-gray-100 text-gray-700";
     }
   };
 
@@ -73,7 +73,7 @@ const ReviewsPage = () => {
       <Star
         key={i}
         className={`h-4 w-4 ${
-          i < rating ? "text-[#FF9102] fill-[#FF9102]" : "text-[#e9e9e9] dark:text-[#373737]"
+          i < rating ? "text-orange-500 fill-orange-500" : "text-gray-200"
         }`}
       />
     ));
@@ -81,23 +81,23 @@ const ReviewsPage = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#212121] dark:text-white">Performance Reviews</h1>
-            <p className="text-[#646464] dark:text-[#909090] mt-1">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Performance Reviews</h1>
+            <p className="text-gray-500 mt-2 text-lg">
               Manage and track performance reviews
             </p>
           </div>
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                <FileText className="h-6 w-6 text-[#651FFF] dark:text-white" />
+              <div className="p-3 bg-purple-50 rounded-xl">
+                <FileText className="h-6 w-6 text-purple-600" />
               </div>
               <div>
                 <p className="text-sm text-[#646464] dark:text-[#909090]">Total Reviews</p>

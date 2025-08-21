@@ -9,57 +9,57 @@ const SettingsPage = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#212121] dark:text-white">Settings</h1>
-            <p className="text-[#646464] dark:text-[#909090] mt-1">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Settings</h1>
+            <p className="text-gray-500 mt-2 text-lg">
               Manage your account and application preferences
             </p>
           </div>
         </div>
 
         {/* Profile Settings */}
-        <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-          <div className="flex items-center space-x-3 mb-6">
-            <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-              <User className="h-6 w-6 text-[#651FFF] dark:text-white" />
+        <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+          <div className="flex items-center space-x-4 mb-8">
+            <div className="p-3 bg-purple-50 rounded-xl">
+              <User className="h-6 w-6 text-purple-600" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Profile</h2>
-              <p className="text-sm text-[#646464] dark:text-[#909090]">Personal settings</p>
+              <h2 className="text-2xl font-semibold text-gray-900">Profile</h2>
+              <p className="text-gray-500">Personal settings</p>
             </div>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
                 Full Name
               </label>
               <input
                 type="text"
                 defaultValue={user?.fullName || ""}
-                className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 transition-all duration-200"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
                 Email Address
               </label>
               <input
                 type="email"
                 defaultValue={user?.emailAddresses?.[0]?.emailAddress || ""}
-                className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 transition-all duration-200"
               />
             </div>
             
             <div>
-              <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+              <label className="block text-sm font-medium text-gray-700 mb-3">
                 Department
               </label>
-              <select className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white">
+              <select className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700">
                 <option>Engineering</option>
                 <option>Design</option>
                 <option>Product</option>
@@ -71,33 +71,33 @@ const SettingsPage = () => {
         </div>
 
         {/* Notification Settings */}
-        <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-          <div className="flex items-center space-x-3 mb-6">
-            <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-              <Bell className="h-6 w-6 text-[#651FFF] dark:text-white" />
+        <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+          <div className="flex items-center space-x-4 mb-8">
+            <div className="p-3 bg-purple-50 rounded-xl">
+              <Bell className="h-6 w-6 text-purple-600" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Notifications</h2>
-              <p className="text-sm text-[#646464] dark:text-[#909090]">Notification settings</p>
+              <h2 className="text-2xl font-semibold text-gray-900">Notifications</h2>
+              <p className="text-gray-500">Notification settings</p>
             </div>
           </div>
 
-          <div className="space-y-4">
-            <div className="flex items-center justify-between p-4 border border-[#e9e9e9] dark:border-[#373737] rounded-lg">
+          <div className="space-y-6">
+            <div className="flex items-center justify-between p-6 border border-gray-200 rounded-xl">
               <div>
-                <h3 className="text-sm font-medium text-[#212121] dark:text-white">Email notifications</h3>
-                <p className="text-xs text-[#646464] dark:text-[#909090]">Receive notifications via email</p>
+                <h3 className="text-sm font-medium text-gray-900">Email notifications</h3>
+                <p className="text-sm text-gray-500">Receive notifications via email</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" defaultChecked className="sr-only peer" />
-                <div className="w-11 h-6 bg-[#e9e9e9] dark:bg-[#373737] peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#651FFF] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#651FFF]"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-purple-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
               </label>
             </div>
 
-            <div className="flex items-center justify-between p-4 border border-[#e9e9e9] dark:border-[#373737] rounded-lg">
+            <div className="flex items-center justify-between p-6 border border-gray-200 rounded-xl">
               <div>
-                <h3 className="text-sm font-medium text-[#212121] dark:text-white">Push notifications</h3>
-                <p className="text-xs text-[#646464] dark:text-[#909090]">Browser notifications</p>
+                <h3 className="text-sm font-medium text-gray-900">Push notifications</h3>
+                <p className="text-sm text-gray-500">Browser notifications</p>
               </div>
               <label className="relative inline-flex items-center cursor-pointer">
                 <input type="checkbox" defaultChecked className="sr-only peer" />

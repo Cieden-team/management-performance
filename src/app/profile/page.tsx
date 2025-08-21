@@ -43,34 +43,34 @@ const ProfilePage = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#212121] dark:text-white">My Profile</h1>
-            <p className="text-[#646464] dark:text-[#909090] mt-1">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">My Profile</h1>
+            <p className="text-gray-500 mt-2 text-lg">
               Manage your personal information and performance
             </p>
           </div>
           <button
             onClick={() => setShowEditModal(true)}
-            className="flex items-center space-x-2 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors"
+            className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
           >
-            <User className="h-4 w-4" />
-            <span>Edit Profile</span>
+            <User className="h-5 w-5" />
+            <span className="font-semibold">Edit Profile</span>
           </button>
         </div>
 
         {/* Profile Overview */}
-        <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-          <div className="flex items-start space-x-6">
+        <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+          <div className="flex items-start space-x-8">
             <Avatar src={currentUser.avatar} alt={`${currentUser.firstName} ${currentUser.lastName}`} size="xl" />
             <div className="flex-1">
-              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">
+              <h2 className="text-2xl font-semibold text-gray-900">
                 {currentUser.firstName} {currentUser.lastName}
               </h2>
-              <p className="text-[#646464] dark:text-[#909090]">{currentUser.email}</p>
-              <p className="text-sm text-[#646464] dark:text-[#909090] mt-1">{currentUser.position} • {currentUser.department}</p>
+              <p className="text-gray-500 text-lg">{currentUser.email}</p>
+              <p className="text-gray-500 mt-2">{currentUser.position} • {currentUser.department}</p>
             </div>
           </div>
         </div>
@@ -78,25 +78,25 @@ const ProfilePage = () => {
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Overall Rating */}
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                <Star className="h-6 w-6 text-[#651FFF] dark:text-white" />
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="p-3 bg-purple-50 rounded-xl">
+                <Star className="h-6 w-6 text-purple-600" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold text-[#212121] dark:text-white">Overall Rating</h3>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">This month</p>
+                <h3 className="text-xl font-semibold text-gray-900">Overall Rating</h3>
+                <p className="text-gray-500">This month</p>
               </div>
             </div>
             
             <div className="text-center">
-              <div className="text-2xl font-bold text-[#212121] dark:text-white">{currentUser.rating}/7</div>
-              <div className="text-sm text-[#646464] dark:text-[#909090]">points</div>
+              <div className="text-3xl font-bold text-gray-900">{currentUser.rating}/7</div>
+              <div className="text-gray-500">points</div>
             </div>
             
-            <div className="flex items-center justify-between text-sm mt-4">
-              <span className="text-[#646464] dark:text-[#909090]">Progress</span>
-              <span className="font-medium text-[#212121] dark:text-white">+0.8</span>
+            <div className="flex items-center justify-between text-sm mt-6">
+              <span className="text-gray-500">Progress</span>
+              <span className="font-medium text-gray-900">+0.8</span>
             </div>
           </div>
 
