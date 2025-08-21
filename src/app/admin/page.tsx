@@ -122,8 +122,8 @@ const AdminPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-full">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="min-h-full w-full">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Admin Panel</h1>
@@ -297,27 +297,27 @@ const AdminPage = () => {
                 </div>
               </div>
 
-              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-[#212121] dark:text-white mb-4">Frequently used functions</h3>
-                <div className="space-y-3">
-                  <button className="w-full flex items-center space-x-3 p-3 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors">
-                    <UserPlus className="h-5 w-5 text-[#651FFF]" />
-                    <span className="text-[#212121] dark:text-white">Add New User</span>
+              <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-6">Frequently used functions</h3>
+                <div className="space-y-4">
+                  <button className="w-full flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-xl transition-all duration-200">
+                    <UserPlus className="h-6 w-6 text-purple-600" />
+                    <span className="text-gray-900 font-medium">Add New User</span>
                   </button>
-                  <button className="w-full flex items-center space-x-3 p-3 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors">
-                    <Calendar className="h-5 w-5 text-[#651FFF]" />
-                    <span className="text-[#212121] dark:text-white">Create Cycle</span>
+                  <button className="w-full flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-xl transition-all duration-200">
+                    <Calendar className="h-6 w-6 text-purple-600" />
+                    <span className="text-gray-900 font-medium">Create Cycle</span>
                   </button>
-                  <button className="w-full flex items-center space-x-3 p-3 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors">
-                    <Shield className="h-5 w-5 text-[#651FFF]" />
-                    <span className="text-[#212121] dark:text-white">Security Settings</span>
+                  <button className="w-full flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-xl transition-all duration-200">
+                    <Shield className="h-6 w-6 text-purple-600" />
+                    <span className="text-gray-900 font-medium">Security Settings</span>
                   </button>
                 </div>
               </div>
             </div>
 
             {/* Seed Data Button */}
-            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
               <AdminSeedButton />
             </div>
           </div>
@@ -325,48 +325,48 @@ const AdminPage = () => {
 
         {/* Users Tab */}
         {activeTab === "users" && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">User Management</h2>
+              <h2 className="text-2xl font-semibold text-gray-900">User Management</h2>
               <button
                 onClick={() => setShowAddUserModal(true)}
-                className="flex items-center space-x-2 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors"
+                className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
               >
-                <Plus className="h-4 w-4" />
-                <span>Add User</span>
+                <Plus className="h-5 w-5" />
+                <span className="font-semibold">Add User</span>
               </button>
             </div>
             
-            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-              <p className="text-[#646464] dark:text-[#909090]">User management interface will be implemented here.</p>
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+              <p className="text-gray-500">User management interface will be implemented here.</p>
             </div>
           </div>
         )}
 
         {/* Cycles Tab */}
         {activeTab === "cycles" && (
-          <div className="space-y-6">
+          <div className="space-y-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Performance Cycles</h2>
-              <button className="flex items-center space-x-2 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors">
-                <Plus className="h-4 w-4" />
-                <span>Create Cycle</span>
+              <h2 className="text-2xl font-semibold text-gray-900">Performance Cycles</h2>
+              <button className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md">
+                <Plus className="h-5 w-5" />
+                <span className="font-semibold">Create Cycle</span>
               </button>
             </div>
             
-            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-              <p className="text-[#646464] dark:text-[#909090]">Performance cycles management interface will be implemented here.</p>
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+              <p className="text-gray-500">Performance cycles management interface will be implemented here.</p>
             </div>
           </div>
         )}
 
         {/* Settings Tab */}
         {activeTab === "settings" && (
-          <div className="space-y-6">
-            <h2 className="text-xl font-semibold text-[#212121] dark:text-white">System Settings</h2>
+          <div className="space-y-8">
+            <h2 className="text-2xl font-semibold text-gray-900">System Settings</h2>
             
-            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-              <p className="text-[#646464] dark:text-[#909090]">System settings interface will be implemented here.</p>
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+              <p className="text-gray-500">System settings interface will be implemented here.</p>
             </div>
           </div>
         )}
