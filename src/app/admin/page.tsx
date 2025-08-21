@@ -184,17 +184,17 @@ const AdminPage = () => {
 
             {/* Quick Actions */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                    <Users className="h-6 w-6 text-[#651FFF] dark:text-white" />
+              <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="p-3 bg-purple-50 rounded-xl">
+                    <Users className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
-                    <div className="font-medium text-[#212121] dark:text-white">User Management</div>
-                    <div className="text-sm text-[#646464] dark:text-[#909090]">Add, edit, delete users</div>
+                    <div className="font-medium text-gray-900">User Management</div>
+                    <div className="text-gray-500">Add, edit, delete users</div>
                   </div>
                 </div>
-                <button className="w-full bg-white dark:bg-[#000319] border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors px-4 py-2 rounded-lg">
+                <button className="w-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all duration-200 px-4 py-3 rounded-xl">
                   Manage Users
                 </button>
               </div>
