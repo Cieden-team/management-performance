@@ -3,10 +3,11 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Layout from "@/components/Layout";
-
+import GoalsProgressCard from "@/components/dashboard/GoalsProgressCard";
+import FeedbackReceivedCard from "@/components/dashboard/FeedbackReceivedCard";
 import { User, Star, Award, FileText, TrendingUp, MessageSquare, X } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
-import { mockFeedbacks } from "@/lib/data";
+import { mockFeedbacks } from "@/lib/mockData";
 
 const ProfilePage = () => {
   const { user } = useUser();
@@ -144,9 +145,9 @@ const ProfilePage = () => {
               <div className="space-y-3">
                 <div className="p-3 bg-[#f8f9fa] dark:bg-[#373737] rounded-lg">
                   <div className="flex items-center justify-between text-sm mb-2">
-                                          <span className="text-gray-600 dark:text-gray-400">Date:</span>
-                      <span className="text-gray-900 dark:text-white">
-                                             {new Date(currentUser.feedbacks[0].createdAt).toLocaleDateString()}
+                    <span className="text-[#646464] dark:text-[#909090]">Date:</span>
+                    <span className="text-[#212121] dark:text-white">
+                      {new Date(currentUser.feedbacks[0].date).toLocaleDateString()}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm mb-2">

@@ -2,7 +2,9 @@
 
 import { useUser } from "@clerk/nextjs";
 import Layout from "@/components/Layout";
-
+import GoalsProgressCard from "@/components/dashboard/GoalsProgressCard";
+import FeedbackReceivedCard from "@/components/dashboard/FeedbackReceivedCard";
+import SkillsProgressCard from "@/components/dashboard/SkillsProgressCard";
 
 import Avatar from "@/components/ui/Avatar";
 
@@ -79,7 +81,7 @@ const DashboardPage = () => {
       category: "Frontend",
       progress: 85,
 
-      color: "#7c3aed"
+      color: "#651FFF"
     },
     { 
       id: 2,
@@ -136,19 +138,16 @@ const DashboardPage = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Welcome Header */}
-        <div className="bg-gradient-to-r from-white via-white to-blue-50/20 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/20 rounded-2xl border-0 dark:border-gray-700 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+        <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm">
           <div className="flex items-center space-x-6">
-            <div className="relative">
-              <Avatar src={currentUser.avatar} alt={`${currentUser.firstName} ${currentUser.lastName}`} size="lg" />
-              <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-3 border-white"></div>
-            </div>
+            <Avatar src={currentUser.avatar} alt={`${currentUser.firstName} ${currentUser.lastName}`} size="lg" />
             <div>
-              <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-1 font-gilroy">
-                Welcome back, {currentUser.firstName} {currentUser.lastName}!
+              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                Welcome back, {currentUser.firstName} {currentUser.lastName}! 👋
               </h1>
-              <p className="text-gray-500 dark:text-gray-400 font-medium">
+              <p className="text-gray-500 text-lg">
                 Last login: {formatDate(new Date().toISOString())} at {formatTime(new Date().toISOString())}
               </p>
             </div>
@@ -157,80 +156,65 @@ const DashboardPage = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Active Goals</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white font-gilroy">
+                <p className="text-sm font-medium text-gray-500 mb-1">Active Goals</p>
+                <p className="text-3xl font-bold text-gray-900">
                   {goals.filter(g => g.status === "active").length}
                 </p>
               </div>
-              <div className="p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl hover:scale-110 transition-transform duration-300">
-                <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+              <div className="w-14 h-14 bg-purple-50 rounded-xl flex items-center justify-center">
+                <span className="text-purple-600 text-2xl">🎯</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Feedback Received</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white font-gilroy">
+                <p className="text-sm font-medium text-gray-500 mb-1">Feedback Received</p>
+                <p className="text-3xl font-bold text-gray-900">
                   {feedbacks.length}
                 </p>
               </div>
-              <div className="p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl hover:scale-110 transition-transform duration-300">
-                <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                </svg>
+              <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center">
+                <span className="text-blue-600 text-2xl">💬</span>
               </div>
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Average Rating</p>
-                <p className="text-3xl font-bold text-gray-900 dark:text-white font-gilroy">
+                <p className="text-sm font-medium text-gray-500 mb-1">Average Rating</p>
+                <p className="text-3xl font-bold text-gray-900">
                   {feedbacks.length > 0 
                     ? (feedbacks.reduce((acc, f) => acc + f.rating, 0) / feedbacks.length).toFixed(1)
                     : "0.0"
-                  }
+                  }/5
                 </p>
               </div>
-              <div className="p-4 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl hover:scale-110 transition-transform duration-300">
-                <svg className="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                </svg>
+              <div className="w-14 h-14 bg-yellow-50 rounded-xl flex items-center justify-center">
+                <span className="text-yellow-600 text-2xl">⭐</span>
               </div>
             </div>
           </div>
         </div>
 
-                           {/* Main Content Grid */}
-                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                     {/* Left Column */}
-                     <div className="lg:col-span-2 space-y-6">
-                       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Goals Progress</h3>
-                         <p className="text-gray-600 dark:text-gray-400">Goals tracking will be here</p>
-                       </div>
-                       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Skills Progress</h3>
-                         <p className="text-gray-600 dark:text-gray-400">Skills tracking will be here</p>
-                       </div>
-                     </div>
-           
-                     {/* Right Column */}
-                     <div className="space-y-6">
-                       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
-                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Feedback</h3>
-                         <p className="text-gray-600 dark:text-gray-400">Feedback will be here</p>
-                       </div>
-                     </div>
-                   </div>
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column */}
+          <div className="lg:col-span-2 space-y-8">
+            <GoalsProgressCard goals={goals} />
+            <SkillsProgressCard skills={skills} />
+          </div>
+
+          {/* Right Column */}
+          <div className="space-y-8">
+            <FeedbackReceivedCard feedbacks={feedbacks} />
+          </div>
+        </div>
       </div>
     </Layout>
   );

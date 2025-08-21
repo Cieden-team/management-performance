@@ -1,15 +1,13 @@
 {
-  "buildCommand": "NODE_OPTIONS='--max-old-space-size=16384' npm run build",
-  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
   "framework": "nextjs",
+  "installCommand": "npm install",
+  "devCommand": "npm run dev",
+  "regions": ["iad1"],
   "functions": {
     "app/**/*.tsx": {
       "maxDuration": 30
-    }
-  },
-  "build": {
-    "env": {
-      "NODE_OPTIONS": "--max-old-space-size=16384"
     }
   }
 }

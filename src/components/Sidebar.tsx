@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { 
   BarChart3, 
   Target, 
@@ -24,23 +23,6 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
   const pathname = usePathname();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Визначаємо поточну тему
-  useEffect(() => {
-    const checkTheme = () => {
-      const isDark = document.body.classList.contains('dark-mode');
-      setIsDarkMode(isDark);
-    };
-
-    checkTheme();
-    
-    // Слухаємо зміни теми
-    const observer = new MutationObserver(checkTheme);
-    observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
-    
-    return () => observer.disconnect();
-  }, []);
 
   const navigation = [
     { name: "Dashboard", href: "/dashboard", icon: BarChart3 },
@@ -68,14 +50,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
       )}
 
       {/* Desktop sidebar */}
-      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 transform transition-transform duration-300 ease-in-out`}>
+      <div className={`${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 fixed md:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-100 transform transition-transform duration-300 ease-in-out`}>
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+          <div className="flex items-center justify-between p-6 border-b border-gray-100">
             <div className="flex items-center space-x-3">
               <Link href="/dashboard">
                 <Image
-                  src={isDarkMode ? "/logoWhite.svg" : "/logoDark.svg"}
+                  src="/logoDark.svg"
                   alt="Cieden Logo"
                   width={100}
                   height={32}
@@ -86,15 +68,15 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
             {onClose && (
               <button
                 onClick={onClose}
-                className="md:hidden p-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                className="md:hidden p-2 rounded-lg hover:bg-gray-50 transition-colors"
               >
-                <X className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+                <X className="h-5 w-5 text-gray-500" />
               </button>
             )}
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 px-6 py-8 space-y-3">
+          <nav className="flex-1 px-4 py-6 space-y-1">
             {navigation.map((item) => {
               const isActive = pathname === item.href;
               const IconComponent = item.icon;
@@ -103,26 +85,26 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className={`flex items-center space-x-4 px-4 py-3 rounded-xl font-gilroy font-medium transition-all duration-300 ${
+                  className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                     isActive
-                      ? "bg-gradient-to-r from-purple-500 to-purple-600 text-white shadow-lg transform scale-105"
-                      : "text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white hover:transform hover:scale-105"
+                      ? "bg-purple-50 text-purple-600 shadow-sm"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                   }`}
                 >
                   <IconComponent className="h-5 w-5" />
-                  <span className="text-sm">{item.name}</span>
+                  <span className="font-medium">{item.name}</span>
                 </Link>
               );
             })}
           </nav>
 
           {/* Footer */}
-          <div className="p-6 border-t border-gray-200 dark:border-gray-700">
-            <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">N 7 Issues</span>
-                <button className="ml-auto text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
+          <div className="p-4 border-t border-[#e9e9e9] dark:border-[#373737]">
+            <div className="bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg p-3">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-[#F44436] rounded-full"></div>
+                <span className="text-sm font-medium text-[#212121] dark:text-white">N 7 Issues</span>
+                <button className="ml-auto text-[#646464] dark:text-[#909090] hover:text-[#212121] dark:hover:text-white">
                   <X className="h-4 w-4" />
                 </button>
               </div>

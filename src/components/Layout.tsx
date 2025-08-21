@@ -12,26 +12,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="min-h-screen bg-gray-50">
       <div className="flex">
-        {/* Fixed Sidebar */}
-        <div className="hidden md:block">
-          <Sidebar isOpen={true} onClose={() => {}} />
-        </div>
-        
-        {/* Mobile Sidebar */}
-        <div className="md:hidden">
-          <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
-        </div>
+        {/* Sidebar */}
+        <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
         
         {/* Main Content */}
-        <div className="flex-1 flex flex-col md:ml-64">
+        <div className="flex-1 flex flex-col min-w-0">
           {/* Header */}
           <Header onMenuClick={() => setSidebarOpen(true)} />
           
           {/* Page Content */}
-          <main className="flex-1 p-6 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-            {children}
+          <main className="flex-1 p-4 sm:p-6 lg:p-8">
+            <div className="max-w-7xl mx-auto">
+              {children}
+            </div>
           </main>
         </div>
       </div>

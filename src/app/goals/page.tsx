@@ -81,19 +81,19 @@ const GoalsPage = () => {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "bg-red-500 text-white";
-      case "medium": return "bg-orange-500 text-white";
-      case "low": return "bg-green-500 text-white";
-      default: return "bg-gray-500 text-white";
+      case "high": return "bg-[#F44436] text-white";
+      case "medium": return "bg-[#FF9102] text-white";
+      case "low": return "bg-[#8AC34A] text-white";
+      default: return "bg-[#646464] text-white";
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active": return "bg-green-500 text-white";
-      case "completed": return "bg-purple-600 text-white";
-      case "paused": return "bg-orange-500 text-white";
-      default: return "bg-gray-500 text-white";
+      case "active": return "bg-[#8AC34A] text-white";
+      case "completed": return "bg-[#651FFF] text-white";
+      case "paused": return "bg-[#FF9102] text-white";
+      default: return "bg-[#646464] text-white";
     }
   };
 
@@ -126,14 +126,14 @@ const GoalsPage = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Goals & OKR</h1>
-    <p className="text-gray-600 dark:text-gray-400 mt-1">
+            <h1 className="text-3xl font-bold text-[#212121] dark:text-white">Goals & OKR</h1>
+            <p className="text-[#646464] dark:text-[#909090] mt-1">
               Manage your goals and objective key results
             </p>
           </div>
           <button
             onClick={() => setShowAddGoalModal(true)}
-            className="flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+            className="flex items-center space-x-2 bg-[#651FFF] text-white px-4 py-2 rounded-lg hover:bg-[#5b1ce6] transition-colors"
           >
             <Plus className="h-5 w-5" />
             <span>Add Goal</span>

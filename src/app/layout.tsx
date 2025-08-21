@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import ClientProviders from "@/components/ClientProviders";
 import "./globals.css";
 
-// Використовуємо Gilroy як основний шрифт (завантажується через CSS)
-const gilroy = {
-  variable: "--font-gilroy",
-};
+// Використовуємо Inter як основний шрифт
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin", "cyrillic"],
+});
 
 export const metadata: Metadata = {
   title: "Performance Management System",
@@ -21,7 +23,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${gilroy.variable} antialiased font-gilroy`} style={{backgroundColor: 'var(--bg-secondary, #f8f9fa)', color: 'var(--text-primary, #212121)'}}>
+        <body className={`${inter.variable} antialiased font-inter`} style={{backgroundColor: 'var(--bg-secondary, #f8f9fa)', color: 'var(--text-primary, #212121)'}}>
           <ClientProviders>
             {children}
           </ClientProviders>

@@ -3,21 +3,20 @@
 import { useState } from "react";
 import { X, Star, Send } from "lucide-react";
 import { getAllTeamMembers } from "@/lib/roleManager";
-import { FeedbackFormData } from "@/types";
 
 interface FeedbackFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: FeedbackFormData) => void;
+  onSubmit: (data: any) => void;
   onCancel: () => void;
 }
 
 const FeedbackForm = ({ isOpen, onClose, onSubmit, onCancel }: FeedbackFormProps) => {
-  const [formData, setFormData] = useState<FeedbackFormData>({
-    toUserId: "",
+  const [formData, setFormData] = useState({
+    recipientId: "",
     category: "",
     rating: 0,
-    comment: "",
+    message: "",
     isAnonymous: false
   });
 
@@ -78,8 +77,8 @@ const FeedbackForm = ({ isOpen, onClose, onSubmit, onCancel }: FeedbackFormProps
               To whom to give feedback
             </label>
             <select
-              value={formData.toUserId}
-              onChange={(e) => setFormData({ ...formData, toUserId: e.target.value })}
+              value={formData.recipientId}
+              onChange={(e) => setFormData({ ...formData, recipientId: e.target.value })}
               className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
               required
             >
@@ -127,8 +126,8 @@ const FeedbackForm = ({ isOpen, onClose, onSubmit, onCancel }: FeedbackFormProps
               Detailed feedback
             </label>
             <textarea
-              value={formData.comment}
-              onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               rows={4}
               placeholder="Write detailed feedback..."
               className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"

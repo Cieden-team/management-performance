@@ -13,30 +13,21 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
   // Завантажуємо збережену тему при старті
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
+    // Очищуємо localStorage щоб примусово встановити світлу тему
+    localStorage.removeItem('theme');
     
     // За замовчуванням світла тема
-    let initialTheme = 'light';
-    if (savedTheme) {
-      initialTheme = savedTheme;
-    }
-    
-    // Встановлюємо тему
-    const isDark = initialTheme === 'dark';
-    setIsDarkMode(isDark);
-    
-    if (isDark) {
-      document.body.classList.add('dark-mode');
-    } else {
-      document.body.classList.remove('dark-mode');
-    }
+    setIsDarkMode(false);
+    document.body.classList.remove('dark-mode');
   }, []);
 
   const toggleTheme = () => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     
-                // Змінюємо клас на body
+    console.log('Switching theme to:', newMode ? 'dark' : 'light'); // Для перевірки
+    
+    // Змінюємо клас на body
     if (newMode) {
       document.body.classList.add('dark-mode');
       localStorage.setItem('theme', 'dark');
@@ -47,36 +38,36 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   };
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 w-full sticky top-0 z-50">
+    <header className="bg-white shadow-sm border-b border-gray-100 w-full sticky top-0 z-40">
       <div className="w-full px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
+        <div className="flex justify-between items-center h-16">
 
           {/* Search (Desktop) */}
           <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
             <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-600 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 h-4 w-4" />
               <input
                 type="text"
                 placeholder="Search..."
-                className="w-full pl-10 pr-4 py-3 border border-gray-200 dark:border-gray-600 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 font-medium transition-all duration-300"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 transition-all duration-200"
               />
             </div>
           </div>
 
           {/* Right Section */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             {/* Notifications */}
-            <button className="relative p-3 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all duration-300 hover:scale-105">
+            <button className="relative p-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-all duration-200">
               <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold shadow-lg">
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
                 3
               </span>
             </button>
 
-            {/* Simple Theme Toggle */}
+            {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
-              className="p-3 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all duration-300 hover:scale-105"
+              className="p-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-all duration-200"
               title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
               {isDarkMode ? (
@@ -89,7 +80,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             {/* Mobile Menu Button */}
             <button
               onClick={onMenuClick}
-              className="md:hidden p-2 text-gray-900 dark:text-white hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg transition-colors"
+              className="md:hidden p-2.5 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-xl transition-all duration-200"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -97,12 +88,12 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             {/* User Info and Button */}
             <div className="hidden md:flex items-center space-x-3">
               <div className="hidden md:block text-right">
-                <p className="text-sm font-medium text-gray-900 dark:text-white">
+                <p className="text-sm font-medium text-gray-900">
                   All Team
                 </p>
-                                        <p className="text-xs text-gray-600 dark:text-gray-400">
-                           team@cieden.com
-                         </p>
+                <p className="text-xs text-gray-500">
+                  team@company.com
+                </p>
               </div>
               <UserButton afterSignOutUrl="/" />
             </div>

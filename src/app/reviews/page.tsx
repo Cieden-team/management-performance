@@ -5,11 +5,11 @@ import { useUser } from "@clerk/nextjs";
 import { FileText, Calendar, Star, User, Clock, CheckCircle, AlertCircle, TrendingUp, BarChart3 } from "lucide-react";
 import Layout from "@/components/Layout";
 import Avatar from "@/components/ui/Avatar";
-import { mockUsers, getUserFullName, getUserById } from "@/lib/data";
+import { mockUsers, getUserFullName, getUserById } from "@/lib/mockData";
 
 const ReviewsPage = () => {
   const { user } = useUser();
-  const [selectedReview, setSelectedReview] = useState<typeof mockReviews[0] | null>(null);
+  const [selectedReview, setSelectedReview] = useState<Record<string, unknown> | null>(null);
 
   // Mock reviews data
   const mockReviews = [
@@ -50,11 +50,11 @@ const ReviewsPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "bg-green-500 text-white";
-      case "pending": return "bg-orange-500 text-white";
-      case "scheduled": return "bg-purple-600 text-white";
-      case "overdue": return "bg-red-500 text-white";
-      default: return "bg-gray-500 text-white";
+      case "completed": return "bg-[#8AC34A] text-white";
+      case "pending": return "bg-[#FF9102] text-white";
+      case "scheduled": return "bg-[#651FFF] text-white";
+      case "overdue": return "bg-[#F44436] text-white";
+      default: return "bg-[#646464] text-white";
     }
   };
 

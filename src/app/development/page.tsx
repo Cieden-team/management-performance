@@ -112,11 +112,11 @@ const DevelopmentPage = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "bg-green-500 text-white";
-      case "in_progress": return "bg-purple-600 text-white";
-      case "pending": return "bg-orange-500 text-white";
-      case "planned": return "bg-gray-500 text-white";
-      default: return "bg-gray-500 text-white";
+      case "completed": return "bg-[#8AC34A] text-white";
+      case "in_progress": return "bg-[#651FFF] text-white";
+      case "pending": return "bg-[#FF9102] text-white";
+      case "planned": return "bg-[#646464] text-white";
+      default: return "bg-[#646464] text-white";
     }
   };
 

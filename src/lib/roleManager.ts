@@ -116,17 +116,11 @@ export function getNavigationByRole(email: string) {
  */
 export function getAllTeamMembers() {
   return [
-    { id: "user1", name: "Yuriy Mykhasyak", email: "yuriy.mykhasyak@cieden.com", role: "admin" },
-    { id: "user2", name: "Kateryna Gorodova", email: "kateryna.gorodova@cieden.com", role: "admin" },
-    { id: "user3", name: "Roman Kaminechny", email: "roman.kaminechny@cieden.com", role: "manager" },
-    { id: "user4", name: "Anastasiya Mudryk", email: "anastasiya.mudryk@cieden.com", role: "manager" },
-    { id: "user5", name: "Olesia Havryshko", email: "olesia.havryshko@cieden.com", role: "manager" },
-    { id: "user6", name: "Tetiana Bondarchuk", email: "tetiana.bondarchuk@cieden.com", role: "manager" },
-    { id: "user7", name: "Yulia Mahera", email: "yulia.mahera@cieden.com", role: "manager" },
-    { id: "user8", name: "Nataliia Levko", email: "nataliia.levko@cieden.com", role: "manager" },
-    { id: "user9", name: "Krystyna Shkriabina", email: "krystyna.shkriabina@cieden.com", role: "manager" },
-    { id: "user10", name: "Kateryna Zavertailo", email: "kateryna.zavertailo@cieden.com", role: "manager" },
-    { id: "user11", name: "All Team", email: "team@cieden.com", role: "admin" },
+    { id: "user1", name: "Yuriy Mykhasyak", email: "yuriy@cieden.com", role: "admin" },
+    { id: "user2", name: "Iryna Serednia", email: "iryna@cieden.com", role: "admin" },
+    { id: "user3", name: "Roman Kaminechny", email: "roman@cieden.com", role: "manager" },
+    { id: "user4", name: "Anastasiya Mudryk", email: "anastasiya@cieden.com", role: "manager" },
+    { id: "user5", name: "Kateryna Zavertailo", email: "kateryna@cieden.com", role: "manager" },
   ];
 }
 
