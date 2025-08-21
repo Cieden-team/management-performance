@@ -182,7 +182,7 @@ const GoalsPage = () => {
                 </div>
                 <button
                   onClick={() => handleEditGoal(goal)}
-                  className="text-[#646464] dark:text-[#909090] hover:text-[#212121] dark:hover:text-white"
+                  className="text-gray-500 hover:text-[#212121] dark:hover:text-white"
                 >
                   <Edit className="h-4 w-4" />
                 </button>
@@ -190,19 +190,19 @@ const GoalsPage = () => {
 
               {/* Content */}
               <div className="space-y-3">
-                <h3 className="font-semibold text-[#212121] dark:text-white">{goal.title}</h3>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">{goal.description}</p>
+                <h3 className="font-semibold text-gray-900">{goal.title}</h3>
+                <p className="text-sm text-gray-500">{goal.description}</p>
 
                 {/* Progress */}
                 <div>
                   <div className="flex justify-between text-sm mb-1">
-                    <span className="text-[#646464] dark:text-[#909090]">Progress</span>
-                    <span className="font-medium text-[#212121] dark:text-white">{goal.progress}%</span>
+                    <span className="text-gray-500">Progress</span>
+                    <span className="font-medium text-gray-900">{goal.progress}%</span>
                   </div>
                   <div className="w-full bg-[#e9e9e9] dark:bg-[#373737] rounded-full h-2">
                     <div
                       className={`h-2 rounded-full ${
-                        goal.status === "completed" ? "bg-[#8AC34A]" : "bg-[#651FFF]"
+                        goal.status === "completed" ? "bg-[#8AC34A]" : "bg-purple-600"
                       }`}
                       style={{ width: `${goal.progress}%` }}
                     ></div>
@@ -210,7 +210,7 @@ const GoalsPage = () => {
                 </div>
 
                 {/* Deadline */}
-                <div className="flex items-center space-x-2 text-sm text-[#646464] dark:text-[#909090]">
+                <div className="flex items-center space-x-2 text-sm text-gray-500">
                   <Calendar className="h-4 w-4" />
                   <span>Deadline: {new Date(goal.deadline).toLocaleDateString()}</span>
                 </div>
@@ -220,7 +220,7 @@ const GoalsPage = () => {
                   {goal.tags.map((tag, index) => (
                     <span
                       key={index}
-                      className="px-2 py-1 text-xs bg-[#f0e9ff] dark:bg-[#651FFF] text-[#651FFF] dark:text-white rounded-full"
+                      className="px-2 py-1 text-xs bg-[#f0e9ff] dark:bg-purple-600 text-[#651FFF] dark:text-white rounded-full"
                     >
                       {tag}
                     </span>
@@ -234,13 +234,13 @@ const GoalsPage = () => {
 
       {/* Add Goal Modal */}
       {showAddGoalModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-[#000319] rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Add New Goal</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Add New Goal</h2>
               <button
                 onClick={() => setShowAddGoalModal(false)}
-                className="text-[#646464] dark:text-[#909090] hover:text-[#212121] dark:hover:text-white"
+                className="text-gray-500 hover:text-[#212121] dark:hover:text-white"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -250,22 +250,22 @@ const GoalsPage = () => {
 
             <form className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Goal Title
                 </label>
                 <input
                   type="text"
-                  className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900"
                   placeholder="Enter goal title"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Description
                 </label>
                 <textarea
-                  className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900"
                   rows={3}
                   placeholder="Enter goal description"
                 ></textarea>
@@ -273,10 +273,10 @@ const GoalsPage = () => {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
                     Priority
                   </label>
-                  <select className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white">
+                  <select className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900">
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
@@ -284,12 +284,12 @@ const GoalsPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
                     Deadline
                   </label>
                   <input
                     type="date"
-                    className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                    className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900"
                   />
                 </div>
               </div>
@@ -298,13 +298,13 @@ const GoalsPage = () => {
                 <button
                   type="button"
                   onClick={() => setShowAddGoalModal(false)}
-                  className="flex-1 px-4 py-2 border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white bg-white dark:bg-[#000319] rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors"
+                  className="flex-1 px-4 py-2 border border-gray-200 text-gray-900 bg-white rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors"
+                  className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                 >
                   Add Goal
                 </button>
@@ -316,13 +316,13 @@ const GoalsPage = () => {
 
       {/* Edit Goal Modal */}
       {showEditGoalModal && selectedGoal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white dark:bg-[#000319] rounded-lg shadow-xl p-6 w-full max-w-md mx-4">
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50">
+          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl transform transition-transform duration-300 ease-in-out">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Edit Goal</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Edit Goal</h2>
               <button
                 onClick={() => setShowEditGoalModal(false)}
-                className="text-[#646464] dark:text-[#909090] hover:text-[#212121] dark:hover:text-white"
+                className="text-gray-500 hover:text-[#212121] dark:hover:text-white"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -332,33 +332,33 @@ const GoalsPage = () => {
 
             <form className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Goal Title
                 </label>
                 <input
                   type="text"
                   defaultValue={selectedGoal.title}
-                  className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                <label className="block text-sm font-medium text-gray-900 mb-2">
                   Description
                 </label>
                 <textarea
                   defaultValue={selectedGoal.description}
-                  className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white"
+                  className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900"
                   rows={3}
                 ></textarea>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
                     Priority
                   </label>
-                  <select defaultValue={selectedGoal.priority} className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white">
+                  <select defaultValue={selectedGoal.priority} className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900">
                     <option value="high">High</option>
                     <option value="medium">Medium</option>
                     <option value="low">Low</option>
@@ -366,10 +366,10 @@ const GoalsPage = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+                  <label className="block text-sm font-medium text-gray-900 mb-2">
                     Status
                   </label>
-                  <select defaultValue={selectedGoal.status} className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white">
+                  <select defaultValue={selectedGoal.status} className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900">
                     <option value="active">Active</option>
                     <option value="completed">Completed</option>
                     <option value="paused">Paused</option>
@@ -381,13 +381,13 @@ const GoalsPage = () => {
                 <button
                   type="button"
                   onClick={() => setShowEditGoalModal(false)}
-                  className="flex-1 px-4 py-2 border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white bg-white dark:bg-[#000319] rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors"
+                  className="flex-1 px-4 py-2 border border-gray-200 text-gray-900 bg-white rounded-lg hover:bg-gray-50 transition-colors"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors"
+                  className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                 >
                   Save Changes
                 </button>
