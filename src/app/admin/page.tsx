@@ -199,44 +199,44 @@ const AdminPage = () => {
                 </button>
               </div>
 
-              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                    <Calendar className="h-6 w-6 text-[#651FFF] dark:text-white" />
+              <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="p-3 bg-purple-50 rounded-xl">
+                    <Calendar className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
-                    <div className="font-medium text-[#212121] dark:text-white">Performance Cycles</div>
-                    <div className="text-sm text-[#646464] dark:text-[#909090]">Setup and planning</div>
+                    <div className="font-medium text-gray-900">Performance Cycles</div>
+                    <div className="text-gray-500">Setup and planning</div>
                   </div>
                 </div>
-                <button className="w-full bg-white dark:bg-[#000319] border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors px-4 py-2 rounded-lg">
+                <button className="w-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all duration-200 px-4 py-3 rounded-xl">
                   Manage Cycles
                 </button>
               </div>
 
-              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                    <Settings className="h-6 w-6 text-[#651FFF] dark:text-white" />
+              <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+                <div className="flex items-center space-x-4 mb-6">
+                  <div className="p-3 bg-purple-50 rounded-xl">
+                    <Settings className="h-6 w-6 text-purple-600" />
                   </div>
                   <div>
-                    <div className="font-medium text-[#212121] dark:text-white">System Settings</div>
-                    <div className="text-sm text-[#646464] dark:text-[#909090]">Configuration and parameters</div>
+                    <div className="font-medium text-gray-900">System Settings</div>
+                    <div className="text-gray-500">Configuration and parameters</div>
                   </div>
                 </div>
-                <button className="w-full bg-white dark:bg-[#000319] border border-[#e9e9e9] dark:border-[#373737] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors px-4 py-2 rounded-lg">
+                <button className="w-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all duration-200 px-4 py-3 rounded-xl">
                   Configure
                 </button>
               </div>
             </div>
 
             {/* Recent Users */}
-            <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-[#212121] dark:text-white">Recently added or updated</h3>
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+              <div className="flex items-center justify-between mb-8">
+                <h3 className="text-xl font-semibold text-gray-900">Recently added or updated</h3>
                 <button 
                   onClick={handleViewAllUsers}
-                  className="text-[#651FFF] dark:text-[#651FFF] hover:text-[#5b1ce6] dark:hover:text-[#5b1ce6] font-medium"
+                  className="text-purple-600 hover:text-purple-700 font-medium transition-colors"
                 >
                   View All
                 </button>
@@ -244,24 +244,24 @@ const AdminPage = () => {
               
               <div className="space-y-4">
                 {recentUsers.map((user) => (
-                  <div key={user.id} className="flex items-center justify-between p-4 border border-[#e9e9e9] dark:border-[#373737] rounded-lg">
+                  <div key={user.id} className="flex items-center justify-between p-6 border border-gray-200 rounded-xl hover:bg-gray-50 transition-all duration-200">
                     <div className="flex items-center space-x-4">
                       <Avatar src={user.avatar} alt={`${user.firstName} ${user.lastName}`} />
                       <div>
-                        <div className="font-medium text-[#212121] dark:text-white">{user.email}</div>
-                        <div className="flex items-center space-x-2 mt-1">
-                          <span className={`px-2 py-1 text-xs rounded-full ${getRoleColor(user.role)}`}>
+                        <div className="font-medium text-gray-900">{user.email}</div>
+                        <div className="flex items-center space-x-2 mt-2">
+                          <span className={`px-3 py-1 text-sm rounded-full ${getRoleColor(user.role)}`}>
                             {user.role}
                           </span>
-                          <span className="text-sm text-[#646464] dark:text-[#909090]">{user.department}</span>
-                          <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(user.status)}`}>
+                          <span className="text-gray-500">{user.department}</span>
+                          <span className={`px-3 py-1 text-sm rounded-full ${getStatusColor(user.status)}`}>
                             {user.status}
                           </span>
                         </div>
                       </div>
                     </div>
-                    <button className="p-2 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors">
-                      <Eye className="h-4 w-4 text-[#646464] dark:text-[#909090]" />
+                    <button className="p-2 hover:bg-gray-100 rounded-xl transition-all duration-200">
+                      <Eye className="h-4 w-4 text-gray-500" />
                     </button>
                   </div>
                 ))}
@@ -270,28 +270,28 @@ const AdminPage = () => {
 
             {/* System Status and Quick Functions */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-                <h3 className="text-lg font-semibold text-[#212121] dark:text-white mb-4">All services are running normally</h3>
-                <div className="space-y-3">
+              <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+                <h3 className="text-xl font-semibold text-gray-900 mb-6">All services are running normally</h3>
+                <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-[#646464] dark:text-[#909090]">Database</span>
+                    <span className="text-gray-500">Database</span>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-[#8AC34A] rounded-full"></div>
-                      <span className="text-sm text-[#8AC34A]">Online</span>
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="text-sm text-green-600 font-medium">Online</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[#646464] dark:text-[#909090]">API</span>
+                    <span className="text-gray-500">API</span>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-[#8AC34A] rounded-full"></div>
-                      <span className="text-sm text-[#8AC34A]">Online</span>
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="text-sm text-green-600 font-medium">Online</span>
                     </div>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[#646464] dark:text-[#909090]">File Storage</span>
+                    <span className="text-gray-500">File Storage</span>
                     <div className="flex items-center space-x-2">
-                      <div className="w-2 h-2 bg-[#8AC34A] rounded-full"></div>
-                      <span className="text-sm text-[#8AC34A]">Online</span>
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="text-sm text-green-600 font-medium">Online</span>
                     </div>
                   </div>
                 </div>
