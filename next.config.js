@@ -19,12 +19,14 @@ const nextConfig = {
             test: /[\\/]node_modules[\\/]/,
             name: 'vendors',
             chunks: 'all',
+            maxSize: 244000,
           },
           common: {
             name: 'common',
             minChunks: 2,
             chunks: 'all',
             enforce: true,
+            maxSize: 244000,
           },
         },
       };
@@ -32,12 +34,21 @@ const nextConfig = {
       // Оптимізація пам'яті
       config.optimization.minimize = true;
       config.optimization.minimizer = config.optimization.minimizer || [];
+      
+      // Додаткові оптимізації
+      config.optimization.removeAvailableModules = true;
+      config.optimization.removeEmptyChunks = true;
+      config.optimization.mergeDuplicateChunks = true;
     }
     return config;
   },
   // Додаткові оптимізації
   output: 'standalone',
   generateEtags: false,
+  // Зменшення розміру
+  swcMinify: true,
+  // Вимкнення source maps для production
+  productionBrowserSourceMaps: false,
 };
 
 module.exports = nextConfig;
