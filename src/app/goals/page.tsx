@@ -81,19 +81,19 @@ const GoalsPage = () => {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "bg-[#F44436] text-white";
-      case "medium": return "bg-[#FF9102] text-white";
-      case "low": return "bg-[#8AC34A] text-white";
-      default: return "bg-[#646464] text-white";
+      case "high": return "bg-red-500 text-white";
+      case "medium": return "bg-orange-500 text-white";
+      case "low": return "bg-green-500 text-white";
+      default: return "bg-gray-500 text-white";
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active": return "bg-[#8AC34A] text-white";
-      case "completed": return "bg-[#651FFF] text-white";
-      case "paused": return "bg-[#FF9102] text-white";
-      default: return "bg-[#646464] text-white";
+      case "active": return "bg-green-500 text-white";
+      case "completed": return "bg-purple-600 text-white";
+      case "paused": return "bg-orange-500 text-white";
+      default: return "bg-gray-500 text-white";
     }
   };
 

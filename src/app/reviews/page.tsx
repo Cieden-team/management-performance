@@ -9,7 +9,7 @@ import { mockUsers, getUserFullName, getUserById } from "@/lib/mockData";
 
 const ReviewsPage = () => {
   const { user } = useUser();
-  const [selectedReview, setSelectedReview] = useState<Record<string, unknown> | null>(null);
+  const [selectedReview, setSelectedReview] = useState<typeof mockReviews[0] | null>(null);
 
   // Mock reviews data
   const mockReviews = [

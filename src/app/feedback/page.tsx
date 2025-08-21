@@ -11,7 +11,7 @@ import { mockFeedbacks, getUserFullName, getUserById } from "@/lib/mockData";
 const FeedbackPage = () => {
   const { user } = useUser();
   const [showFeedbackForm, setShowFeedbackForm] = useState(false);
-  const [selectedFeedback, setSelectedFeedback] = useState<any>(null);
+  const [selectedFeedback, setSelectedFeedback] = useState<typeof mockFeedbacks[0] | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("all");
 

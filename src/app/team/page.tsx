@@ -9,7 +9,7 @@ import Avatar from "@/components/ui/Avatar";
 const TeamPage = () => {
   const { user } = useUser();
   const [showAddModal, setShowAddModal] = useState(false);
-  const [selectedMember, setSelectedMember] = useState<any>(null);
+  const [selectedMember, setSelectedMember] = useState<typeof teamMembers[0] | null>(null);
   
   // Повний список команди Cieden (32 співробітники)
   const teamMembers = [

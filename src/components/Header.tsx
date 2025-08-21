@@ -36,9 +36,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     const newMode = !isDarkMode;
     setIsDarkMode(newMode);
     
-    console.log('Switching theme to:', newMode ? 'dark' : 'light'); // Для перевірки
-    
-    // Змінюємо клас на body
+                // Змінюємо клас на body
     if (newMode) {
       document.body.classList.add('dark-mode');
       localStorage.setItem('theme', 'dark');
@@ -102,9 +100,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 <p className="text-sm font-medium text-gray-900 dark:text-white">
                   All Team
                 </p>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  team@company.com
-                </p>
+                                        <p className="text-xs text-gray-600 dark:text-gray-400">
+                           team@cieden.com
+                         </p>
               </div>
               <UserButton afterSignOutUrl="/" />
             </div>
