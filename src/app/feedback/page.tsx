@@ -6,7 +6,7 @@ import { MessageSquare, Plus, Search, Calendar, Star, User, Send, Clock, CheckCi
 import Layout from "@/components/Layout";
 import Avatar from "@/components/ui/Avatar";
 import FeedbackForm from "@/components/feedback/FeedbackForm";
-import { mockFeedbacks, getUserFullName, getUserById } from "@/lib/mockData";
+import { mockFeedbacks, getUserFullName, getUserById } from "@/lib/data";
 
 const FeedbackPage = () => {
   const { user } = useUser();
@@ -118,7 +118,7 @@ const FeedbackPage = () => {
                 <div className="flex items-center space-x-4 text-sm text-[#646464] dark:text-[#909090] mb-2">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-4 w-4" />
-                                         <span>{new Date(selectedFeedback.date).toLocaleDateString()}</span>
+                                         <span>{new Date(selectedFeedback.createdAt).toLocaleDateString()}</span>
                   </div>
                   <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(selectedFeedback.status)}`}>
                     {getStatusText(selectedFeedback.status)}
@@ -172,7 +172,7 @@ const FeedbackPage = () => {
                 </div>
                 <div className="flex items-center space-x-1">
                   <Calendar className="h-4 w-4" />
-                                     <span>{new Date(feedback.date).toLocaleDateString()}</span>
+                                     <span>{new Date(feedback.createdAt).toLocaleDateString()}</span>
                 </div>
               </div>
             </div>

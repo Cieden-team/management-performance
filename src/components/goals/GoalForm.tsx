@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Target, Calendar, AlertCircle } from "lucide-react";
+import { X, Target, Calendar } from "lucide-react";
 import { GoalFormData } from "@/types";
 
 interface GoalFormProps {
@@ -30,9 +30,9 @@ const GoalForm = ({ isOpen, onClose, onSubmit, onCancel, initialData }: GoalForm
   }, [initialData]);
 
   const priorities = [
-    { value: "low", label: "Low", color: "bg-[#8AC34A] text-white" },
-    { value: "medium", label: "Medium", color: "bg-[#FF9102] text-white" },
-    { value: "high", label: "High", color: "bg-[#F44436] text-white" }
+    { value: "low", label: "Low", color: "bg-green-500 text-white" },
+    { value: "medium", label: "Medium", color: "bg-orange-500 text-white" },
+    { value: "high", label: "High", color: "bg-red-500 text-white" }
   ];
 
   const availableTags = [
@@ -67,20 +67,20 @@ const GoalForm = ({ isOpen, onClose, onSubmit, onCancel, initialData }: GoalForm
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center space-x-3">
-            <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-              <Target className="h-6 w-6 text-[#651FFF] dark:text-white" />
+                         <div className="p-2 bg-purple-50 dark:bg-purple-600 rounded-lg">
+               <Target className="h-6 w-6 text-purple-600 dark:text-white" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold text-[#212121] dark:text-white">
-                {initialData ? "Edit Goal" : "Create New Goal"}
-              </h2>
-              <p className="text-sm text-[#646464] dark:text-[#909090]">Fill in detailed information about the goal</p>
+                             <h2 className="text-xl font-semibold text-gray-900 dark:text-white">
+                 {initialData ? "Edit Goal" : "Create New Goal"}
+               </h2>
+               <p className="text-sm text-gray-600 dark:text-gray-400">Fill in detailed information about the goal</p>
             </div>
           </div>
-          <button
-            onClick={onClose}
-            className="text-[#646464] dark:text-[#909090] hover:text-[#212121] dark:hover:text-white"
-          >
+                     <button
+             onClick={onClose}
+             className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+           >
             <X className="w-5 h-5" />
           </button>
         </div>

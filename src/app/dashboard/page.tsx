@@ -159,7 +159,7 @@ const DashboardPage = () => {
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Active Goals</p>
@@ -175,7 +175,7 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Feedback Received</p>
@@ -191,7 +191,7 @@ const DashboardPage = () => {
             </div>
           </div>
 
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border-0 dark:border-gray-700 p-6 shadow-sm hover:shadow-lg transition-all duration-300">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-2">Average Rating</p>

@@ -45,8 +45,7 @@ const nextConfig = {
   // Додаткові оптимізації
   output: 'standalone',
   generateEtags: false,
-  // Зменшення розміру
-  swcMinify: true,
+  
   // Вимкнення source maps для production
   productionBrowserSourceMaps: false,
 };

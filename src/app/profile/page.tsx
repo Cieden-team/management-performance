@@ -7,7 +7,7 @@ import GoalsProgressCard from "@/components/dashboard/GoalsProgressCard";
 import FeedbackReceivedCard from "@/components/dashboard/FeedbackReceivedCard";
 import { User, Star, Award, FileText, TrendingUp, MessageSquare, X } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
-import { mockFeedbacks } from "@/lib/mockData";
+import { mockFeedbacks } from "@/lib/data";
 
 const ProfilePage = () => {
   const { user } = useUser();
@@ -147,7 +147,7 @@ const ProfilePage = () => {
                   <div className="flex items-center justify-between text-sm mb-2">
                     <span className="text-[#646464] dark:text-[#909090]">Date:</span>
                     <span className="text-[#212121] dark:text-white">
-                      {new Date(currentUser.feedbacks[0].date).toLocaleDateString()}
+                                             {new Date(currentUser.feedbacks[0].createdAt).toLocaleDateString()}
                     </span>
                   </div>
                   <div className="flex items-center justify-between text-sm mb-2">

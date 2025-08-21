@@ -5,7 +5,7 @@ import { useUser } from "@clerk/nextjs";
 import { FileText, Calendar, Star, User, Clock, CheckCircle, AlertCircle, TrendingUp, BarChart3 } from "lucide-react";
 import Layout from "@/components/Layout";
 import Avatar from "@/components/ui/Avatar";
-import { mockUsers, getUserFullName, getUserById } from "@/lib/mockData";
+import { mockUsers, getUserFullName, getUserById } from "@/lib/data";
 
 const ReviewsPage = () => {
   const { user } = useUser();
