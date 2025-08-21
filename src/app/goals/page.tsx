@@ -81,19 +81,19 @@ const GoalsPage = () => {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case "high": return "bg-[#F44436] text-white";
-      case "medium": return "bg-[#FF9102] text-white";
-      case "low": return "bg-[#8AC34A] text-white";
-      default: return "bg-[#646464] text-white";
+      case "high": return "bg-red-100 text-red-700";
+      case "medium": return "bg-orange-100 text-orange-700";
+      case "low": return "bg-green-100 text-green-700";
+      default: return "bg-gray-100 text-gray-700";
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "active": return "bg-[#8AC34A] text-white";
-      case "completed": return "bg-[#651FFF] text-white";
-      case "paused": return "bg-[#FF9102] text-white";
-      default: return "bg-[#646464] text-white";
+      case "active": return "bg-green-100 text-green-700";
+      case "completed": return "bg-purple-100 text-purple-700";
+      case "paused": return "bg-orange-100 text-orange-700";
+      default: return "bg-gray-100 text-gray-700";
     }
   };
 
@@ -122,44 +122,44 @@ const GoalsPage = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-[#212121] dark:text-white">Goals & OKR</h1>
-            <p className="text-[#646464] dark:text-[#909090] mt-1">
+            <h1 className="text-4xl font-bold text-gray-900">Goals & OKR</h1>
+            <p className="text-gray-500 mt-2 text-lg">
               Manage your goals and objective key results
             </p>
           </div>
           <button
             onClick={() => setShowAddGoalModal(true)}
-            className="flex items-center space-x-2 bg-[#651FFF] text-white px-4 py-2 rounded-lg hover:bg-[#5b1ce6] transition-colors"
+            className="flex items-center space-x-3 bg-purple-600 text-white px-6 py-3 rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
           >
             <Plus className="h-5 w-5" />
-            <span>Add Goal</span>
+            <span className="font-semibold">Add Goal</span>
           </button>
         </div>
 
         {/* Search and Filters */}
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#646464] dark:text-[#909090] h-4 w-4" />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 h-5 w-5" />
             <input
               type="text"
               placeholder="Search goals..."
-              className="w-full pl-10 pr-4 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white placeholder-[#646464] dark:placeholder-[#909090]"
+              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 transition-all duration-200"
             />
           </div>
-          <div className="flex gap-2">
-            <button className="flex items-center space-x-2 px-4 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg bg-white dark:bg-[#000319] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors">
+          <div className="flex gap-3">
+            <button className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200">
               <Filter className="h-4 w-4" />
               <span>All Statuses</span>
             </button>
-            <button className="flex items-center space-x-2 px-4 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg bg-white dark:bg-[#000319] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors">
+            <button className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200">
               <Target className="h-4 w-4" />
               <span>All Types</span>
             </button>
-            <button className="flex items-center space-x-2 px-4 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg bg-white dark:bg-[#000319] text-[#212121] dark:text-white hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors">
+            <button className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200">
               <Tag className="h-4 w-4" />
               <span>All Priorities</span>
             </button>
@@ -169,7 +169,7 @@ const GoalsPage = () => {
         {/* Goals Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {goals.map((goal) => (
-            <div key={goal.id} className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+            <div key={goal.id} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
               {/* Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex flex-wrap gap-2">
