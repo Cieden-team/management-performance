@@ -105,55 +105,55 @@ const CyclesPage = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                <Calendar className="h-6 w-6 text-[#651FFF] dark:text-white" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-purple-50 rounded-xl">
+                <Calendar className="h-6 w-6 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Total Cycles</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">{performanceCycles.length}</p>
+                <p className="text-sm text-gray-500">Total Cycles</p>
+                <p className="text-2xl font-bold text-gray-900">{performanceCycles.length}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-            <div className="flex items-center space-x-3">
-              <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                <Clock className="h-6 w-6 text-[#651FFF] dark:text-white" />
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-purple-50 rounded-xl">
+                <Clock className="h-6 w-6 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Active</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Active</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {performanceCycles.filter(c => c.status === "active").length}
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-            <div className="flex items-center space-x-3">
-                              <div className="p-2 bg-[#8AC34A] text-white rounded-lg">
-                <CheckCircle className="h-6 w-6 text-[#8AC34A] dark:text-white" />
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-green-50 rounded-xl">
+                <CheckCircle className="h-6 w-6 text-green-600" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Completed</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Completed</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {performanceCycles.filter(c => c.status === "completed").length}
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-            <div className="flex items-center space-x-3">
-                              <div className="p-2 bg-[#FF9102] text-white rounded-lg">
-                <Users className="h-6 w-6 text-[#FF9102] dark:text-white" />
+          <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div className="flex items-center space-x-4">
+              <div className="p-3 bg-orange-50 rounded-xl">
+                <Users className="h-6 w-6 text-orange-600" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Participants</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Participants</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {performanceCycles.reduce((acc, cycle) => acc + cycle.participants, 0)}
                 </p>
               </div>
@@ -168,67 +168,67 @@ const CyclesPage = () => {
             const progress = cycle.participants > 0 ? (cycle.completedReviews / cycle.participants) * 100 : 0;
             
             return (
-              <div key={cycle.id} className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm hover:shadow-md transition-shadow">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                      <IconComponent className="h-5 w-5 text-[#651FFF] dark:text-white" />
+              <div key={cycle.id} className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+                <div className="flex items-start justify-between mb-6">
+                  <div className="flex items-center space-x-4">
+                    <div className="p-3 bg-purple-50 rounded-xl">
+                      <IconComponent className="h-6 w-6 text-purple-600" />
                     </div>
                     <div>
-                      <h3 className="text-lg font-semibold text-[#212121] dark:text-white">{cycle.name}</h3>
-                      <p className="text-sm text-[#646464] dark:text-[#909090]">{cycle.description}</p>
+                      <h3 className="text-xl font-semibold text-gray-900">{cycle.name}</h3>
+                      <p className="text-gray-500">{cycle.description}</p>
                     </div>
                   </div>
-                  <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(cycle.status)}`}>
+                  <span className={`px-3 py-1 text-sm rounded-full ${getStatusColor(cycle.status)}`}>
                     {getStatusText(cycle.status)}
                   </span>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#646464] dark:text-[#909090]">Period:</span>
-                    <span className="text-[#212121] dark:text-white">
+                    <span className="text-gray-500">Period:</span>
+                    <span className="text-gray-900 font-medium">
                       {new Date(cycle.startDate).toLocaleDateString()} - {new Date(cycle.endDate).toLocaleDateString()}
                     </span>
                   </div>
                   
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#646464] dark:text-[#909090]">Participants:</span>
-                    <span className="text-[#212121] dark:text-white">{cycle.participants}</span>
+                    <span className="text-gray-500">Participants:</span>
+                    <span className="text-gray-900 font-medium">{cycle.participants}</span>
                   </div>
                   
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#646464] dark:text-[#909090]">Completed Reviews:</span>
-                    <span className="text-[#212121] dark:text-white">{cycle.completedReviews}</span>
+                    <span className="text-gray-500">Completed Reviews:</span>
+                    <span className="text-gray-900 font-medium">{cycle.completedReviews}</span>
                   </div>
                   
                   {cycle.averageRating > 0 && (
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-[#646464] dark:text-[#909090]">Average Rating:</span>
-                      <span className="text-[#212121] dark:text-white">{cycle.averageRating}/7</span>
+                      <span className="text-gray-500">Average Rating:</span>
+                      <span className="text-gray-900 font-medium">{cycle.averageRating}/7</span>
                     </div>
                   )}
                   
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-[#646464] dark:text-[#909090]">Progress</span>
-                      <span className="text-[#212121] dark:text-white">{Math.round(progress)}%</span>
+                      <span className="text-gray-500">Progress</span>
+                      <span className="text-gray-900 font-medium">{Math.round(progress)}%</span>
                     </div>
-                    <div className="w-full bg-[#e9e9e9] dark:bg-[#373737] rounded-full h-2">
+                    <div className="w-full bg-gray-200 rounded-full h-3">
                       <div 
-                        className="bg-[#651FFF] h-2 rounded-full transition-all duration-300"
+                        className="bg-gradient-to-r from-purple-600 to-purple-700 h-3 rounded-full transition-all duration-300"
                         style={{ width: `${progress}%` }}
                       />
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex space-x-2 mt-4">
-                  <button className="flex-1 px-3 py-2 text-sm bg-[#f0e9ff] dark:bg-[#651FFF] text-[#651FFF] dark:text-white rounded-lg hover:bg-[#e9d5ff] dark:hover:bg-[#5b1ce6] transition-colors">
+                <div className="flex space-x-3 mt-6">
+                  <button className="flex-1 px-4 py-3 text-sm bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md">
                     View Details
                   </button>
                   {cycle.status === "active" && (
-                    <button className="flex-1 px-3 py-2 text-sm border border-[#e9e9e9] dark:border-[#373737] text-[#646464] dark:text-[#909090] rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors">
+                    <button className="flex-1 px-4 py-3 text-sm border border-gray-200 text-gray-700 rounded-xl hover:bg-gray-50 transition-all duration-200">
                       Manage
                     </button>
                   )}
