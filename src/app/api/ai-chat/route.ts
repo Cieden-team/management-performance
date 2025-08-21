@@ -63,7 +63,6 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       const errorData = await response.json();
-      console.error("OpenAI API error:", errorData);
       throw new Error(`OpenAI API error: ${response.status}`);
     }
 
@@ -76,7 +75,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ response: aiResponse });
   } catch (error) {
-    console.error("AI Chat API error:", error);
     return NextResponse.json(
       { 
         error: "Internal server error",

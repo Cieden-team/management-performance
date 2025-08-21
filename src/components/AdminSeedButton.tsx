@@ -16,7 +16,6 @@ export default function AdminSeedButton() {
       await seedUsers();
       alert("Команда Cieden успішно завантажена!");
     } catch (error) {
-      console.error("Помилка при завантаженні команди:", error);
       alert("Помилка при завантаженні команди");
     } finally {
       setIsSeeding(false);

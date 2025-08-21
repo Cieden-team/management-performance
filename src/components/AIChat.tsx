@@ -74,7 +74,6 @@ const AIChat = ({ isOpen, onToggle }: AIChatProps) => {
 
       setMessages(prev => [...prev, assistantMessage]);
     } catch (error) {
-      console.error("Error sending message:", error);
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         content: "Sorry, I'm having trouble responding right now. Please try again later.",

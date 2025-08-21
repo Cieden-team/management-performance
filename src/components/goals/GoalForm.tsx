@@ -2,22 +2,23 @@
 
 import { useState, useEffect } from "react";
 import { X, Target, Calendar, AlertCircle } from "lucide-react";
+import { GoalFormData } from "@/types";
 
 interface GoalFormProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (data: any) => void;
+  onSubmit: (data: GoalFormData) => void;
   onCancel: () => void;
-  initialData?: any;
+  initialData?: GoalFormData;
 }
 
 const GoalForm = ({ isOpen, onClose, onSubmit, onCancel, initialData }: GoalFormProps) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<GoalFormData>({
     title: "",
     description: "",
     priority: "medium",
     deadline: "",
-    tags: [] as string[],
+    tags: [],
     targetValue: "",
     currentValue: ""
   });
@@ -130,7 +131,7 @@ const GoalForm = ({ isOpen, onClose, onSubmit, onCancel, initialData }: GoalForm
                   <button
                     key={priority.value}
                     type="button"
-                    onClick={() => setFormData({ ...formData, priority: priority.value })}
+                                         onClick={() => setFormData({ ...formData, priority: priority.value as "low" | "medium" | "high" })}
                     className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                       formData.priority === priority.value
                         ? priority.color
