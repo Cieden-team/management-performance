@@ -7,7 +7,6 @@ const nextConfig = {
     domains: ['images.clerk.dev'],
   },
   // Оптимізація для Vercel
-  swcMinify: true,
   compress: true,
   poweredByHeader: false,
   // Зменшення розміру бандла
@@ -21,11 +20,24 @@ const nextConfig = {
             name: 'vendors',
             chunks: 'all',
           },
+          common: {
+            name: 'common',
+            minChunks: 2,
+            chunks: 'all',
+            enforce: true,
+          },
         },
       };
+      
+      // Оптимізація пам'яті
+      config.optimization.minimize = true;
+      config.optimization.minimizer = config.optimization.minimizer || [];
     }
     return config;
   },
+  // Додаткові оптимізації
+  output: 'standalone',
+  generateEtags: false,
 };
 
 module.exports = nextConfig;
