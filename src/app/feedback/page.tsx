@@ -143,36 +143,36 @@ const FeedbackPage = () => {
           {filteredFeedbacks.map((feedback) => (
             <div 
               key={feedback.id} 
-              className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
               onClick={() => setSelectedFeedback(feedback)}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <Avatar src={getUserById(feedback.fromUserId)?.avatar} alt={getUserFullName(feedback.fromUserId)} />
                   <div>
-                    <div className="font-medium text-[#212121] dark:text-white">
+                    <div className="font-medium text-gray-900">
                       {getUserFullName(feedback.fromUserId)}
                     </div>
-                    <div className="text-sm text-[#646464] dark:text-[#909090]">
+                    <div className="text-sm text-gray-500">
                       to {getUserFullName(feedback.toUserId)}
                     </div>
                   </div>
                 </div>
-                <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(feedback.status)}`}>
+                <span className={`px-3 py-1 text-sm rounded-full ${getStatusColor(feedback.status)}`}>
                   {getStatusText(feedback.status)}
                 </span>
               </div>
               
-              <p className="text-[#212121] dark:text-white line-clamp-2 mb-4">{feedback.comment}</p>
+              <p className="text-gray-900 line-clamp-2 mb-4">{feedback.comment}</p>
               
-              <div className="flex items-center justify-between text-sm text-[#646464] dark:text-[#909090]">
+              <div className="flex items-center justify-between text-sm text-gray-500">
                 <div className="flex items-center space-x-1">
-                  <Star className="h-4 w-4 text-[#FF9102]" />
+                  <Star className="h-4 w-4 text-orange-500" />
                   <span>{feedback.rating}/7</span>
                 </div>
                 <div className="flex items-center space-x-1">
                   <Calendar className="h-4 w-4" />
-                                     <span>{new Date(feedback.date).toLocaleDateString()}</span>
+                  <span>{new Date(feedback.date).toLocaleDateString()}</span>
                 </div>
               </div>
             </div>
@@ -182,9 +182,9 @@ const FeedbackPage = () => {
         {/* Empty State */}
         {filteredFeedbacks.length === 0 && (
           <div className="text-center py-12">
-            <MessageSquare className="h-12 w-12 text-[#646464] dark:text-[#909090] mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-[#212121] dark:text-white mb-2">No feedback found</h3>
-            <p className="text-[#646464] dark:text-[#909090] mb-4">
+            <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No feedback found</h3>
+            <p className="text-gray-500 mb-4">
               {searchTerm || filterCategory !== "all" 
                 ? "Try adjusting your search or filters"
                 : "Start by giving feedback to your team members"
@@ -193,7 +193,7 @@ const FeedbackPage = () => {
             {!searchTerm && filterCategory === "all" && (
               <button
                 onClick={() => setShowFeedbackForm(true)}
-                className="px-4 py-2 bg-[#651FFF] text-white rounded-lg hover:bg-[#5b1ce6] transition-colors"
+                className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
               >
                 Give First Feedback
               </button>
