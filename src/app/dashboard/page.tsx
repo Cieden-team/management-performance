@@ -2,9 +2,7 @@
 
 import { useUser } from "@clerk/nextjs";
 import Layout from "@/components/Layout";
-import GoalsProgressCard from "@/components/dashboard/GoalsProgressCard";
-import FeedbackReceivedCard from "@/components/dashboard/FeedbackReceivedCard";
-import SkillsProgressCard from "@/components/dashboard/SkillsProgressCard";
+
 
 import Avatar from "@/components/ui/Avatar";
 
@@ -81,7 +79,7 @@ const DashboardPage = () => {
       category: "Frontend",
       progress: 85,
 
-      color: "#651FFF"
+      color: "#7c3aed"
     },
     { 
       id: 2,
@@ -211,19 +209,28 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left Column */}
-          <div className="lg:col-span-2 space-y-6">
-            <GoalsProgressCard goals={goals} />
-            <SkillsProgressCard skills={skills} />
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-6">
-            <FeedbackReceivedCard feedbacks={feedbacks} />
-          </div>
-        </div>
+                           {/* Main Content Grid */}
+                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                     {/* Left Column */}
+                     <div className="lg:col-span-2 space-y-6">
+                       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Goals Progress</h3>
+                         <p className="text-gray-600 dark:text-gray-400">Goals tracking will be here</p>
+                       </div>
+                       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Skills Progress</h3>
+                         <p className="text-gray-600 dark:text-gray-400">Skills tracking will be here</p>
+                       </div>
+                     </div>
+           
+                     {/* Right Column */}
+                     <div className="space-y-6">
+                       <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-sm">
+                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Recent Feedback</h3>
+                         <p className="text-gray-600 dark:text-gray-400">Feedback will be here</p>
+                       </div>
+                     </div>
+                   </div>
       </div>
     </Layout>
   );

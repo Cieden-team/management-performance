@@ -20,7 +20,7 @@ const FeedbackFormsPage = () => {
     <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Self-Evaluation Form</h2>
-        <p className="text-[#646464] dark:text-[#909090] mt-1">Reflect on your achievements, goals, and alignment with company values.</p>
+        <p className="text-gray-600 dark:text-gray-400 mt-1">Reflect on your achievements, goals, and alignment with company values.</p>
       </div>
 
       <div className="space-y-8">

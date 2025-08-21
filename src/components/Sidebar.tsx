@@ -86,9 +86,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
             {onClose && (
               <button
                 onClick={onClose}
-                className="md:hidden p-1 rounded-lg hover:bg-[#f8f9fa] dark:hover:bg-[#373737] transition-colors"
+                className="md:hidden p-1 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               >
-                <X className="h-5 w-5 text-[#646464] dark:text-[#909090]" />
+                <X className="h-5 w-5 text-gray-600 dark:text-gray-400" />
               </button>
             )}
           </div>
@@ -120,7 +120,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen = true, onClose }) => {
           <div className="p-6 border-t border-gray-200 dark:border-gray-700">
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-4">
               <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-[#F44436] rounded-full"></div>
+                <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                 <span className="text-sm font-medium text-gray-700 dark:text-gray-300">N 7 Issues</span>
                 <button className="ml-auto text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200">
                   <X className="h-4 w-4" />

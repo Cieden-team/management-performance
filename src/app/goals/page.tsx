@@ -126,14 +126,14 @@ const GoalsPage = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-[#212121] dark:text-white">Goals & OKR</h1>
-            <p className="text-[#646464] dark:text-[#909090] mt-1">
+                <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Goals & OKR</h1>
+    <p className="text-gray-600 dark:text-gray-400 mt-1">
               Manage your goals and objective key results
             </p>
           </div>
           <button
             onClick={() => setShowAddGoalModal(true)}
-            className="flex items-center space-x-2 bg-[#651FFF] text-white px-4 py-2 rounded-lg hover:bg-[#5b1ce6] transition-colors"
+            className="flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
           >
             <Plus className="h-5 w-5" />
             <span>Add Goal</span>

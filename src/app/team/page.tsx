@@ -387,10 +387,10 @@ const TeamPage = () => {
 
   const getRoleColor = (role: string) => {
     switch (role) {
-      case "admin": return "bg-[#F44436] text-white";
-      case "manager": return "bg-[#651FFF] text-white";
-      case "employee": return "bg-[#646464] text-white";
-      default: return "bg-[#646464] text-white";
+      case "admin": return "bg-red-500 text-white";
+      case "manager": return "bg-purple-600 text-white";
+      case "employee": return "bg-gray-500 text-white";
+      default: return "bg-gray-500 text-white";
     }
   };
 

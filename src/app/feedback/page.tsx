@@ -115,7 +115,7 @@ const FeedbackPage = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-4 text-sm text-[#646464] dark:text-[#909090] mb-2">
+                <div className="flex items-center space-x-4 text-sm text-gray-600 dark:text-gray-400 mb-2">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-4 w-4" />
                                          <span>{new Date(selectedFeedback.createdAt).toLocaleDateString()}</span>
@@ -125,12 +125,12 @@ const FeedbackPage = () => {
                   </span>
                 </div>
                 
-                <div className="p-4 bg-[#f8f9fa] dark:bg-[#373737] rounded-lg">
-                  <p className="text-[#212121] dark:text-white">{selectedFeedback.comment}</p>
+                <div className="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                  <p className="text-gray-900 dark:text-white">{selectedFeedback.comment}</p>
                 </div>
                 
-                <div className="flex items-center text-sm text-[#646464] dark:text-[#909090]">
-                  <Star className="h-4 w-4 text-[#FF9102] mr-1" />
+                <div className="flex items-center text-sm text-gray-600 dark:text-gray-400">
+                  <Star className="h-4 w-4 text-orange-500 mr-1" />
                   <span>Rating: {selectedFeedback.rating}/7</span>
                 </div>
               </div>
@@ -143,19 +143,19 @@ const FeedbackPage = () => {
           {filteredFeedbacks.map((feedback) => (
             <div 
               key={feedback.id} 
-              className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className="bg-white dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
               onClick={() => setSelectedFeedback(feedback)}
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <Avatar src={getUserById(feedback.fromUserId)?.avatar} alt={getUserFullName(feedback.fromUserId)} />
                   <div>
-                    <div className="font-medium text-[#212121] dark:text-white">
-                      {getUserFullName(feedback.fromUserId)}
-                    </div>
-                    <div className="text-sm text-[#646464] dark:text-[#909090]">
-                      to {getUserFullName(feedback.toUserId)}
-                    </div>
+                                      <div className="font-medium text-gray-900 dark:text-white">
+                    {getUserFullName(feedback.fromUserId)}
+                  </div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">
+                    to {getUserFullName(feedback.toUserId)}
+                  </div>
                   </div>
                 </div>
                 <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(feedback.status)}`}>
@@ -163,11 +163,11 @@ const FeedbackPage = () => {
                 </span>
               </div>
               
-              <p className="text-[#212121] dark:text-white line-clamp-2 mb-4">{feedback.comment}</p>
+              <p className="text-gray-900 dark:text-white line-clamp-2 mb-4">{feedback.comment}</p>
               
-              <div className="flex items-center justify-between text-sm text-[#646464] dark:text-[#909090]">
+              <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
                 <div className="flex items-center space-x-1">
-                  <Star className="h-4 w-4 text-[#FF9102]" />
+                  <Star className="h-4 w-4 text-orange-500" />
                   <span>{feedback.rating}/7</span>
                 </div>
                 <div className="flex items-center space-x-1">
