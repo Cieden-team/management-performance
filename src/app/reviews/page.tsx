@@ -100,48 +100,48 @@ const ReviewsPage = () => {
                 <FileText className="h-6 w-6 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Total Reviews</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">{mockReviews.length}</p>
+                <p className="text-sm text-gray-500">Total Reviews</p>
+                <p className="text-2xl font-bold text-gray-900">{mockReviews.length}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
-                              <div className="p-2 bg-[#8AC34A] text-white rounded-lg">
-                <CheckCircle className="h-6 w-6 text-[#8AC34A] dark:text-white" />
+                              <div className="p-2 bg-green-500 text-white rounded-lg">
+                <CheckCircle className="h-6 w-6 text-white" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Completed</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Completed</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {mockReviews.filter(r => r.status === "completed").length}
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
-                              <div className="p-2 bg-[#FF9102] text-white rounded-lg">
-                <Clock className="h-6 w-6 text-[#FF9102] dark:text-white" />
+                              <div className="p-2 bg-orange-500 text-white rounded-lg">
+                <Clock className="h-6 w-6 text-white" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Scheduled</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Scheduled</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {mockReviews.filter(r => r.status === "scheduled").length}
                 </p>
               </div>
             </div>
           </div>
           
-          <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
+          <div className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
-              <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-                <BarChart3 className="h-6 w-6 text-[#651FFF] dark:text-white" />
+              <div className="p-2 bg-purple-50 rounded-lg">
+                <BarChart3 className="h-6 w-6 text-purple-600" />
               </div>
               <div>
-                <p className="text-sm text-[#646464] dark:text-[#909090]">Average Rating</p>
-                <p className="text-2xl font-bold text-[#212121] dark:text-white">
+                <p className="text-sm text-gray-500">Average Rating</p>
+                <p className="text-2xl font-bold text-gray-900">
                   {mockReviews.filter(r => r.rating > 0).length > 0 
                     ? (mockReviews.filter(r => r.rating > 0).reduce((acc, r) => acc + r.rating, 0) / mockReviews.filter(r => r.rating > 0).length).toFixed(1)
                     : "0.0"
@@ -157,17 +157,17 @@ const ReviewsPage = () => {
           {mockReviews.map((review) => (
             <div 
               key={review.id} 
-              className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className="bg-white rounded-xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
               onClick={() => setSelectedReview(review)}
             >
               <div className="flex items-start justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <Avatar src={getUserById(review.employeeId)?.avatar} alt={getUserFullName(review.employeeId)} />
                   <div>
-                    <div className="font-medium text-[#212121] dark:text-white">
+                    <div className="font-medium text-gray-900">
                       {getUserFullName(review.employeeId)}
                     </div>
-                    <div className="text-sm text-[#646464] dark:text-[#909090]">
+                    <div className="text-sm text-gray-500">
                       Reviewed by {getUserFullName(review.managerId)}
                     </div>
                   </div>
@@ -179,25 +179,25 @@ const ReviewsPage = () => {
               
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-[#646464] dark:text-[#909090]">Review Date:</span>
-                  <span className="text-[#212121] dark:text-white">
+                  <span className="text-gray-500">Review Date:</span>
+                  <span className="text-gray-900">
                     {new Date(review.reviewDate).toLocaleDateString()}
                   </span>
                 </div>
                 
                 {review.rating > 0 && (
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-[#646464] dark:text-[#909090]">Rating:</span>
+                    <span className="text-gray-500">Rating:</span>
                     <div className="flex items-center space-x-1">
                       {renderStars(review.rating)}
-                      <span className="ml-1 text-sm text-[#646464] dark:text-[#909090]">{review.rating}/7</span>
+                      <span className="ml-1 text-sm text-gray-500">{review.rating}/7</span>
                     </div>
                   </div>
                 )}
                 
                 {review.comment && (
-                  <div className="p-3 bg-[#f8f9fa] dark:bg-[#373737] rounded-lg">
-                    <p className="text-sm text-[#212121] dark:text-white">{review.comment}</p>
+                  <div className="p-3 bg-gray-50 rounded-lg">
+                    <p className="text-sm text-gray-900">{review.comment}</p>
                   </div>
                 )}
               </div>
@@ -207,15 +207,15 @@ const ReviewsPage = () => {
 
         {/* Review Details Side Panel */}
         {selectedReview && (
-          <div className="fixed right-0 top-0 h-full w-[28rem] bg-white dark:bg-[#000319] shadow-2xl transform transition-transform duration-300 ease-in-out z-50">
+          <div className="fixed right-0 top-0 h-full w-[28rem] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out z-50">
             <div className="p-6 h-full overflow-y-auto">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Review Details</h2>
+                <h2 className="text-xl font-semibold text-gray-900">Review Details</h2>
                 <button 
                   onClick={() => setSelectedReview(null)}
                   className="p-2 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors"
                 >
-                  <span className="text-2xl text-[#646464] dark:text-[#909090]">&times;</span>
+                  <span className="text-2xl text-gray-500">&times;</span>
                 </button>
               </div>
               
@@ -223,10 +223,10 @@ const ReviewsPage = () => {
                 <div className="flex items-center space-x-3">
                   <Avatar src={getUserById(selectedReview.employeeId as string)?.avatar} alt={getUserFullName(selectedReview.employeeId as string)} />
                   <div>
-                    <div className="font-medium text-[#212121] dark:text-white">
+                    <div className="font-medium text-gray-900">
                       {getUserFullName(selectedReview.employeeId as string)}
                     </div>
-                    <div className="text-sm text-[#646464] dark:text-[#909090]">
+                    <div className="text-sm text-gray-500">
                       Employee
                     </div>
                   </div>
@@ -235,16 +235,16 @@ const ReviewsPage = () => {
                 <div className="flex items-center space-x-3">
                   <Avatar src={getUserById(selectedReview.managerId as string)?.avatar} alt={getUserFullName(selectedReview.managerId as string)} />
                   <div>
-                    <div className="font-medium text-[#212121] dark:text-white">
+                    <div className="font-medium text-gray-900">
                       {getUserFullName(selectedReview.managerId as string)}
                     </div>
-                    <div className="text-sm text-[#646464] dark:text-[#909090]">
+                    <div className="text-sm text-gray-500">
                       Manager
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-4 text-sm text-[#646464] dark:text-[#909090] mb-2">
+                <div className="flex items-center space-x-4 text-sm text-gray-500 mb-2">
                   <div className="flex items-center space-x-1">
                     <Calendar className="h-4 w-4" />
                     <span>{new Date(selectedReview.reviewDate as string).toLocaleDateString()}</span>
@@ -256,29 +256,29 @@ const ReviewsPage = () => {
                 
                 {(selectedReview.rating as number) > 0 && (
                   <div>
-                    <h3 className="font-medium text-[#212121] dark:text-white mb-2">Overall Rating</h3>
+                    <h3 className="font-medium text-gray-900 mb-2">Overall Rating</h3>
                     <div className="flex items-center space-x-2">
                       {renderStars(selectedReview.rating as number)}
-                      <span className="text-sm text-[#646464] dark:text-[#909090]">{(selectedReview.rating as number)}/7</span>
+                      <span className="text-sm text-gray-500">{(selectedReview.rating as number)}/7</span>
                     </div>
                   </div>
                 )}
                 
                 {(selectedReview.comment as string) && (
                   <div>
-                    <h3 className="font-medium text-[#212121] dark:text-white mb-2">Comments</h3>
-                    <div className="p-3 bg-[#f8f9fa] dark:bg-[#373737] rounded-lg">
-                      <p className="text-sm text-[#212121] dark:text-white">{selectedReview.comment as string}</p>
+                    <h3 className="font-medium text-gray-900 mb-2">Comments</h3>
+                    <div className="p-3 bg-gray-50 rounded-lg">
+                      <p className="text-sm text-gray-900">{selectedReview.comment as string}</p>
                     </div>
                   </div>
                 )}
                 
                 {(selectedReview.goals as string[])?.length > 0 && (
                   <div>
-                    <h3 className="font-medium text-[#212121] dark:text-white mb-2">Goals</h3>
+                    <h3 className="font-medium text-gray-900 mb-2">Goals</h3>
                     <ul className="space-y-1">
                       {(selectedReview.goals as string[]).map((goal, index) => (
-                        <li key={index} className="text-sm text-[#646464] dark:text-[#909090] flex items-center space-x-2">
+                        <li key={index} className="text-sm text-gray-500 flex items-center space-x-2">
                           <div className="w-1.5 h-1.5 bg-[#651FFF] rounded-full"></div>
                           <span>{goal}</span>
                         </li>
@@ -289,10 +289,10 @@ const ReviewsPage = () => {
                 
                 {(selectedReview.achievements as string[])?.length > 0 && (
                   <div>
-                    <h3 className="font-medium text-[#212121] dark:text-white mb-2">Achievements</h3>
+                    <h3 className="font-medium text-gray-900 mb-2">Achievements</h3>
                     <ul className="space-y-1">
                       {(selectedReview.achievements as string[]).map((achievement, index) => (
-                        <li key={index} className="text-sm text-[#646464] dark:text-[#909090] flex items-center space-x-2">
+                        <li key={index} className="text-sm text-gray-500 flex items-center space-x-2">
                           <CheckCircle className="h-4 w-4 text-[#8AC34A]" />
                           <span>{achievement}</span>
                         </li>
