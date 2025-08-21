@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Layout from "@/components/Layout";
-import { Users, Plus, Search, Filter, Mail, Phone, MapPin } from "lucide-react";
+import { Users, Plus, Search, Filter, Mail, MapPin } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
 
 const TeamPage = () => {

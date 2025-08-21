@@ -105,19 +105,19 @@ const HRMAnalytics = () => {
       title: "Export to Excel",
       description: "Generate report",
       icon: Download,
-      action: () => console.log("Export to Excel")
+              action: () => {}
     },
     {
       title: "Export to CSV",
       description: "Export data",
       icon: FileText,
-      action: () => console.log("Export to CSV")
+              action: () => {}
     },
     {
       title: "Detailed Analytics",
       description: "Deep analysis",
       icon: BarChart3,
-      action: () => console.log("Detailed Analytics")
+              action: () => {}
     }
   ];
 

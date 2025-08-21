@@ -140,7 +140,7 @@ const DashboardPage = () => {
     <Layout>
       <div className="space-y-6">
         {/* Welcome Header */}
-        <div className="bg-gradient-to-r from-white via-white to-blue-50/20 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/20 rounded-2xl border-0 dark:border dark:border-gray-700 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
+        <div className="bg-gradient-to-r from-white via-white to-blue-50/20 dark:from-gray-800 dark:via-gray-800 dark:to-purple-900/20 rounded-2xl border-0 dark:border-gray-700 p-8 shadow-sm hover:shadow-lg transition-all duration-300">
           <div className="flex items-center space-x-6">
             <div className="relative">
               <Avatar src={currentUser.avatar} alt={`${currentUser.firstName} ${currentUser.lastName}`} size="lg" />

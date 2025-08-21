@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
-import { MessageSquare, Plus, Filter, Search, Calendar, Star, User, Send, Clock, CheckCircle, AlertCircle } from "lucide-react";
+import { MessageSquare, Plus, Search, Calendar, Star, User, Send, Clock, CheckCircle, AlertCircle } from "lucide-react";
 import Layout from "@/components/Layout";
 import Avatar from "@/components/ui/Avatar";
 import FeedbackForm from "@/components/feedback/FeedbackForm";
