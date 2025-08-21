@@ -93,22 +93,22 @@ const SkillsProgressCard: React.FC<SkillsProgressCardProps> = ({ skills: propSki
   };
 
   return (
-    <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-            <TrendingUp className="h-6 w-6 text-[#651FFF] dark:text-white" />
+    <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center space-x-4">
+          <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
+            <TrendingUp className="h-6 w-6 text-purple-600" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Skills Progress</h2>
-            <p className="text-sm text-[#646464] dark:text-[#909090]">Your key competencies as Product Designer</p>
+            <h2 className="text-2xl font-bold text-gray-900">Skills Progress</h2>
+            <p className="text-gray-500">Your key competencies as Product Designer</p>
           </div>
         </div>
         <div className="text-right">
-          <div className="text-2xl font-bold text-[#212121] dark:text-white">
+          <div className="text-3xl font-bold text-purple-600">
             {Math.round(skills.reduce((acc, skill) => acc + skill.progress, 0) / skills.length)}%
           </div>
-          <div className="text-sm text-[#646464] dark:text-[#909090]">average</div>
+          <div className="text-sm text-gray-500">Average</div>
         </div>
       </div>
 
@@ -117,27 +117,27 @@ const SkillsProgressCard: React.FC<SkillsProgressCardProps> = ({ skills: propSki
         {skills.map((skill) => {
           const IconComponent = skill.icon || TrendingUp;
           return (
-            <div key={skill.id} className="space-y-2">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-3">
-                  <div className="p-1 bg-[#f8f9fa] dark:bg-[#373737] rounded">
-                    <IconComponent className="h-4 w-4 text-[#646464] dark:text-[#909090]" />
-                  </div>
-                  <div>
-                    <h3 className="font-medium text-[#212121] dark:text-white">{skill.name}</h3>
-                    <p className="text-xs text-[#646464] dark:text-[#909090]">{getCategoryLabel(skill.category)}</p>
-                  </div>
+            <div key={skill.id} className="flex items-center justify-between p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200">
+              <div className="flex items-center space-x-4">
+                <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
+                  <IconComponent className="h-5 w-5 text-purple-600" />
                 </div>
-                <div className="text-right">
-                  <div className="text-sm font-medium text-[#212121] dark:text-white">{skill.progress}%</div>
-                  <div className="text-xs text-[#646464] dark:text-[#909090]">target: {skill.target}%</div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 text-lg">{skill.name}</h3>
+                  <p className="text-sm text-gray-500">{getCategoryLabel(skill.category)}</p>
                 </div>
               </div>
-              <div className="w-full bg-[#e9e9e9] dark:bg-[#373737] rounded-full h-2">
-                <div 
-                  className={`${skill.color} h-2 rounded-full transition-all duration-300`}
-                  style={{ width: `${skill.progress}%` }}
-                />
+              <div className="flex items-center space-x-4">
+                <div className="text-right">
+                  <div className="text-lg font-bold text-gray-900">{skill.progress}%</div>
+                  <div className="text-sm text-gray-500">target: {skill.target}%</div>
+                </div>
+                <div className="w-24 bg-gray-200 rounded-full h-3 overflow-hidden">
+                  <div 
+                    className="bg-gradient-to-r from-purple-600 to-purple-700 h-3 rounded-full transition-all duration-500"
+                    style={{ width: `${skill.progress}%` }}
+                  />
+                </div>
               </div>
             </div>
           );
@@ -145,19 +145,19 @@ const SkillsProgressCard: React.FC<SkillsProgressCardProps> = ({ skills: propSki
       </div>
 
       {/* Summary */}
-      <div className="mt-6 pt-4 border-t border-[#e9e9e9] dark:border-[#373737]">
-        <div className="grid grid-cols-2 gap-4 text-center">
-          <div>
-            <div className="text-lg font-bold text-[#8AC34A]">
+      <div className="mt-8 pt-6 border-t border-gray-100">
+        <div className="grid grid-cols-2 gap-6 text-center">
+          <div className="p-4 bg-green-50 rounded-xl">
+            <div className="text-2xl font-bold text-green-600">
               {skills.filter(s => s.progress >= 90).length}
             </div>
-            <div className="text-xs text-[#646464] dark:text-[#909090]">Excellent</div>
+            <div className="text-sm text-green-600 font-medium">Excellent</div>
           </div>
-          <div>
-            <div className="text-lg font-bold text-[#651FFF]">
+          <div className="p-4 bg-purple-50 rounded-xl">
+            <div className="text-2xl font-bold text-purple-600">
               {skills.filter(s => s.progress >= 75 && s.progress < 90).length}
             </div>
-            <div className="text-xs text-[#646464] dark:text-[#909090]">Good</div>
+            <div className="text-sm text-purple-600 font-medium">Good</div>
           </div>
         </div>
       </div>

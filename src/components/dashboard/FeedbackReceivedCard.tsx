@@ -35,25 +35,25 @@ const FeedbackReceivedCard: React.FC<FeedbackReceivedCardProps> = ({ feedbacks =
   };
 
   return (
-    <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 bg-[#f0e9ff] dark:bg-[#651FFF] rounded-lg">
-            <MessageSquare className="h-6 w-6 text-[#651FFF] dark:text-white" />
+    <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+      <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center space-x-4">
+          <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
+            <MessageSquare className="h-6 w-6 text-purple-600" />
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Feedback Received</h2>
-            <p className="text-sm text-[#646464] dark:text-[#909090]">Feedback for the semester</p>
+            <h2 className="text-2xl font-bold text-gray-900">Feedback Received</h2>
+            <p className="text-gray-500">Feedback for the semester</p>
           </div>
         </div>
       </div>
 
       {/* Average Rating */}
-      <div className="mb-6 p-4 bg-[#f8f9fa] dark:bg-[#373737] rounded-lg">
+      <div className="mb-8 p-6 bg-purple-50 rounded-xl">
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-[#646464] dark:text-[#909090]">Average rating</p>
-            <p className="text-2xl font-bold text-[#212121] dark:text-white">
+            <p className="text-sm text-gray-500 mb-1">Average rating</p>
+            <p className="text-3xl font-bold text-purple-600">
               {averageRating.toFixed(1)}/5
             </p>
           </div>
@@ -65,29 +65,29 @@ const FeedbackReceivedCard: React.FC<FeedbackReceivedCardProps> = ({ feedbacks =
 
       {/* Latest Feedback */}
       <div>
-        <h3 className="font-medium text-[#212121] dark:text-white mb-4">Latest feedback</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-6">Latest feedback</h3>
         <div className="space-y-4">
           {safeFeedbacks.length > 0 ? (
             safeFeedbacks.slice(0, 3).map((feedback) => (
-              <div key={feedback.id} className="flex items-start space-x-3 p-3 bg-[#f8f9fa] dark:bg-[#373737] rounded-lg">
+              <div key={feedback.id} className="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200">
                 <Avatar src="" alt="User" size="sm" />
                 <div className="flex-1">
-                  <div className="flex items-center justify-between mb-1">
-                    <p className="font-medium text-[#212121] dark:text-white">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="font-semibold text-gray-900 text-lg">
                       User {feedback.fromUserId}
                     </p>
                     <div className="flex space-x-1">
                       {renderStars(feedback.rating)}
                     </div>
                   </div>
-                  <p className="text-sm text-[#646464] dark:text-[#909090] mb-2">
+                  <p className="text-gray-600 mb-3 leading-relaxed">
                     {feedback.message}
                   </p>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs text-[#646464] dark:text-[#909090] capitalize">
+                    <span className="text-sm text-purple-600 font-medium capitalize">
                       {feedback.category}
                     </span>
-                    <span className="text-xs text-[#646464] dark:text-[#909090]">
+                    <span className="text-sm text-gray-500">
                       {new Date(feedback.createdAt).toLocaleDateString()}
                     </span>
                   </div>
@@ -95,18 +95,21 @@ const FeedbackReceivedCard: React.FC<FeedbackReceivedCardProps> = ({ feedbacks =
               </div>
             ))
           ) : (
-            <div className="text-center py-6">
-              <MessageSquare className="h-12 w-12 text-[#646464] dark:text-[#909090] mx-auto mb-3" />
-              <p className="text-[#646464] dark:text-[#909090]">No feedback received yet</p>
+            <div className="text-center py-12">
+              <div className="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <MessageSquare className="h-8 w-8 text-purple-600" />
+              </div>
+              <p className="text-gray-500 text-lg">No feedback received yet</p>
+              <p className="text-gray-400 text-sm mt-1">Start collaborating to receive feedback</p>
             </div>
           )}
         </div>
       </div>
 
       {safeFeedbacks.length > 3 && (
-        <div className="mt-4 text-center">
-          <button className="text-[#651FFF] dark:text-[#651FFF] hover:text-[#5b1ce6] dark:hover:text-[#5b1ce6] text-sm font-medium">
-            View all {safeFeedbacks.length} feedback
+        <div className="mt-6 text-center">
+          <button className="text-purple-600 hover:text-purple-700 text-sm font-semibold transition-colors duration-200">
+            View all {safeFeedbacks.length} feedback →
           </button>
         </div>
       )}
