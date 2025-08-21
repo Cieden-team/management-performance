@@ -504,17 +504,17 @@ const FeedbackFormsPage = () => {
   );
 
   const renderTeammateEvaluationForm = () => (
-    <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Teammate Evaluation Form</h2>
-        <p className="text-[#646464] dark:text-[#909090] mt-1">Provide feedback for a colleague's performance</p>
+    <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold text-gray-900">Teammate Evaluation Form</h2>
+        <p className="text-gray-500 mt-2 text-lg">Provide feedback for a colleague's performance</p>
       </div>
 
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-3">
           Select a colleague to evaluate:
         </label>
-        <select className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white">
+        <select className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 transition-all duration-200">
           <option value="">Choose a colleague...</option>
                      {colleagues.map((colleague) => (
              <option key={colleague.id} value={colleague.id}>
@@ -525,9 +525,9 @@ const FeedbackFormsPage = () => {
       </div>
 
       <div className="text-center py-12">
-        <CheckCircle className="h-12 w-12 text-[#646464] dark:text-[#909090] mx-auto mb-4" />
-        <h3 className="text-lg font-medium text-[#212121] dark:text-white mb-2">Form will appear here</h3>
-        <p className="text-[#646464] dark:text-[#909090]">
+        <CheckCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-gray-900 mb-2">Form will appear here</h3>
+        <p className="text-gray-500">
           Select a colleague above to start the evaluation form
         </p>
       </div>
@@ -535,17 +535,17 @@ const FeedbackFormsPage = () => {
   );
 
   const renderLeaderEvaluationForm = () => (
-    <div className="bg-white dark:bg-[#000319] rounded-xl border border-[#e9e9e9] dark:border-[#373737] p-6 shadow-sm">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Leader Evaluation Form</h2>
-        <p className="text-[#646464] dark:text-[#909090] mt-1">Provide feedback about your manager's leadership performance</p>
+    <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+      <div className="mb-8">
+        <h2 className="text-2xl font-semibold text-gray-900">Leader Evaluation Form</h2>
+        <p className="text-gray-500 mt-2 text-lg">Provide feedback about your manager's leadership performance</p>
       </div>
 
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-[#212121] dark:text-white mb-2">
+      <div className="mb-6">
+        <label className="block text-sm font-medium text-gray-700 mb-3">
           Select a manager to evaluate:
         </label>
-        <select className="w-full px-3 py-2 border border-[#e9e9e9] dark:border-[#373737] rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white dark:bg-[#000319] text-[#212121] dark:text-white">
+        <select className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 transition-all duration-200">
           <option value="">Choose a manager...</option>
                      {managers.map((manager) => (
              <option key={manager.id} value={manager.id}>
@@ -556,9 +556,9 @@ const FeedbackFormsPage = () => {
       </div>
 
       <div className="text-center py-12">
-        <CheckCircle className="h-12 w-12 text-[#646464] dark:text-[#909090] mx-auto mb-4" />
-        <h3 className="text-lg font-medium text-[#212121] dark:text-white mb-2">Form will appear here</h3>
-        <p className="text-[#646464] dark:text-[#909090]">
+        <CheckCircle className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-gray-900 mb-2">Form will appear here</h3>
+        <p className="text-gray-500">
           Select a manager above to start the evaluation form
         </p>
       </div>
@@ -567,19 +567,19 @@ const FeedbackFormsPage = () => {
 
   return (
     <Layout>
-      <div className="min-h-full">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="min-h-full w-full">
+        <div className="w-full px-4 sm:px-6 lg:px-8 py-8">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#212121] dark:text-white">Feedback Forms</h1>
-            <p className="text-[#646464] dark:text-[#909090] mt-1">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Feedback Forms</h1>
+            <p className="text-gray-500 mt-2 text-lg">
               Provide feedback to help improve performance and collaboration
             </p>
           </div>
 
           {/* Tab Navigation */}
-          <div className="bg-[#f8f9fa] dark:bg-[#000319] rounded-lg p-1">
-            <div className="flex space-x-1">
+          <div className="bg-gray-100 rounded-xl p-2">
+            <div className="flex space-x-2">
               {[
                 { id: "self", name: "Self-Evaluation", icon: User },
                 { id: "teammate", name: "Teammate Evaluation", icon: Users },
@@ -588,13 +588,13 @@ const FeedbackFormsPage = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as "self" | "teammate" | "leader")}
-                  className={`flex-1 flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                  className={`flex-1 flex items-center justify-center px-6 py-3 rounded-xl text-sm font-medium transition-all duration-200 ${
                     activeTab === tab.id
-                      ? "bg-[#651FFF] text-white"
-                      : "text-[#646464] dark:text-[#909090] hover:text-[#212121] dark:hover:text-white"
+                      ? "bg-purple-600 text-white shadow-sm"
+                      : "text-gray-600 hover:text-gray-900 hover:bg-white"
                   }`}
                 >
-                  <tab.icon className="h-4 w-4 mr-2" />
+                  <tab.icon className="h-5 w-5 mr-2" />
                   {tab.name}
                 </button>
               ))}
