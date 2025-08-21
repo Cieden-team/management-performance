@@ -8,7 +8,7 @@ import { Loader2, Users } from "lucide-react";
 
 export default function AdminSeedButton() {
   const [isSeeding, setIsSeeding] = useState(false);
-  const seedUsers = useMutation(api.users.seedCiedenTeam);
+  const seedUsers = useMutation(api.users.seedRealCiedenTeam);
 
   const handleSeedTeam = async () => {
     setIsSeeding(true);
