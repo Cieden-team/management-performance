@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Search, Filter, Target, Calendar, Tag, Edit, Trash2 } from "lucide-react";
+import { Plus, Search, Filter, Target, Calendar, Tag, Edit, Trash2, CheckCircle } from "lucide-react";
 import Layout from "@/components/Layout";
 
 interface Goal {
@@ -20,8 +20,7 @@ const GoalsPage = () => {
   const [showAddGoalModal, setShowAddGoalModal] = useState(false);
   const [showEditGoalModal, setShowEditGoalModal] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
-
-  const goals: Goal[] = [
+  const [goals, setGoals] = useState<Goal[]>([
     {
       id: 1,
       title: "Improve UX/UI design skills",
@@ -77,7 +76,7 @@ const GoalsPage = () => {
       tags: ["Certification", "Product Management"],
       type: "personal"
     }
-  ];
+  ]);
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
@@ -118,6 +117,24 @@ const GoalsPage = () => {
   const handleEditGoal = (goal: Goal) => {
     setSelectedGoal(goal);
     setShowEditGoalModal(true);
+  };
+
+  // Функція для оновлення прогресу цілі
+  const handleProgressChange = (goalId: number, newProgress: number) => {
+    setGoals(prevGoals => 
+      prevGoals.map(goal => {
+        if (goal.id === goalId) {
+          const updatedGoal = {
+            ...goal,
+            progress: newProgress,
+            // Автоматично змінюємо статус на "completed" якщо прогрес 100%
+            status: newProgress >= 100 ? "completed" : goal.status
+          };
+          return updatedGoal;
+        }
+        return goal;
+      })
+    );
   };
 
   return (
@@ -176,7 +193,8 @@ const GoalsPage = () => {
                   <span className={`px-2 py-1 text-xs rounded-full ${getPriorityColor(goal.priority)}`}>
                     {getPriorityText(goal.priority)}
                   </span>
-                  <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(goal.status)}`}>
+                  <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(goal.status)} flex items-center gap-1`}>
+                    {goal.status === "completed" && <CheckCircle className="h-3 w-3" />}
                     {getStatusText(goal.status)}
                   </span>
                 </div>
@@ -193,20 +211,50 @@ const GoalsPage = () => {
                 <h3 className="font-semibold text-gray-900">{goal.title}</h3>
                 <p className="text-sm text-gray-500">{goal.description}</p>
 
-                {/* Progress */}
+                {/* Interactive Progress */}
                 <div>
-                  <div className="flex justify-between text-sm mb-1">
+                  <div className="flex justify-between text-sm mb-2">
                     <span className="text-gray-500">Progress</span>
                     <span className="font-medium text-gray-900">{goal.progress}%</span>
                   </div>
-                  <div className="w-full bg-[#e9e9e9] dark:bg-[#373737] rounded-full h-2">
+                  
+                  {/* Progress Bar */}
+                  <div className="w-full bg-[#e9e9e9] dark:bg-[#373737] rounded-full h-2 mb-3">
                     <div
-                      className={`h-2 rounded-full ${
+                      className={`h-2 rounded-full transition-all duration-300 ${
                         goal.status === "completed" ? "bg-[#8AC34A]" : "bg-purple-600"
                       }`}
                       style={{ width: `${goal.progress}%` }}
                     ></div>
                   </div>
+
+                  {/* Interactive Slider */}
+                  <div className="relative">
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={goal.progress}
+                      onChange={(e) => handleProgressChange(goal.id, parseInt(e.target.value))}
+                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                      style={{
+                        background: `linear-gradient(to right, ${goal.status === "completed" ? "#8AC34A" : "#9333EA"} 0%, ${goal.status === "completed" ? "#8AC34A" : "#9333EA"} ${goal.progress}%, #e5e7eb ${goal.progress}%, #e5e7eb 100%)`
+                      }}
+                    />
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
+                      <span>0%</span>
+                      <span>50%</span>
+                      <span>100%</span>
+                    </div>
+                  </div>
+
+                  {/* Completion Message */}
+                  {goal.status === "completed" && (
+                    <div className="flex items-center gap-2 text-sm text-green-600 bg-green-50 px-3 py-2 rounded-lg mt-2">
+                      <CheckCircle className="h-4 w-4" />
+                      <span className="font-medium">Goal completed! 🎉</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Deadline */}
@@ -396,6 +444,34 @@ const GoalsPage = () => {
           </div>
         </div>
       )}
+
+      {/* Custom CSS for slider */}
+      <style jsx>{`
+        .slider::-webkit-slider-thumb {
+          appearance: none;
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #9333EA;
+          cursor: pointer;
+          border: 2px solid white;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .slider::-moz-range-thumb {
+          height: 20px;
+          width: 20px;
+          border-radius: 50%;
+          background: #9333EA;
+          cursor: pointer;
+          border: 2px solid white;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .slider:focus {
+          outline: none;
+        }
+      `}</style>
     </Layout>
   );
 };
