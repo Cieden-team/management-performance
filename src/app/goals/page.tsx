@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Plus, Search, Filter, Target, Calendar, Tag, Edit, Trash2, CheckCircle, ChevronDown } from "lucide-react";
 import Layout from "@/components/Layout";
 
@@ -90,6 +90,62 @@ const GoalsPage = () => {
     }
   ]);
 
+  // Додаємо CSS стилі для повзунка
+  useEffect(() => {
+    const style = document.createElement('style');
+    style.textContent = `
+      .progress-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 8px;
+        border-radius: 4px;
+        background: #e5e7eb;
+        outline: none;
+        cursor: pointer;
+      }
+      
+      .progress-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #9333EA;
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      
+      .progress-slider::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #9333EA;
+        cursor: pointer;
+        border: 2px solid white;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      }
+      
+      .progress-slider:focus {
+        outline: none;
+      }
+      
+      .progress-slider.completed::-webkit-slider-thumb {
+        background: #8AC34A;
+      }
+      
+      .progress-slider.completed::-moz-range-thumb {
+        background: #8AC34A;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   // Фільтрація цілей
   const filteredGoals = useMemo(() => {
     return goals.filter(goal => {
@@ -158,6 +214,7 @@ const GoalsPage = () => {
 
   // Функція для оновлення прогресу цілі
   const handleProgressChange = (goalId: number, newProgress: number) => {
+    console.log(`Updating goal ${goalId} progress to ${newProgress}%`); // Debug log
     setGoals(prevGoals => 
       prevGoals.map(goal => {
         if (goal.id === goalId) {
@@ -167,6 +224,7 @@ const GoalsPage = () => {
             // Автоматично змінюємо статус на "completed" якщо прогрес 100%
             status: newProgress >= 100 ? "completed" : (goal.status === "completed" && newProgress < 100 ? "active" : goal.status)
           };
+          console.log(`Goal ${goalId} updated:`, updatedGoal); // Debug log
           return updatedGoal;
         }
         return goal;
@@ -174,13 +232,25 @@ const GoalsPage = () => {
     );
   };
 
+  // Закриття dropdown при кліку поза ним
+  useEffect(() => {
+    const handleClickOutside = () => {
+      setShowStatusDropdown(false);
+      setShowTypeDropdown(false);
+      setShowPriorityDropdown(false);
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
   return (
     <Layout>
       <div className="space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900">Goals & OKR</h1>
+            <h1 className="text-4xl font-bold text-gray-900">Goals & OKR - Updated</h1>
             <p className="text-gray-500 mt-2 text-lg">
               Manage your goals and objective key results
             </p>
@@ -210,7 +280,10 @@ const GoalsPage = () => {
           {/* Status Filter */}
           <div className="relative">
             <button
-              onClick={() => setShowStatusDropdown(!showStatusDropdown)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowStatusDropdown(!showStatusDropdown);
+              }}
               className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200 min-w-[140px]"
             >
               <Filter className="h-4 w-4" />
@@ -222,7 +295,8 @@ const GoalsPage = () => {
                 {["All Statuses", "Active", "Completed", "Paused"].map((status) => (
                   <button
                     key={status}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setStatusFilter(status);
                       setShowStatusDropdown(false);
                     }}
@@ -238,7 +312,10 @@ const GoalsPage = () => {
           {/* Type Filter */}
           <div className="relative">
             <button
-              onClick={() => setShowTypeDropdown(!showTypeDropdown)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowTypeDropdown(!showTypeDropdown);
+              }}
               className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200 min-w-[120px]"
             >
               <Target className="h-4 w-4" />
@@ -250,7 +327,8 @@ const GoalsPage = () => {
                 {["All Types", "Personal", "Team", "Company"].map((type) => (
                   <button
                     key={type}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setTypeFilter(type);
                       setShowTypeDropdown(false);
                     }}
@@ -266,7 +344,10 @@ const GoalsPage = () => {
           {/* Priority Filter */}
           <div className="relative">
             <button
-              onClick={() => setShowPriorityDropdown(!showPriorityDropdown)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setShowPriorityDropdown(!showPriorityDropdown);
+              }}
               className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200 min-w-[140px]"
             >
               <Tag className="h-4 w-4" />
@@ -278,7 +359,8 @@ const GoalsPage = () => {
                 {["All Priorities", "High", "Medium", "Low"].map((priority) => (
                   <button
                     key={priority}
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.stopPropagation();
                       setPriorityFilter(priority);
                       setShowPriorityDropdown(false);
                     }}
@@ -295,6 +377,7 @@ const GoalsPage = () => {
         {/* Results Count */}
         <div className="text-sm text-gray-500">
           Showing {filteredGoals.length} of {goals.length} goals
+          {searchTerm && ` for "${searchTerm}"`}
         </div>
 
         {/* Goals Grid */}
@@ -353,7 +436,7 @@ const GoalsPage = () => {
                       max="100"
                       value={goal.progress}
                       onChange={(e) => handleProgressChange(goal.id, parseInt(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                      className={`progress-slider ${goal.status === "completed" ? "completed" : ""}`}
                       style={{
                         background: `linear-gradient(to right, ${goal.status === "completed" ? "#8AC34A" : "#9333EA"} 0%, ${goal.status === "completed" ? "#8AC34A" : "#9333EA"} ${goal.progress}%, #e5e7eb ${goal.progress}%, #e5e7eb 100%)`
                       }}
@@ -572,34 +655,6 @@ const GoalsPage = () => {
           </div>
         </div>
       )}
-
-      {/* Custom CSS for slider */}
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: #9333EA;
-          cursor: pointer;
-          border: 2px solid white;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .slider::-moz-range-thumb {
-          height: 20px;
-          width: 20px;
-          border-radius: 50%;
-          background: #9333EA;
-          cursor: pointer;
-          border: 2px solid white;
-          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .slider:focus {
-          outline: none;
-        }
-      `}</style>
     </Layout>
   );
 };
