@@ -105,9 +105,9 @@ const TeamPage = () => {
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Team</h1>
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Team - Live Data</h1>
             <p className="text-gray-500 mt-2 text-lg">
-              Team management and employees ({filteredUsers.length} people) - Updated
+              Team management and employees ({filteredUsers.length} people) - Real-time from Convex
             </p>
           </div>
           <button 
