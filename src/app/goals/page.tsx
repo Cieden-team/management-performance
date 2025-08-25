@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, Search, Filter, Target, Calendar, Tag, Edit, Trash2, CheckCircle } from "lucide-react";
+import { useState, useMemo } from "react";
+import { Plus, Search, Filter, Target, Calendar, Tag, Edit, Trash2, CheckCircle, ChevronDown } from "lucide-react";
 import Layout from "@/components/Layout";
 
 interface Goal {
@@ -20,6 +20,18 @@ const GoalsPage = () => {
   const [showAddGoalModal, setShowAddGoalModal] = useState(false);
   const [showEditGoalModal, setShowEditGoalModal] = useState(false);
   const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
+  
+  // State для пошуку та фільтрів
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("All Statuses");
+  const [typeFilter, setTypeFilter] = useState("All Types");
+  const [priorityFilter, setPriorityFilter] = useState("All Priorities");
+  
+  // State для dropdown меню
+  const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+  const [showTypeDropdown, setShowTypeDropdown] = useState(false);
+  const [showPriorityDropdown, setShowPriorityDropdown] = useState(false);
+
   const [goals, setGoals] = useState<Goal[]>([
     {
       id: 1,
@@ -78,6 +90,22 @@ const GoalsPage = () => {
     }
   ]);
 
+  // Фільтрація цілей
+  const filteredGoals = useMemo(() => {
+    return goals.filter(goal => {
+      const matchesSearch = 
+        goal.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        goal.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        goal.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+      
+      const matchesStatus = statusFilter === "All Statuses" || goal.status === statusFilter.toLowerCase();
+      const matchesType = typeFilter === "All Types" || goal.type === typeFilter.toLowerCase();
+      const matchesPriority = priorityFilter === "All Priorities" || goal.priority === priorityFilter.toLowerCase();
+      
+      return matchesSearch && matchesStatus && matchesType && matchesPriority;
+    });
+  }, [goals, searchTerm, statusFilter, typeFilter, priorityFilter]);
+
   const getPriorityColor = (priority: string) => {
     switch (priority) {
       case "high": return "bg-red-100 text-red-700";
@@ -114,6 +142,15 @@ const GoalsPage = () => {
     }
   };
 
+  const getTypeText = (type: string) => {
+    switch (type) {
+      case "personal": return "Personal";
+      case "team": return "Team";
+      case "company": return "Company";
+      default: return type;
+    }
+  };
+
   const handleEditGoal = (goal: Goal) => {
     setSelectedGoal(goal);
     setShowEditGoalModal(true);
@@ -128,7 +165,7 @@ const GoalsPage = () => {
             ...goal,
             progress: newProgress,
             // Автоматично змінюємо статус на "completed" якщо прогрес 100%
-            status: newProgress >= 100 ? "completed" : goal.status
+            status: newProgress >= 100 ? "completed" : (goal.status === "completed" && newProgress < 100 ? "active" : goal.status)
           };
           return updatedGoal;
         }
@@ -164,28 +201,105 @@ const GoalsPage = () => {
             <input
               type="text"
               placeholder="Search goals..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 transition-all duration-200"
             />
           </div>
-          <div className="flex gap-3">
-            <button className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200">
+          
+          {/* Status Filter */}
+          <div className="relative">
+            <button
+              onClick={() => setShowStatusDropdown(!showStatusDropdown)}
+              className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200 min-w-[140px]"
+            >
               <Filter className="h-4 w-4" />
-              <span>All Statuses</span>
+              <span>{statusFilter}</span>
+              <ChevronDown className="h-4 w-4" />
             </button>
-            <button className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200">
-              <Target className="h-4 w-4" />
-              <span>All Types</span>
-            </button>
-            <button className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200">
-              <Tag className="h-4 w-4" />
-              <span>All Priorities</span>
-            </button>
+            {showStatusDropdown && (
+              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg z-10">
+                {["All Statuses", "Active", "Completed", "Paused"].map((status) => (
+                  <button
+                    key={status}
+                    onClick={() => {
+                      setStatusFilter(status);
+                      setShowStatusDropdown(false);
+                    }}
+                    className="w-full px-4 py-2 text-left hover:bg-gray-50 first:rounded-t-xl last:rounded-b-xl"
+                  >
+                    {status}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
+
+          {/* Type Filter */}
+          <div className="relative">
+            <button
+              onClick={() => setShowTypeDropdown(!showTypeDropdown)}
+              className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200 min-w-[120px]"
+            >
+              <Target className="h-4 w-4" />
+              <span>{typeFilter}</span>
+              <ChevronDown className="h-4 w-4" />
+            </button>
+            {showTypeDropdown && (
+              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg z-10">
+                {["All Types", "Personal", "Team", "Company"].map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => {
+                      setTypeFilter(type);
+                      setShowTypeDropdown(false);
+                    }}
+                    className="w-full px-4 py-2 text-left hover:bg-gray-50 first:rounded-t-xl last:rounded-b-xl"
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Priority Filter */}
+          <div className="relative">
+            <button
+              onClick={() => setShowPriorityDropdown(!showPriorityDropdown)}
+              className="flex items-center space-x-2 px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200 min-w-[140px]"
+            >
+              <Tag className="h-4 w-4" />
+              <span>{priorityFilter}</span>
+              <ChevronDown className="h-4 w-4" />
+            </button>
+            {showPriorityDropdown && (
+              <div className="absolute top-full left-0 mt-1 w-full bg-white border border-gray-200 rounded-xl shadow-lg z-10">
+                {["All Priorities", "High", "Medium", "Low"].map((priority) => (
+                  <button
+                    key={priority}
+                    onClick={() => {
+                      setPriorityFilter(priority);
+                      setShowPriorityDropdown(false);
+                    }}
+                    className="w-full px-4 py-2 text-left hover:bg-gray-50 first:rounded-t-xl last:rounded-b-xl"
+                  >
+                    {priority}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Results Count */}
+        <div className="text-sm text-gray-500">
+          Showing {filteredGoals.length} of {goals.length} goals
         </div>
 
         {/* Goals Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {goals.map((goal) => (
+          {filteredGoals.map((goal) => (
             <div key={goal.id} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
               {/* Header */}
               <div className="flex items-start justify-between mb-4">
@@ -196,6 +310,9 @@ const GoalsPage = () => {
                   <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(goal.status)} flex items-center gap-1`}>
                     {goal.status === "completed" && <CheckCircle className="h-3 w-3" />}
                     {getStatusText(goal.status)}
+                  </span>
+                  <span className="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700">
+                    {getTypeText(goal.type)}
                   </span>
                 </div>
                 <button
@@ -278,6 +395,17 @@ const GoalsPage = () => {
             </div>
           ))}
         </div>
+
+        {/* No Results */}
+        {filteredGoals.length === 0 && (
+          <div className="text-center py-12">
+            <div className="text-gray-400 mb-4">
+              <Target className="h-16 w-16 mx-auto" />
+            </div>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">No goals found</h3>
+            <p className="text-gray-500">Try adjusting your search or filters</p>
+          </div>
+        )}
       </div>
 
       {/* Add Goal Modal */}
