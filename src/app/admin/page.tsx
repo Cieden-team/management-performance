@@ -22,10 +22,12 @@ import {
 import AdminSeedButton from "@/components/AdminSeedButton";
 import Avatar from "@/components/ui/Avatar";
 import Layout from "@/components/Layout";
+import CreateCycleModal from "@/components/admin/CreateCycleModal";
 
 const AdminPage = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [showAddUserModal, setShowAddUserModal] = useState(false);
+  const [showCreateCycleModal, setShowCreateCycleModal] = useState(false);
 
   const stats = [
     {
@@ -111,6 +113,12 @@ const AdminPage = () => {
 
   const handleViewAllUsers = () => {
     window.location.href = "/team";
+  };
+
+  const handleCreateCycle = (cycleData: any) => {
+    console.log("Creating cycle with data:", cycleData);
+    // TODO: Implement cycle creation logic
+    // This would typically involve calling an API or database function
   };
 
   const tabs = [
@@ -209,7 +217,10 @@ const AdminPage = () => {
                     <div className="text-gray-500">Setup and planning</div>
                   </div>
                 </div>
-                <button className="w-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all duration-200 px-4 py-3 rounded-xl">
+                <button 
+                  onClick={() => setActiveTab("cycles")}
+                  className="w-full bg-white border border-gray-200 text-gray-700 hover:bg-gray-50 transition-all duration-200 px-4 py-3 rounded-xl"
+                >
                   Manage Cycles
                 </button>
               </div>
@@ -304,7 +315,10 @@ const AdminPage = () => {
                     <UserPlus className="h-6 w-6 text-purple-600" />
                     <span className="text-gray-900 font-medium">Add New User</span>
                   </button>
-                  <button className="w-full flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-xl transition-all duration-200">
+                  <button 
+                    onClick={() => setShowCreateCycleModal(true)}
+                    className="w-full flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-xl transition-all duration-200"
+                  >
                     <Calendar className="h-6 w-6 text-purple-600" />
                     <span className="text-gray-900 font-medium">Create Cycle</span>
                   </button>
@@ -348,7 +362,10 @@ const AdminPage = () => {
           <div className="space-y-8">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-semibold text-gray-900">Performance Cycles</h2>
-              <button className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md">
+              <button 
+                onClick={() => setShowCreateCycleModal(true)}
+                className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
+              >
                 <Plus className="h-5 w-5" />
                 <span className="font-semibold">Create Cycle</span>
               </button>
@@ -370,6 +387,13 @@ const AdminPage = () => {
             </div>
           </div>
         )}
+
+        {/* Create Cycle Modal */}
+        <CreateCycleModal
+          isOpen={showCreateCycleModal}
+          onClose={() => setShowCreateCycleModal(false)}
+          onSubmit={handleCreateCycle}
+        />
       </div>
     </div>
     </Layout>
