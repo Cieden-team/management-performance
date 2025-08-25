@@ -1,7 +1,7 @@
 const { ConvexHttpClient } = require("convex/browser");
 
 // Конфігурація Convex
-const CONVEX_URL = "https://insightful-wombat-565.convex.cloud";
+const CONVEX_URL = "https://festive-porpoise-89.convex.cloud";
 
 // Новий перелік користувачів з організаційної діаграми Cieden
 const newUsersData = [

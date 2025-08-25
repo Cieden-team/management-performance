@@ -107,7 +107,7 @@ const TeamPage = () => {
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Team</h1>
             <p className="text-gray-500 mt-2 text-lg">
-              Team management and employees ({filteredUsers.length} people)
+              Team management and employees ({filteredUsers.length} people) - Updated
             </p>
           </div>
           <button 
