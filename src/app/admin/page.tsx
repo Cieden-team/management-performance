@@ -122,6 +122,10 @@ const AdminPage = () => {
   };
 
   const handleImportUsers = async () => {
+    if (!confirm('⚠️ This will replace all existing users with the new Cieden team data. Continue?')) {
+      return;
+    }
+    
     try {
       const response = await fetch('/api/import-users', {
         method: 'POST',
@@ -130,7 +134,8 @@ const AdminPage = () => {
       const result = await response.json();
       
       if (result.success) {
-        alert(`✅ ${result.message}`);
+        const message = `✅ ${result.message}\n\n📊 Expected: ${result.expectedCount} users\n📊 Actual: ${result.finalCount} users`;
+        alert(message);
         // Refresh the page to show updated data
         window.location.reload();
       } else {

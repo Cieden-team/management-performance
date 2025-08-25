@@ -51,7 +51,26 @@ export async function POST() {
   try {
     const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
     
-    console.log("Starting user import...");
+    console.log("Starting user import process...");
+    
+    // Step 1: Get existing users to check for duplicates
+    console.log("Checking existing users...");
+    const existingUsers = await convex.query(api.users.list);
+    console.log(`Found ${existingUsers.length} existing users`);
+    
+    // Step 2: Clear all existing users (optional - uncomment if you want to replace all)
+    console.log("Clearing existing users...");
+    for (const user of existingUsers) {
+      try {
+        await convex.mutation(api.users.remove, { id: user._id });
+        console.log(`Removed user: ${user.firstName} ${user.lastName}`);
+      } catch (error) {
+        console.error(`Failed to remove user: ${user.firstName} ${user.lastName}`, error);
+      }
+    }
+    
+    // Step 3: Import new users
+    console.log("Importing new users...");
     const results = [];
     
     for (const user of usersData) {
@@ -72,7 +91,7 @@ export async function POST() {
           id: result
         });
         
-        console.log(`Imported user: ${user.firstName} ${user.lastName}`);
+        console.log(`✅ Imported user: ${user.firstName} ${user.lastName}`);
       } catch (error) {
         results.push({
           success: false,
@@ -80,19 +99,25 @@ export async function POST() {
           error: error instanceof Error ? error.message : "Unknown error"
         });
         
-        console.error(`Failed to import user: ${user.firstName} ${user.lastName}`, error);
+        console.error(`❌ Failed to import user: ${user.firstName} ${user.lastName}`, error);
       }
     }
     
     const successCount = results.filter(r => r.success).length;
     const failureCount = results.filter(r => !r.success).length;
     
-    console.log(`User import completed! Success: ${successCount}, Failures: ${failureCount}`);
+    console.log(`🎉 User import completed! Success: ${successCount}, Failures: ${failureCount}`);
+    
+    // Step 4: Verify final count
+    const finalUsers = await convex.query(api.users.list);
+    console.log(`📊 Final user count in database: ${finalUsers.length}`);
     
     return NextResponse.json({
       success: true,
-      message: `Successfully imported ${successCount} users. ${failureCount} failures.`,
-      results
+      message: `Successfully imported ${successCount} users. ${failureCount} failures. Total users in database: ${finalUsers.length}`,
+      results,
+      finalCount: finalUsers.length,
+      expectedCount: usersData.length
     });
     
   } catch (error) {
