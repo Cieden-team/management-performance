@@ -121,6 +121,27 @@ const AdminPage = () => {
     // This would typically involve calling an API or database function
   };
 
+  const handleImportUsers = async () => {
+    try {
+      const response = await fetch('/api/import-users', {
+        method: 'POST',
+      });
+      
+      const result = await response.json();
+      
+      if (result.success) {
+        alert(`✅ ${result.message}`);
+        // Refresh the page to show updated data
+        window.location.reload();
+      } else {
+        alert(`❌ Error: ${result.error}`);
+      }
+    } catch (error) {
+      console.error('Error importing users:', error);
+      alert('❌ Failed to import users. Please try again.');
+    }
+  };
+
   const tabs = [
     { id: "overview", name: "Overview", icon: BarChart3 },
     { id: "users", name: "Users", icon: Users },
@@ -333,6 +354,22 @@ const AdminPage = () => {
             {/* Seed Data Button */}
             <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
               <AdminSeedButton />
+            </div>
+
+            {/* Import Users Button */}
+            <div className="bg-white rounded-2xl border border-gray-100 p-8 shadow-sm hover:shadow-md transition-all duration-200">
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-2">Import Cieden Users</h3>
+                  <p className="text-gray-500">Import all users from the organizational chart</p>
+                </div>
+                <button
+                  onClick={handleImportUsers}
+                  className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 font-medium"
+                >
+                  Import Users
+                </button>
+              </div>
             </div>
           </div>
         )}
