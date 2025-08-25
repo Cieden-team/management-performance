@@ -1,388 +1,84 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import Layout from "@/components/Layout";
-import { Users, Plus, Search, Filter, Mail, Phone, MapPin } from "lucide-react";
+import { Users, Plus, Search, Filter, Mail, Phone, MapPin, Calendar, Clock } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
 
 const TeamPage = () => {
   const { user } = useUser();
   const [showAddModal, setShowAddModal] = useState(false);
   const [selectedMember, setSelectedMember] = useState<any>(null);
-  
-  // Повний список команди Cieden (32 співробітники)
-  const teamMembers = [
-    {
-      _id: "1",
-      firstName: "Yuriy",
-      lastName: "Mykhasyak",
-      email: "yuriy@cieden.com",
-      position: "CEO & Co-founder",
-      department: "Leadership",
-      role: "admin",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "2",
-      firstName: "Iryna",
-      lastName: "Serednia",
-      email: "iryna@cieden.com",
-      position: "Design Director, Co-founder",
-      department: "Design",
-      role: "admin",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "3",
-      firstName: "Kateryna",
-      lastName: "Zavertailo",
-      email: "kateryna@cieden.com",
-      position: "Sales Manager",
-      department: "Sales",
-      role: "manager",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "4",
-      firstName: "Roman",
-      lastName: "Kaminechny",
-      email: "roman@cieden.com",
-      position: "Head of Design Department",
-      department: "Design",
-      role: "manager",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "5",
-      firstName: "Anastasiya",
-      lastName: "Mudryk",
-      email: "anastasiya@cieden.com",
-      position: "Head of PM/BA",
-      department: "Product Management",
-      role: "manager",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "6",
-      firstName: "Olesia",
-      lastName: "Havryshko",
-      email: "olesia@cieden.com",
-      position: "Product Manager/Business Analyst",
-      department: "Product Management",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "7",
-      firstName: "Tetiana",
-      lastName: "Bondarchuk",
-      email: "tetiana.b@cieden.com",
-      position: "Product Manager/Business Analyst",
-      department: "Product Management",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "8",
-      firstName: "Yulia",
-      lastName: "Mahera",
-      email: "yulia@cieden.com",
-      position: "Product Manager/Business Analyst",
-      department: "Product Management",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "9",
-      firstName: "Andrew",
-      lastName: "Sapkowski",
-      email: "andrew@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "10",
-      firstName: "Denis",
-      lastName: "Dudar",
-      email: "denis@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "11",
-      firstName: "Valentyn",
-      lastName: "Skliarov",
-      email: "valentyn@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "12",
-      firstName: "Daria",
-      lastName: "Novosiadla",
-      email: "daria@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "13",
-      firstName: "Tetiana",
-      lastName: "Zakus",
-      email: "tetiana.z@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "14",
-      firstName: "Maksym",
-      lastName: "Gozhelsky",
-      email: "maksym.g@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "15",
-      firstName: "Oksana",
-      lastName: "Veskera",
-      email: "oksana@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "16",
-      firstName: "Demian",
-      lastName: "Peretiatko",
-      email: "demian@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "17",
-      firstName: "Marta",
-      lastName: "Kacharaba",
-      email: "marta@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "18",
-      firstName: "Iryna",
-      lastName: "Mykytenko",
-      email: "iryna.m@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "19",
-      firstName: "Volodymyr",
-      lastName: "Merlenko",
-      email: "volodymyr@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "20",
-      firstName: "Iryna",
-      lastName: "Tanavska",
-      email: "iryna.t@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "21",
-      firstName: "Yuliia",
-      lastName: "Braslavska",
-      email: "yuliia@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "22",
-      firstName: "Vladyslav",
-      lastName: "Pianov",
-      email: "vladyslav@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "23",
-      firstName: "Maksym",
-      lastName: "Vertsanov",
-      email: "maksym.v@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "24",
-      firstName: "Khrystyna",
-      lastName: "Nych",
-      email: "khrystyna@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "25",
-      firstName: "Illia",
-      lastName: "Suprun",
-      email: "illia@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "26",
-      firstName: "Dmytro",
-      lastName: "Chyzh",
-      email: "dmytro@cieden.com",
-      position: "Product Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "27",
-      firstName: "Bohdana",
-      lastName: "Levochko",
-      email: "bohdana@cieden.com",
-      position: "Lead Generation / Account Manager",
-      department: "Sales",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "28",
-      firstName: "Taras",
-      lastName: "Kunanets",
-      email: "taras@cieden.com",
-      position: "Lead Generation Manager",
-      department: "Sales",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "29",
-      firstName: "Daya",
-      lastName: "Danyliv",
-      email: "daya@cieden.com",
-      position: "Graphic Designer",
-      department: "Design",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "30",
-      firstName: "Tamara",
-      lastName: "Zhostka",
-      email: "tamara@cieden.com",
-      position: "Marketing Manager",
-      department: "Marketing",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "31",
-      firstName: "Tetiana",
-      lastName: "Korol",
-      email: "tetiana.k@cieden.com",
-      position: "Marketing Manager",
-      department: "Marketing",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-    {
-      _id: "32",
-      firstName: "Natalia",
-      lastName: "Antonyshyn",
-      email: "natalia@cieden.com",
-      position: "Accountant",
-      department: "Finance",
-      role: "employee",
-      isActive: true,
-      avatar: "",
-    },
-  ];
+  const [searchTerm, setSearchTerm] = useState("");
+  const [departmentFilter, setDepartmentFilter] = useState("All Departments");
+  const [statusFilter, setStatusFilter] = useState("All Statuses");
+  const [sortBy, setSortBy] = useState("name");
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "active": return "bg-[#8AC34A] text-white";
-      case "inactive": return "bg-[#646464] text-white";
-      case "away": return "bg-[#FF9102] text-white";
-      default: return "bg-[#646464] text-white";
+  // Отримуємо користувачів з Convex
+  const users = useQuery(api.users.getAllUsers) || [];
+
+  // Фільтрація та сортування
+  const filteredUsers = users
+    .filter((user) => {
+      const matchesSearch = 
+        user.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        user.position?.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesDepartment = departmentFilter === "All Departments" || user.department === departmentFilter;
+      const matchesStatus = statusFilter === "All Statuses" || (statusFilter === "Active" ? user.isActive : !user.isActive);
+      
+      return matchesSearch && matchesDepartment && matchesStatus;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "name":
+          return `${a.firstName} ${a.lastName}`.localeCompare(`${b.firstName} ${b.lastName}`);
+        case "department":
+          return (a.department || "").localeCompare(b.department || "");
+        case "leader":
+          return (a.leader || "").localeCompare(b.leader || "");
+        case "experience":
+          return (a.experienceStarted || "").localeCompare(b.experienceStarted || "");
+        default:
+          return 0;
+      }
+    });
+
+  // Отримуємо унікальні відділи для фільтра
+  const departments = ["All Departments", ...new Set(users.map(u => u.department).filter(Boolean))];
+
+  // Функція для розрахунку досвіду
+  const calculateExperience = (startDate: string) => {
+    if (!startDate) return "N/A";
+    
+    try {
+      const start = new Date(startDate);
+      const now = new Date();
+      const diffTime = Math.abs(now.getTime() - start.getTime());
+      const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
+      const diffMonths = Math.floor((diffTime % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24 * 30));
+      
+      if (diffYears > 0) {
+        return `${diffYears} year${diffYears > 1 ? 's' : ''}${diffMonths > 0 ? ` ${diffMonths} month${diffMonths > 1 ? 's' : ''}` : ''}`;
+      } else {
+        return `${diffMonths} month${diffMonths > 1 ? 's' : ''}`;
+      }
+    } catch {
+      return "N/A";
     }
   };
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case "active": return "Active";
-      case "inactive": return "Inactive";
-      case "away": return "Away";
-      default: return status;
-    }
+  const getStatusColor = (status: boolean) => {
+    return status ? "bg-[#8AC34A] text-white" : "bg-[#646464] text-white";
+  };
+
+  const getStatusText = (status: boolean) => {
+    return status ? "Active" : "Inactive";
   };
 
   const getRoleColor = (role: string) => {
@@ -411,7 +107,7 @@ const TeamPage = () => {
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Team</h1>
             <p className="text-gray-500 mt-2 text-lg">
-              Team management and employees ({teamMembers.length} people)
+              Team management and employees ({filteredUsers.length} people)
             </p>
           </div>
           <button 
@@ -430,31 +126,46 @@ const TeamPage = () => {
             <input
               type="text"
               placeholder="Search employees..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 transition-all duration-200"
             />
           </div>
           <div className="flex gap-3">
-            <select className="px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700">
-              <option>All Departments</option>
-              <option>Leadership</option>
-              <option>Design</option>
-              <option>Sales</option>
-              <option>Product Management</option>
-              <option>Marketing</option>
-              <option>Finance</option>
+            <select 
+              value={departmentFilter}
+              onChange={(e) => setDepartmentFilter(e.target.value)}
+              className="px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700"
+            >
+              {departments.map(dept => (
+                <option key={dept} value={dept}>{dept}</option>
+              ))}
             </select>
-            <select className="px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700">
+            <select 
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700"
+            >
               <option>All Statuses</option>
               <option>Active</option>
               <option>Inactive</option>
-              <option>Away</option>
+            </select>
+            <select 
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-4 py-3 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700"
+            >
+              <option value="name">Sort by Name</option>
+              <option value="department">Sort by Department</option>
+              <option value="leader">Sort by Leader</option>
+              <option value="experience">Sort by Experience</option>
             </select>
           </div>
         </div>
 
         {/* Team Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {teamMembers.map((member) => (
+          {filteredUsers.map((member) => (
             <div key={member._id} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
               <div className="flex items-start space-x-4">
                 <Avatar
@@ -467,8 +178,8 @@ const TeamPage = () => {
                     <h3 className="text-lg font-semibold text-gray-900 truncate">
                       {member.firstName} {member.lastName}
                     </h3>
-                    <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(member.isActive ? "active" : "inactive")}`}>
-                      {getStatusText(member.isActive ? "active" : "inactive")}
+                    <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(member.isActive)}`}>
+                      {getStatusText(member.isActive)}
                     </span>
                   </div>
                   
@@ -490,10 +201,26 @@ const TeamPage = () => {
                       <span className="truncate">{member.email}</span>
                     </div>
                     
-                    <div className="flex items-center space-x-2 text-sm text-gray-500">
-                      <MapPin className="h-4 w-4" />
-                      <span>Kyiv</span>
-                    </div>
+                    {member.leader && (
+                      <div className="flex items-center space-x-2 text-sm text-gray-500">
+                        <Users className="h-4 w-4" />
+                        <span className="truncate">Leader: {member.leader}</span>
+                      </div>
+                    )}
+                    
+                    {member.joinedCieden && (
+                      <div className="flex items-center space-x-2 text-sm text-gray-500">
+                        <Calendar className="h-4 w-4" />
+                        <span>Joined: {member.joinedCieden}</span>
+                      </div>
+                    )}
+                    
+                    {member.experienceStarted && (
+                      <div className="flex items-center space-x-2 text-sm text-gray-500">
+                        <Clock className="h-4 w-4" />
+                        <span>Exp: {calculateExperience(member.experienceStarted)}</span>
+                      </div>
+                    )}
                   </div>
                   
                   <div className="flex space-x-2 mt-4">
@@ -522,20 +249,20 @@ const TeamPage = () => {
               </div>
               <div>
                 <p className="text-sm text-gray-500">Total Employees</p>
-                <p className="text-2xl font-bold text-gray-900">{teamMembers.length}</p>
+                <p className="text-2xl font-bold text-gray-900">{filteredUsers.length}</p>
               </div>
             </div>
           </div>
           
           <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
-                              <div className="p-2 bg-[#8AC34A] text-white rounded-lg">
-                <Users className="h-6 w-6 text-[#8AC34A] dark:text-white" />
+              <div className="p-2 bg-[#8AC34A] text-white rounded-lg">
+                <Users className="h-6 w-6 text-white" />
               </div>
               <div>
                 <p className="text-sm text-gray-500">Active</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {teamMembers.filter(m => m.isActive).length}
+                  {filteredUsers.filter(m => m.isActive).length}
                 </p>
               </div>
             </div>
@@ -549,7 +276,7 @@ const TeamPage = () => {
               <div>
                 <p className="text-sm text-gray-500">Departments</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {new Set(teamMembers.map(m => m.department)).size}
+                  {new Set(filteredUsers.map(m => m.department).filter(Boolean)).size}
                 </p>
               </div>
             </div>
@@ -557,13 +284,13 @@ const TeamPage = () => {
           
           <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
             <div className="flex items-center space-x-3">
-                              <div className="p-2 bg-[#FF9102] text-white rounded-lg">
-                <Users className="h-6 w-6 text-[#FF9102] dark:text-white" />
+              <div className="p-2 bg-[#FF9102] text-white rounded-lg">
+                <Users className="h-6 w-6 text-white" />
               </div>
               <div>
                 <p className="text-sm text-gray-500">Managers</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {teamMembers.filter(m => m.role === "manager" || m.role === "admin").length}
+                  {filteredUsers.filter(m => m.role === "manager" || m.role === "admin").length}
                 </p>
               </div>
             </div>
@@ -637,10 +364,11 @@ const TeamPage = () => {
                     <select className="w-full px-3 py-2 border border-gray-100 rounded-lg focus:ring-2 focus:ring-[#651FFF] focus:border-transparent bg-white text-gray-900">
                       <option>Design</option>
                       <option>Sales</option>
-                      <option>Product Management</option>
+                      <option>Product</option>
                       <option>Marketing</option>
                       <option>Finance</option>
-                      <option>Leadership</option>
+                      <option>Talent Management</option>
+                      <option>CEO</option>
                     </select>
                   </div>
                   
@@ -706,10 +434,26 @@ const TeamPage = () => {
                   <span>{selectedMember.email}</span>
                 </div>
                 
-                <div className="flex items-center space-x-2 text-gray-500">
-                  <MapPin className="h-4 w-4" />
-                  <span>Kyiv, Ukraine</span>
-                </div>
+                {selectedMember.leader && (
+                  <div className="flex items-center space-x-2 text-gray-500">
+                    <Users className="h-4 w-4" />
+                    <span>Leader: {selectedMember.leader}</span>
+                  </div>
+                )}
+                
+                {selectedMember.joinedCieden && (
+                  <div className="flex items-center space-x-2 text-gray-500">
+                    <Calendar className="h-4 w-4" />
+                    <span>Started at Cieden: {selectedMember.joinedCieden}</span>
+                  </div>
+                )}
+                
+                {selectedMember.experienceStarted && (
+                  <div className="flex items-center space-x-2 text-gray-500">
+                    <Clock className="h-4 w-4" />
+                    <span>Total Experience: {calculateExperience(selectedMember.experienceStarted)}</span>
+                  </div>
+                )}
                 
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-500">Role:</span>
@@ -720,8 +464,8 @@ const TeamPage = () => {
                 
                 <div className="flex items-center space-x-2">
                   <span className="text-gray-500">Status:</span>
-                  <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(selectedMember.isActive ? "active" : "inactive")}`}>
-                    {getStatusText(selectedMember.isActive ? "active" : "inactive")}
+                  <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(selectedMember.isActive)}`}>
+                    {getStatusText(selectedMember.isActive)}
                   </span>
                 </div>
               </div>
