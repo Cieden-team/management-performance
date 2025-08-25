@@ -366,14 +366,22 @@ const AdminPage = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">Import Cieden Users</h3>
-                  <p className="text-gray-500">Import all users from the organizational chart</p>
+                  <p className="text-gray-500">Import all 41 users from the organizational chart</p>
                 </div>
-                <button
-                  onClick={handleImportUsers}
-                  className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 font-medium"
-                >
-                  Import Users
-                </button>
+                <div className="flex space-x-3">
+                  <button
+                    onClick={handleImportUsers}
+                    className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 font-medium"
+                  >
+                    Import Users
+                  </button>
+                  <button
+                    onClick={() => window.open('https://management-performance.vercel.app/api/import-users', '_blank')}
+                    className="px-6 py-3 bg-green-600 text-white rounded-xl hover:bg-green-700 transition-all duration-200 font-medium"
+                  >
+                    Direct API
+                  </button>
+                </div>
               </div>
             </div>
           </div>
