@@ -1,7 +1,9 @@
-/* Використовуємо Gilroy як основний шрифт */
+/* Використовуємо Inter як основний шрифт */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* CSS Variables for modern theming */
 :root {

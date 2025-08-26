@@ -4,6 +4,9 @@ import { useState, useMemo, useEffect } from "react";
 import { Plus, Search, Filter, Target, Calendar, Tag, Edit, Trash2, CheckCircle, ChevronDown, Star } from "lucide-react";
 import Layout from "@/components/Layout";
 
+// Динамічний рендеринг
+export const dynamic = 'force-dynamic';
+
 interface Goal {
   id: number;
   title: string;

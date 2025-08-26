@@ -1,6 +1,7 @@
 "use client";
 
 import { ConvexProvider, ConvexReactClient } from "convex/react";
+import ConvexErrorBoundary from "./ConvexErrorBoundary";
 
 // Перевіряємо наявність Convex URL
 const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
@@ -17,9 +18,11 @@ interface ClientProvidersProps {
 
 const ClientProviders = ({ children }: ClientProvidersProps) => {
   return (
-    <ConvexProvider client={convex}>
-      {children}
-    </ConvexProvider>
+    <ConvexErrorBoundary>
+      <ConvexProvider client={convex}>
+        {children}
+      </ConvexProvider>
+    </ConvexErrorBoundary>
   );
 };
 

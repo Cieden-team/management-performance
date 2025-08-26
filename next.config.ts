@@ -9,4 +9,21 @@ const nextConfig: NextConfig = {
     // Disable TypeScript errors during builds for production
     ignoreBuildErrors: false,
   },
+  serverExternalPackages: ["convex"],
+  // Відключаємо static generation
+  output: 'standalone',
+  webpack: (config, { isServer }) => {
+    // Handle Convex imports
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    return config;
+  },
 };
+
+export default nextConfig;

@@ -3,10 +3,13 @@
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
-import { api } from "../../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import Layout from "@/components/Layout";
 import { Users, Plus, Search, Filter, Mail, Phone, MapPin, Calendar, Clock } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
+
+// Динамічний рендеринг
+export const dynamic = 'force-dynamic';
 
 const TeamPage = () => {
   const { user } = useUser();
@@ -178,9 +181,9 @@ const TeamPage = () => {
                     <h3 className="text-lg font-semibold text-gray-900 truncate">
                       {member.firstName} {member.lastName}
                     </h3>
-                    <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(member.isActive)}`}>
-                      {getStatusText(member.isActive)}
-                    </span>
+                                         <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(member.isActive || false)}`}>
+                       {getStatusText(member.isActive || false)}
+                     </span>
                   </div>
                   
                   <p className="text-sm font-medium text-[#651FFF] mb-1">

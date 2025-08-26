@@ -1,229 +1,222 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
-import { MessageSquare, Plus, Filter, Search, Calendar, Star, User, Send, Clock, CheckCircle, AlertCircle } from "lucide-react";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import Layout from "@/components/Layout";
+import { MessageSquare, Plus, Search, Filter, Star, Calendar, User } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
-import FeedbackForm from "@/components/feedback/FeedbackForm";
-import { mockFeedbacks, getUserFullName, getUserById } from "@/lib/mockData";
+
+// Динамічний рендеринг
+export const dynamic = 'force-dynamic';
 
 const FeedbackPage = () => {
   const { user } = useUser();
-  const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+  const [showAddModal, setShowAddModal] = useState(false);
   const [selectedFeedback, setSelectedFeedback] = useState<any>(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [filterCategory, setFilterCategory] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("All Categories");
+  const [statusFilter, setStatusFilter] = useState("All Statuses");
+  const [sortBy, setSortBy] = useState("date");
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "completed": return "bg-green-100 text-green-700";
-      case "pending": return "bg-orange-100 text-orange-700";
-      case "draft": return "bg-gray-100 text-gray-700";
+  // Отримуємо дані з Convex
+  const currentUser = useQuery(api.users.getUserByClerkId, 
+    user?.id ? { clerkId: user.id } : "skip"
+  );
+  
+  const feedbacks = useQuery(api.feedback.getFeedbackByUser, 
+    currentUser?._id ? { userId: currentUser._id, type: "received" } : "skip"
+  );
+
+  // Loading state
+  if (!currentUser || !feedbacks) {
+    return (
+      <Layout>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-600"></div>
+        </div>
+      </Layout>
+    );
+  }
+
+  // Фільтрація та сортування
+  const filteredFeedbacks = feedbacks
+    .filter((feedback) => {
+      const matchesSearch = 
+        feedback.comment?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        feedback.category?.toLowerCase().includes(searchTerm.toLowerCase());
+      
+      const matchesCategory = categoryFilter === "All Categories" || feedback.category === categoryFilter;
+      const matchesStatus = statusFilter === "All Statuses" || feedback.status === statusFilter;
+      
+      return matchesSearch && matchesCategory && matchesStatus;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "date":
+          return b.createdAt - a.createdAt;
+        case "rating":
+          return (b.rating || 0) - (a.rating || 0);
+        case "category":
+          return (a.category || "").localeCompare(b.category || "");
+        default:
+          return 0;
+      }
+    });
+
+  // Отримуємо унікальні категорії для фільтра
+  const categories = ["All Categories", ...new Set(feedbacks.map(f => f.category).filter(Boolean))];
+
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "communication": return "bg-blue-100 text-blue-700";
+      case "leadership": return "bg-purple-100 text-purple-700";
+      case "technical": return "bg-green-100 text-green-700";
+      case "collaboration": return "bg-orange-100 text-orange-700";
       default: return "bg-gray-100 text-gray-700";
     }
   };
 
-  const getStatusText = (status: string) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
-      case "completed": return "Completed";
-      case "pending": return "Pending";
-      case "draft": return "Draft";
-      default: return status;
+      case "completed": return "bg-green-100 text-green-700";
+      case "pending": return "bg-yellow-100 text-yellow-700";
+      default: return "bg-gray-100 text-gray-700";
     }
   };
 
-  const filteredFeedbacks = mockFeedbacks.filter(feedback => {
-    const matchesSearch = feedback.comment.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         getUserFullName(feedback.fromUserId).toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         getUserFullName(feedback.toUserId).toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = filterCategory === "all" || feedback.category === filterCategory;
-    
-    return matchesSearch && matchesCategory;
-  });
+  const renderStars = (rating: number) => {
+    return Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`h-4 w-4 ${
+          i < rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+        }`}
+      />
+    ));
+  };
 
   return (
     <Layout>
       <div className="space-y-8">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Feedback</h1>
-            <p className="text-gray-500 mt-2 text-lg">
-              Give and receive feedback from team members
-            </p>
+            <h1 className="text-3xl font-bold text-gray-900">Feedback</h1>
+            <p className="text-gray-500 mt-2">Manage and review feedback from your team</p>
           </div>
           <button
-            onClick={() => setShowFeedbackForm(true)}
-            className="flex items-center space-x-3 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
+            onClick={() => setShowAddModal(true)}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg flex items-center space-x-2 transition-colors"
           >
             <Plus className="h-5 w-5" />
-            <span className="font-semibold">Give Feedback</span>
+            <span>Add Feedback</span>
           </button>
         </div>
 
-        {/* Search and Filters */}
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500" />
-            <input
-              type="text"
-              placeholder="Search feedback..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-900 placeholder-gray-500 transition-all duration-200"
-            />
-          </div>
-          <select
-            value={filterCategory}
-            onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-transparent bg-white text-gray-700"
-          >
-            <option value="all">All Categories</option>
-            <option value="technical">Technical</option>
-            <option value="communication">Communication</option>
-            <option value="leadership">Leadership</option>
-            <option value="collaboration">Collaboration</option>
-          </select>
-        </div>
-
-        {/* Feedback Details Side Panel */}
-        {selectedFeedback && (
-          <div className="fixed right-0 top-0 h-full w-[28rem] bg-white dark:bg-[#000319] shadow-2xl transform transition-transform duration-300 ease-in-out z-50">
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Feedback Details</h2>
-                <button 
-                  onClick={() => setSelectedFeedback(null)}
-                  className="p-2 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors"
-                >
-                  <span className="text-2xl text-[#646464] dark:text-[#909090]">&times;</span>
-                </button>
-              </div>
-              
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <Avatar src={getUserById(selectedFeedback.fromUserId)?.avatar} alt={getUserFullName(selectedFeedback.fromUserId)} />
-                  <div className="font-medium text-[#212121] dark:text-white">
-                    {getUserFullName(selectedFeedback.fromUserId)}
-                  </div>
-                  <span className="text-[#646464] dark:text-[#909090]">→</span>
-                  <Avatar src={getUserById(selectedFeedback.toUserId)?.avatar} alt={getUserFullName(selectedFeedback.toUserId)} />
-                  <div className="font-medium text-[#212121] dark:text-white">
-                    {getUserFullName(selectedFeedback.toUserId)}
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-4 text-sm text-[#646464] dark:text-[#909090] mb-2">
-                  <div className="flex items-center space-x-1">
-                    <Calendar className="h-4 w-4" />
-                                         <span>{new Date(selectedFeedback.date).toLocaleDateString()}</span>
-                  </div>
-                  <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(selectedFeedback.status)}`}>
-                    {getStatusText(selectedFeedback.status)}
-                  </span>
-                </div>
-                
-                <div className="p-4 bg-[#f8f9fa] dark:bg-[#373737] rounded-lg">
-                  <p className="text-[#212121] dark:text-white">{selectedFeedback.comment}</p>
-                </div>
-                
-                <div className="flex items-center text-sm text-[#646464] dark:text-[#909090]">
-                  <Star className="h-4 w-4 text-[#FF9102] mr-1" />
-                  <span>Rating: {selectedFeedback.rating}/7</span>
-                </div>
-              </div>
+        {/* Filters */}
+        <div className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            {/* Search */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <input
+                type="text"
+                placeholder="Search feedback..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              />
             </div>
+
+            {/* Category Filter */}
+            <select
+              value={categoryFilter}
+              onChange={(e) => setCategoryFilter(e.target.value)}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            >
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+
+            {/* Status Filter */}
+            <select
+              value={statusFilter}
+              onChange={(e) => setStatusFilter(e.target.value)}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            >
+              <option value="All Statuses">All Statuses</option>
+              <option value="completed">Completed</option>
+              <option value="pending">Pending</option>
+            </select>
+
+            {/* Sort */}
+            <select
+              value={sortBy}
+              onChange={(e) => setSortBy(e.target.value)}
+              className="px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            >
+              <option value="date">Sort by Date</option>
+              <option value="rating">Sort by Rating</option>
+              <option value="category">Sort by Category</option>
+            </select>
           </div>
-        )}
+        </div>
 
         {/* Feedback List */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredFeedbacks.map((feedback) => (
-            <div 
-              key={feedback.id} 
-              className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer"
-              onClick={() => setSelectedFeedback(feedback)}
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center space-x-3">
-                  <Avatar src={getUserById(feedback.fromUserId)?.avatar} alt={getUserFullName(feedback.fromUserId)} />
-                  <div>
-                    <div className="font-medium text-gray-900">
-                      {getUserFullName(feedback.fromUserId)}
-                    </div>
-                    <div className="text-sm text-gray-500">
-                      to {getUserFullName(feedback.toUserId)}
+        <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
+          <div className="p-6 border-b border-gray-100">
+            <h2 className="text-xl font-semibold text-gray-900">
+              Feedback ({filteredFeedbacks.length})
+            </h2>
+          </div>
+
+          <div className="divide-y divide-gray-100">
+            {filteredFeedbacks.length > 0 ? (
+              filteredFeedbacks.map((feedback) => (
+                <div key={feedback._id} className="p-6 hover:bg-gray-50 transition-colors">
+                  <div className="flex items-start space-x-4">
+                    <Avatar src="" alt="User" size="md" />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center space-x-3">
+                          <h3 className="font-semibold text-gray-900">
+                            Feedback from User {feedback.fromUserId}
+                          </h3>
+                          <span className={`px-2 py-1 text-xs rounded-full ${getCategoryColor(feedback.category)}`}>
+                            {feedback.category}
+                          </span>
+                          <span className={`px-2 py-1 text-xs rounded-full ${getStatusColor(feedback.status)}`}>
+                            {feedback.status}
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          {feedback.rating && renderStars(feedback.rating)}
+                          <span className="text-sm text-gray-500">
+                            {new Date(feedback.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="text-gray-600 mb-3">{feedback.comment}</p>
                     </div>
                   </div>
                 </div>
-                <span className={`px-3 py-1 text-sm rounded-full ${getStatusColor(feedback.status)}`}>
-                  {getStatusText(feedback.status)}
-                </span>
-              </div>
-              
-              <p className="text-gray-900 line-clamp-2 mb-4">{feedback.comment}</p>
-              
-              <div className="flex items-center justify-between text-sm text-gray-500">
-                <div className="flex items-center space-x-1">
-                  <Star className="h-4 w-4 text-orange-500" />
-                  <span>{feedback.rating}/7</span>
+              ))
+            ) : (
+              <div className="p-12 text-center">
+                <div className="w-16 h-16 bg-purple-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <MessageSquare className="h-8 w-8 text-purple-600" />
                 </div>
-                <div className="flex items-center space-x-1">
-                  <Calendar className="h-4 w-4" />
-                  <span>{new Date(feedback.date).toLocaleDateString()}</span>
-                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">No feedback found</h3>
+                <p className="text-gray-500">Try adjusting your filters or add new feedback</p>
               </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {filteredFeedbacks.length === 0 && (
-          <div className="text-center py-12">
-            <MessageSquare className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No feedback found</h3>
-            <p className="text-gray-500 mb-4">
-              {searchTerm || filterCategory !== "all" 
-                ? "Try adjusting your search or filters"
-                : "Start by giving feedback to your team members"
-              }
-            </p>
-            {!searchTerm && filterCategory === "all" && (
-              <button
-                onClick={() => setShowFeedbackForm(true)}
-                className="px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all duration-200 shadow-sm hover:shadow-md"
-              >
-                Give First Feedback
-              </button>
             )}
           </div>
-        )}
-
-        {/* Feedback Form Side Panel */}
-        {showFeedbackForm && (
-          <div className="fixed right-0 top-0 h-full w-[28rem] bg-white dark:bg-[#000319] shadow-2xl transform transition-transform duration-300 ease-in-out z-50">
-            <div className="p-6 h-full overflow-y-auto">
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-xl font-semibold text-[#212121] dark:text-white">Give Feedback</h2>
-                <button 
-                  onClick={() => setShowFeedbackForm(false)}
-                  className="p-2 hover:bg-[#f8f9fa] dark:hover:bg-[#373737] rounded-lg transition-colors"
-                >
-                  <span className="text-2xl text-[#646464] dark:text-[#909090]">&times;</span>
-                </button>
-              </div>
-              
-                             <FeedbackForm 
-                               isOpen={showFeedbackForm} 
-                               onClose={() => setShowFeedbackForm(false)} 
-                               onSubmit={() => setShowFeedbackForm(false)} 
-                               onCancel={() => setShowFeedbackForm(false)} 
-                             />
-            </div>
-          </div>
-        )}
+        </div>
       </div>
     </Layout>
   );

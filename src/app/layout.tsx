@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description: "Performance management system for modern teams",
 };
 
+// Динамічний рендеринг для всіх сторінок
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
   children,
 }: Readonly<{

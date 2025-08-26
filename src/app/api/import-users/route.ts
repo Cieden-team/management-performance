@@ -55,14 +55,14 @@ export async function POST() {
     
     // Step 1: Get existing users to check for duplicates
     console.log("Checking existing users...");
-    const existingUsers = await convex.query(api.users.list);
+    const existingUsers = await convex.query(api.users.getAllUsers);
     console.log(`Found ${existingUsers.length} existing users`);
     
     // Step 2: Clear all existing users (optional - uncomment if you want to replace all)
     console.log("Clearing existing users...");
     for (const user of existingUsers) {
       try {
-        await convex.mutation(api.users.remove, { id: user._id });
+        await convex.mutation(api.users.deleteUser, { userId: user._id });
         console.log(`Removed user: ${user.firstName} ${user.lastName}`);
       } catch (error) {
         console.error(`Failed to remove user: ${user.firstName} ${user.lastName}`, error);
@@ -75,13 +75,15 @@ export async function POST() {
     
     for (const user of usersData) {
       try {
-        const result = await convex.mutation(api.users.create, {
+        const result = await convex.mutation(api.users.createUser, {
+          clerkId: `cieden_${user.firstName.toLowerCase()}_${user.lastName.toLowerCase()}`,
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
-          role: user.role,
+          role: user.role === "Finance Manager" || user.role === "Marketing Manager" || user.role === "Sales Manager" || user.role === "Head of Talent Management" || user.role === "C-level" ? "manager" : "employee",
           department: user.department,
-          status: user.status,
+          position: user.role,
+          hireDate: new Date().toISOString().split('T')[0],
           avatar: user.avatar,
         });
         
@@ -109,7 +111,7 @@ export async function POST() {
     console.log(`🎉 User import completed! Success: ${successCount}, Failures: ${failureCount}`);
     
     // Step 4: Verify final count
-    const finalUsers = await convex.query(api.users.list);
+    const finalUsers = await convex.query(api.users.getAllUsers);
     console.log(`📊 Final user count in database: ${finalUsers.length}`);
     
     return NextResponse.json({

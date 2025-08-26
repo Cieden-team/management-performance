@@ -4,6 +4,9 @@ import { useUser } from "@clerk/nextjs";
 import Layout from "@/components/Layout";
 import { TrendingUp, Target, BookOpen, Award, Calendar, CheckCircle } from "lucide-react";
 
+// Динамічний рендеринг
+export const dynamic = 'force-dynamic';
+
 const DevelopmentPage = () => {
   const { user } = useUser();
 

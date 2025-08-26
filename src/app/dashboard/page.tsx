@@ -11,6 +11,9 @@ import AdminSeedButton from "@/components/AdminSeedButton";
 import ConvexTest from "@/components/ConvexTest";
 import Avatar from "@/components/ui/Avatar";
 
+// Динамічний рендеринг
+export const dynamic = 'force-dynamic';
+
 const DashboardPage = () => {
   const { user } = useUser();
 

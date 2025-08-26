@@ -3,8 +3,11 @@
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import Layout from "@/components/Layout";
-import { CheckCircle, User, Users, Crown } from "lucide-react";
+import { FileText, Plus, Search, Filter, Calendar, User, CheckCircle, Clock, AlertCircle, Users, Crown } from "lucide-react";
 import { getColleagues, getManagers } from "@/lib/roleManager";
+
+// Динамічний рендеринг
+export const dynamic = 'force-dynamic';
 
 const FeedbackFormsPage = () => {
   const { user } = useUser();

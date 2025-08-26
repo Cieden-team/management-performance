@@ -1,5 +1,5 @@
 import { ConvexHttpClient } from "convex/browser";
-import { api } from "../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 
 // Дані користувачів з CSV
 const usersData = [
@@ -53,13 +53,15 @@ export const importUsers = async () => {
     console.log("Starting user import...");
     
     for (const user of usersData) {
-      await convex.mutation(api.users.create, {
+      await convex.mutation(api.users.createUser, {
+        clerkId: `cieden_${user.firstName.toLowerCase()}_${user.lastName.toLowerCase()}`,
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        role: user.role,
+        role: user.role === "Finance Manager" || user.role === "Marketing Manager" || user.role === "Sales Manager" || user.role === "Head of Talent Management" || user.role === "C-level" ? "manager" : "employee",
         department: user.department,
-        status: user.status,
+        position: user.role,
+        hireDate: new Date().toISOString().split('T')[0],
         avatar: user.avatar,
       });
       console.log(`Imported user: ${user.firstName} ${user.lastName}`);

@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import { ConvexHttpClient } from "convex/browser";
+import { api } from "@/convex/_generated/api";
 
 export async function GET() {
   try {
-    const convex = new ConvexHttpClient("https://festive-porpoise-89.convex.cloud");
-    const users = await convex.query("users:getAllUsers");
+    const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+    const users = await convex.query(api.users.getAllUsers);
     
     return NextResponse.json({
       success: true,
@@ -18,7 +19,7 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json({
       success: false,
-      error: error.message
+      error: error instanceof Error ? error.message : "Unknown error"
     }, { status: 500 });
   }
 }
