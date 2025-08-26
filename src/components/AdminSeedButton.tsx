@@ -1,46 +1,48 @@
 "use client";
 
-import { useState } from "react";
 import { useMutation } from "convex/react";
-import { api } from "../../convex/_generated/api";
-import { Button } from "./ui/button";
-import { Loader2, Users } from "lucide-react";
+import { api } from "@/convex/_generated/api";
+import { useState } from "react";
 
-export default function AdminSeedButton() {
-  const [isSeeding, setIsSeeding] = useState(false);
-  const seedUsers = useMutation(api.users.seedRealCiedenTeam);
+const AdminSeedButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const seedUsers = useMutation(api.users.seedCiedenTeam);
+  const seedGoals = useMutation(api.goals.seedCiedenGoals);
+  const seedFeedback = useMutation(api.feedback.seedCiedenFeedback);
 
-  const handleSeedTeam = async () => {
-    setIsSeeding(true);
+  const handleSeedData = async () => {
+    setIsLoading(true);
     try {
+      console.log("Seeding users...");
       await seedUsers();
-      alert("Команда Cieden успішно завантажена!");
+      
+      console.log("Seeding goals...");
+      await seedGoals();
+      
+      console.log("Seeding feedback...");
+      await seedFeedback();
+      
+      console.log("All data seeded successfully!");
+      alert("Test data created successfully!");
     } catch (error) {
-      console.error("Помилка при завантаженні команди:", error);
-      alert("Помилка при завантаженні команди");
+      console.error("Error seeding data:", error);
+      alert("Error creating test data. Check console for details.");
     } finally {
-      setIsSeeding(false);
+      setIsLoading(false);
     }
   };
 
   return (
-    <Button 
-      onClick={handleSeedTeam} 
-      disabled={isSeeding}
-      variant="outline"
-      size="sm"
-    >
-      {isSeeding ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-          Завантаження...
-        </>
-      ) : (
-        <>
-          <Users className="mr-2 h-4 w-4" />
-          Завантажити команду Cieden
-        </>
-      )}
-    </Button>
+    <div className="fixed bottom-4 right-4 z-50">
+      <button
+        onClick={handleSeedData}
+        disabled={isLoading}
+        className="bg-purple-600 hover:bg-purple-700 disabled:bg-gray-400 text-white px-4 py-2 rounded-lg shadow-lg transition-colors"
+      >
+        {isLoading ? "Creating..." : "Create Test Data"}
+      </button>
+    </div>
   );
-}
+};
+
+export default AdminSeedButton;

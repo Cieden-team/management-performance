@@ -4,13 +4,14 @@ import { MessageSquare, Star } from "lucide-react";
 import Avatar from "@/components/ui/Avatar";
 
 interface Feedback {
-  id: number;
+  _id: string;
   fromUserId: string;
   toUserId: string;
-  message: string;
-  rating: number;
-  category: string;
-  createdAt: string;
+  comment: string;
+  rating?: number;
+  category: "communication" | "leadership" | "technical" | "collaboration" | "other";
+  createdAt: number;
+  status: "pending" | "completed";
 }
 
 interface FeedbackReceivedCardProps {
@@ -20,7 +21,7 @@ interface FeedbackReceivedCardProps {
 const FeedbackReceivedCard: React.FC<FeedbackReceivedCardProps> = ({ feedbacks = [] }) => {
   const safeFeedbacks = feedbacks || [];
   const averageRating = safeFeedbacks.length > 0
-    ? safeFeedbacks.reduce((acc, f) => acc + f.rating, 0) / safeFeedbacks.length
+    ? safeFeedbacks.reduce((acc, f) => acc + (f.rating || 0), 0) / safeFeedbacks.length
     : 0;
 
   const renderStars = (rating: number) => {
@@ -69,7 +70,7 @@ const FeedbackReceivedCard: React.FC<FeedbackReceivedCardProps> = ({ feedbacks =
         <div className="space-y-4">
           {safeFeedbacks.length > 0 ? (
             safeFeedbacks.slice(0, 3).map((feedback) => (
-              <div key={feedback.id} className="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200">
+              <div key={feedback._id} className="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200">
                 <Avatar src="" alt="User" size="sm" />
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-2">
@@ -77,11 +78,11 @@ const FeedbackReceivedCard: React.FC<FeedbackReceivedCardProps> = ({ feedbacks =
                       User {feedback.fromUserId}
                     </p>
                     <div className="flex space-x-1">
-                      {renderStars(feedback.rating)}
+                      {renderStars(feedback.rating || 0)}
                     </div>
                   </div>
                   <p className="text-gray-600 mb-3 leading-relaxed">
-                    {feedback.message}
+                    {feedback.comment}
                   </p>
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-purple-600 font-medium capitalize">

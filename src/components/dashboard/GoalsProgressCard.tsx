@@ -3,17 +3,18 @@
 import { Target, TrendingUp, Calendar } from "lucide-react";
 
 interface Goal {
-  id: number;
+  _id: string;
   userId: string;
-  goalType: string;
   title: string;
   description: string;
+  category: "performance" | "development" | "team" | "personal";
+  status: "not_started" | "in_progress" | "completed" | "overdue";
+  priority: "low" | "medium" | "high";
   progress: number;
-  priority: "high" | "medium" | "low";
-  status: string;
-  deadline: string;
-  tags: string[];
-  link: string;
+  startDate: string;
+  dueDate: string;
+  tags?: string[];
+  link?: string;
 }
 
 interface GoalsProgressCardProps {
@@ -22,7 +23,7 @@ interface GoalsProgressCardProps {
 
 const GoalsProgressCard: React.FC<GoalsProgressCardProps> = ({ goals = [] }) => {
   const safeGoals = goals || [];
-  const activeGoals = safeGoals.filter(goal => goal.status === "active");
+  const activeGoals = safeGoals.filter(goal => goal.status === "in_progress");
   const completedGoals = safeGoals.filter(goal => goal.status === "completed");
   const totalProgress = safeGoals.length > 0
     ? safeGoals.reduce((sum, goal) => sum + goal.progress, 0) / safeGoals.length
@@ -97,7 +98,7 @@ const GoalsProgressCard: React.FC<GoalsProgressCardProps> = ({ goals = [] }) => 
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Active Goals</h3>
         {activeGoals.length > 0 ? (
           activeGoals.slice(0, 3).map((goal) => (
-            <div key={goal.id} className="flex items-center justify-between p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200">
+            <div key={goal._id} className="flex items-center justify-between p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-all duration-200">
               <div className="flex-1">
                 <h4 className="font-semibold text-gray-900 text-lg mb-2">{goal.title}</h4>
                 <p className="text-gray-600 mb-3">{goal.description}</p>
@@ -110,7 +111,7 @@ const GoalsProgressCard: React.FC<GoalsProgressCardProps> = ({ goals = [] }) => 
                     {getPriorityText(goal.priority)}
                   </span>
                   <span className="text-sm text-gray-500">
-                    Due: {new Date(goal.deadline).toLocaleDateString()}
+                    Due: {new Date(goal.dueDate).toLocaleDateString()}
                   </span>
                 </div>
               </div>

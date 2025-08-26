@@ -2,7 +2,14 @@
 
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 
-const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
+// Перевіряємо наявність Convex URL
+const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL;
+
+if (!convexUrl) {
+  throw new Error("NEXT_PUBLIC_CONVEX_URL is not set. Please check your environment variables.");
+}
+
+const convex = new ConvexReactClient(convexUrl);
 
 interface ClientProvidersProps {
   children: React.ReactNode;
