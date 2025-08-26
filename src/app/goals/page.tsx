@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useEffect } from "react";
-import { Plus, Search, Filter, Target, Calendar, Tag, Edit, Trash2, CheckCircle, ChevronDown } from "lucide-react";
+import { Plus, Search, Filter, Target, Calendar, Tag, Edit, Trash2, CheckCircle, ChevronDown, Star } from "lucide-react";
 import Layout from "@/components/Layout";
 
 interface Goal {
@@ -31,6 +31,10 @@ const GoalsPage = () => {
   const [showStatusDropdown, setShowStatusDropdown] = useState(false);
   const [showTypeDropdown, setShowTypeDropdown] = useState(false);
   const [showPriorityDropdown, setShowPriorityDropdown] = useState(false);
+
+  // State для анімацій та фідбеку
+  const [showCompletionToast, setShowCompletionToast] = useState<boolean>(false);
+  const [completedGoalTitle, setCompletedGoalTitle] = useState<string>("");
 
   const [goals, setGoals] = useState<Goal[]>([
     {
@@ -90,7 +94,7 @@ const GoalsPage = () => {
     }
   ]);
 
-  // Додаємо CSS стилі для повзунка
+  // Додаємо CSS стилі для повзунка з покращеними анімаціями
   useEffect(() => {
     const style = document.createElement('style');
     style.textContent = `
@@ -98,45 +102,105 @@ const GoalsPage = () => {
         -webkit-appearance: none;
         appearance: none;
         width: 100%;
-        height: 8px;
-        border-radius: 4px;
+        height: 10px;
+        border-radius: 5px;
         background: #e5e7eb;
         outline: none;
         cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .progress-slider:hover {
+        transform: scaleY(1.2);
       }
       
       .progress-slider::-webkit-slider-thumb {
         -webkit-appearance: none;
         appearance: none;
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         background: #9333EA;
         cursor: pointer;
-        border: 2px solid white;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        border: 3px solid white;
+        box-shadow: 0 4px 8px rgba(147, 51, 234, 0.3);
+        transition: all 0.2s ease;
+      }
+      
+      .progress-slider::-webkit-slider-thumb:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 12px rgba(147, 51, 234, 0.4);
       }
       
       .progress-slider::-moz-range-thumb {
-        width: 20px;
-        height: 20px;
+        width: 24px;
+        height: 24px;
         border-radius: 50%;
         background: #9333EA;
         cursor: pointer;
-        border: 2px solid white;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        border: 3px solid white;
+        box-shadow: 0 4px 8px rgba(147, 51, 234, 0.3);
+        transition: all 0.2s ease;
+      }
+      
+      .progress-slider::-moz-range-thumb:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 12px rgba(147, 51, 234, 0.4);
       }
       
       .progress-slider:focus {
         outline: none;
+        box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
       }
       
       .progress-slider.completed::-webkit-slider-thumb {
         background: #8AC34A;
+        box-shadow: 0 4px 8px rgba(138, 195, 74, 0.3);
+      }
+      
+      .progress-slider.completed::-webkit-slider-thumb:hover {
+        box-shadow: 0 6px 12px rgba(138, 195, 74, 0.4);
       }
       
       .progress-slider.completed::-moz-range-thumb {
         background: #8AC34A;
+        box-shadow: 0 4px 8px rgba(138, 195, 74, 0.3);
+      }
+      
+      .progress-slider.completed::-moz-range-thumb:hover {
+        box-shadow: 0 6px 12px rgba(138, 195, 74, 0.4);
+      }
+
+      .completion-toast {
+        animation: slideInFromTop 0.5s ease-out;
+      }
+
+      @keyframes slideInFromTop {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .progress-bar-animation {
+        transition: width 0.5s ease-out;
+      }
+
+      .goal-card-completed {
+        animation: pulse 2s ease-in-out;
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.02);
+        }
       }
     `;
     document.head.appendChild(style);
@@ -145,6 +209,28 @@ const GoalsPage = () => {
       document.head.removeChild(style);
     };
   }, []);
+
+  // Функція для відтворення звуку досягнення
+  const playCompletionSound = () => {
+    try {
+      const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT');
+      audio.volume = 0.3;
+      audio.play();
+    } catch (error) {
+      console.log('Audio playback not supported');
+    }
+  };
+
+  // Функція для показу toast повідомлення
+  const displayCompletionToast = (goalTitle: string) => {
+    setCompletedGoalTitle(goalTitle);
+    setShowCompletionToast(true);
+    playCompletionSound();
+    
+    setTimeout(() => {
+      setShowCompletionToast(false);
+    }, 4000);
+  };
 
   // Фільтрація цілей
   const filteredGoals = useMemo(() => {
@@ -212,19 +298,25 @@ const GoalsPage = () => {
     setShowEditGoalModal(true);
   };
 
-  // Функція для оновлення прогресу цілі
+  // Покращена функція для оновлення прогресу цілі
   const handleProgressChange = (goalId: number, newProgress: number) => {
-    console.log(`Updating goal ${goalId} progress to ${newProgress}%`); // Debug log
     setGoals(prevGoals => 
       prevGoals.map(goal => {
         if (goal.id === goalId) {
+          const wasCompleted = goal.status === "completed";
+          const willBeCompleted = newProgress >= 100;
+          
           const updatedGoal = {
             ...goal,
             progress: newProgress,
-            // Автоматично змінюємо статус на "completed" якщо прогрес 100%
-            status: newProgress >= 100 ? "completed" : (goal.status === "completed" && newProgress < 100 ? "active" : goal.status)
+            status: willBeCompleted ? "completed" : (wasCompleted && newProgress < 100 ? "active" : goal.status)
           };
-          console.log(`Goal ${goalId} updated:`, updatedGoal); // Debug log
+
+          // Показуємо toast тільки якщо ціль щойно досягнута
+          if (!wasCompleted && willBeCompleted) {
+            setTimeout(() => displayCompletionToast(goal.title), 100);
+          }
+
           return updatedGoal;
         }
         return goal;
@@ -247,10 +339,23 @@ const GoalsPage = () => {
   return (
     <Layout>
       <div className="space-y-8">
+        {/* Completion Toast */}
+        {showCompletionToast && (
+          <div className="fixed top-4 right-4 z-50 completion-toast">
+            <div className="bg-green-500 text-white px-6 py-4 rounded-xl shadow-lg flex items-center space-x-3">
+              <CheckCircle className="h-6 w-6" />
+              <div>
+                <div className="font-semibold">🎉 Goal Completed!</div>
+                <div className="text-sm opacity-90">{completedGoalTitle}</div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-4xl font-bold text-gray-900">Goals & OKR - Updated</h1>
+            <h1 className="text-4xl font-bold text-gray-900">Goals & OKR</h1>
             <p className="text-gray-500 mt-2 text-lg">
               Manage your goals and objective key results
             </p>
@@ -383,7 +488,12 @@ const GoalsPage = () => {
         {/* Goals Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredGoals.map((goal) => (
-            <div key={goal.id} className="bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200">
+            <div 
+              key={goal.id} 
+              className={`bg-white rounded-2xl border border-gray-100 p-6 shadow-sm hover:shadow-md transition-all duration-200 ${
+                goal.status === "completed" ? "goal-card-completed" : ""
+              }`}
+            >
               {/* Header */}
               <div className="flex items-start justify-between mb-4">
                 <div className="flex flex-wrap gap-2">
@@ -400,7 +510,7 @@ const GoalsPage = () => {
                 </div>
                 <button
                   onClick={() => handleEditGoal(goal)}
-                  className="text-gray-500 hover:text-[#212121] dark:hover:text-white"
+                  className="text-gray-500 hover:text-[#212121] dark:hover:text-white transition-colors"
                 >
                   <Edit className="h-4 w-4" />
                 </button>
@@ -421,7 +531,7 @@ const GoalsPage = () => {
                   {/* Progress Bar */}
                   <div className="w-full bg-[#e9e9e9] dark:bg-[#373737] rounded-full h-2 mb-3">
                     <div
-                      className={`h-2 rounded-full transition-all duration-300 ${
+                      className={`h-2 rounded-full progress-bar-animation ${
                         goal.status === "completed" ? "bg-[#8AC34A]" : "bg-purple-600"
                       }`}
                       style={{ width: `${goal.progress}%` }}
